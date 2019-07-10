@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SausageChat", "SausageChat\SausageChat.csproj", "{1E6AF49C-535D-449A-8920-4F19BD741A3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SausageChatServer", "SausageChat\SausageChatServer.csproj", "{1E6AF49C-535D-449A-8920-4F19BD741A3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SausageChatClient", "SausageChatClient\SausageChatClient.csproj", "{A199F454-3100-422F-B0F5-091041F825FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1E6AF49C-535D-449A-8920-4F19BD741A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E6AF49C-535D-449A-8920-4F19BD741A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E6AF49C-535D-449A-8920-4F19BD741A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A199F454-3100-422F-B0F5-091041F825FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A199F454-3100-422F-B0F5-091041F825FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A199F454-3100-422F-B0F5-091041F825FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A199F454-3100-422F-B0F5-091041F825FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
