@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace SausageChat
 {
-    class Server
+    static class Server
     {
+        public static bool IsOpen = false;
         public static ViewModel Vm;
+        public static MainWindow Mw;
 
         public async static Task Log(IMessage message)
         {
-            Vm.Messaages.Add(message);
+            Vm.Messages.Add(message);
+            await Mw.AddAsync(message);
         }
     }
 }

@@ -14,17 +14,6 @@ namespace SausageChat
         public ViewModel()
         {
             Messages = new ObservableCollection<IMessage>();
-            Messages.CollectionChanged += (_, e) =>
-            {
-                if(e.NewItems is ServerMessage)
-                {
-
-                }
-                else if(e.NewItems is UserMessage)
-                {
-
-                }
-            };
         }
     }
 }

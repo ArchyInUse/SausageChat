@@ -26,6 +26,19 @@ namespace SausageChat
             var vm = new ViewModel();
             DataContext = vm;
             Server.Vm = vm;
+            Server.Mw = this;
+        }
+
+        public async Task AddAsync(IMessage message)
+        {
+            if (message is UserMessage)
+            {
+                Chat_Box.AppendText(message.FormatMessage());
+            }
+            else if (message is ServerMessage)
+            {
+                Chat_Box.AppendText(message.FormatMessage());
+            }
         }
     }
 }
