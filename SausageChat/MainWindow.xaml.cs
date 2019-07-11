@@ -46,7 +46,42 @@ namespace SausageChat
 
     }
 
-    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
+    {
+
+    }
+
+    private void Mute_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Kick_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Ban_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Info_Button_Click(object sender, RoutedEventArgs e) 
+    {
+
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e) ///event for info2 button click
+    {
+
+    }
+
+    private void Stop_Server_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Start_server_Click(object sender, RoutedEventArgs e)
     {
 
     }
