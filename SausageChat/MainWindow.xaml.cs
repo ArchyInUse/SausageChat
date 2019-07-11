@@ -23,6 +23,9 @@ namespace SausageChat
         public MainWindow()
         {
             InitializeComponent();
+            var vm = new ViewModel();
+            DataContext = vm;
+            Server.Vm = vm;
         }
     }
 }
