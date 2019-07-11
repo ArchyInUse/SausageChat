@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,5 +40,15 @@ namespace SausageChat
                 Chat_Box.AppendText(message.FormatMessage());
             }
         }
+
+    private void Chat_Box_TextChanged(object sender, TextChangedEventArgs e) //event hander for the Chat box. 
+    {
+
     }
+
+    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+  }
 }
