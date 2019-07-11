@@ -9,14 +9,21 @@ namespace SausageChat
 {
     class ViewModel
     {
-        public ObservableCollection<IMessage> Messaages { get; set; }
+        public ObservableCollection<IMessage> Messages { get; set; }
 
         public ViewModel()
         {
-            Messaages = new ObservableCollection<IMessage>();
-            Messaages.CollectionChanged += (_, e) =>
+            Messages = new ObservableCollection<IMessage>();
+            Messages.CollectionChanged += (_, e) =>
             {
-                // the new item is e so you can check if it's a UserMessage or a ServerMessage
+                if(e.NewItems is ServerMessage)
+                {
+
+                }
+                else if(e.NewItems is UserMessage)
+                {
+
+                }
             };
         }
     }
