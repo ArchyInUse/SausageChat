@@ -85,5 +85,10 @@ namespace SausageChat
     {
 
     }
+
+    private void Server_message_button_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
   }
 }

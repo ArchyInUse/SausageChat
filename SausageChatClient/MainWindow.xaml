@@ -1,12 +1,84 @@
-﻿<Window x:Class="SausageChatClient.MainWindow"
+<Window x:Name="Client" x:Class="SausageChatClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SausageChatClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Client_view" Height="642.507" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <!-- Define the columns for the grid -->
+
+            <ColumnDefinition Width="*" />
+            <!-- The first row.  -->
+            <ColumnDefinition Width="*"/>
+            <!-- The Second Column  -->
+            <ColumnDefinition Width="*" />
+            <!-- The third column -->
+
+
+            <ColumnDefinition Width="*" />
+            <!-- The Fourth column -->
+
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition  Height="auto"/>
+            <!-- The First Row -->
+            <RowDefinition  Height="*"/>
+            <!-- The Second Row -->
+
+
+
+        </Grid.RowDefinitions>
+        <RichTextBox x:Name="Chat_Box_client" TextChanged="Chat_Box_TextChanged" Margin="2,0,0,0" Height="234" VerticalAlignment="Top">
+            <!--  The chatbox of where the messages will go.-->
+
+
+
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Name: [Message]"/>
+                </Paragraph>
+                <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
+                    <Run Text="Server Message"/>
+                </Paragraph>
+                <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
+                    <Run/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <StackPanel Grid.Column="2" Margin="0,0,63,0">
+
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <!-- Give 10 margin space in height to each button -->
+                    <!-- Set target type of the style to button-->
+                    <Setter Property="Margin" Value="0,10,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Button x:Name="Mute_Button_client" Content="Mute" Height="38" VerticalAlignment="Top" Margin="0,10,15,0" Click="Mute_Button_Click"/>
+            <Button x:Name="Kick_Button_client" Content="Kick" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Kick_Button_Click"/>
+            <Button x:Name="Ban_Button_client" Content="Ban" Height="44" VerticalAlignment="Top" RenderTransformOrigin="0.275,1.364" Margin="0,10,15,0" Click="Ban_Button_Click"/>
+            <Button x:Name="Info_Button_client" Content="Info" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Info_Button_Click"/>
+            <Button x:Name="Freinds_button" Content="Freinds" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Start_server_Click"/>
+        </StackPanel>
+        <ListBox x:Name="User_List_client" Grid.Column="2" Margin="35,32,51,63" SelectionChanged="ListBox_SelectionChanged" Grid.Row="1">
+            <ListBoxItem Content="Users List"/>
+        </ListBox>
+        <TreeView x:Name="Freinds_List_view" Grid.Column="3" Margin="10,19,10,171" Background="{x:Null}">
+            <TreeViewItem Header="WORK DAMMIT" Height="100" Width="127" IsExpanded="True">
+                <TreeViewItem Header="TreeViewItem" HorizontalAlignment="Left" Height="100" Width="81" IsExpanded="True"/>
+            </TreeViewItem>
+        </TreeView>
+        <StackPanel Margin="2,239,0,38">
+            <TextBox x:Name="User_Message_client" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="User_Message_client_TextChanged"/>
+            <Button x:Name="Send_message_Button_client" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click"/>
+        </StackPanel>
+
     </Grid>
 </Window>

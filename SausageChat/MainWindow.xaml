@@ -53,7 +53,7 @@
       </FlowDocument>
     </RichTextBox>
     <StackPanel Margin="2,226,0,60">
-      <TextBox x:Name="Server_message_button" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11"/>
+      <TextBox x:Name="Server_message_button" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="Server_message_button_TextChanged"/>
       <Button x:Name="Send_message_Button" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415"/>
     </StackPanel>
 

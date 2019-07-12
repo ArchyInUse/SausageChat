@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +24,50 @@ namespace SausageChatClient
         {
             InitializeComponent();
         }
+
+    private void Mute_Button_Click(object sender, RoutedEventArgs e)
+    {
+
     }
+
+    private void Kick_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Ban_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Info_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Start_server_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    private void Chat_Box_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
+
+    private void Send_message_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void User_Message_client_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
+  }
 }
