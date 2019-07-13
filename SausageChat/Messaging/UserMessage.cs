@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SausageChat.Networking;
 
-namespace SausageChat
+namespace SausageChat.Messaging
 {
     class UserMessage : IMessage
     {
@@ -18,6 +19,11 @@ namespace SausageChat
         }
 
         public string FormatMessage()
+        {
+            return ToString();
+        }
+
+        public override string ToString()
         {
             return $"<{Author}>:{Content}";
         }

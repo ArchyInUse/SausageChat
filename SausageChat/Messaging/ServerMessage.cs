@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SausageChat
+namespace SausageChat.Messaging
 {
     class ServerMessage : IMessage
     {
@@ -15,9 +15,8 @@ namespace SausageChat
             Content = content;
         }
 
-        public string FormatMessage()
-        {
-            return Content;
-        }
+        public string FormatMessage() => ToString();
+
+        public override string ToString() => Content;
     }
 }
