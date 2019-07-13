@@ -13,18 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using MahApps.Metro.Controls;
+
 namespace SausageChatClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
         public MainWindow()
         {
-            InitializeComponent();
-        }
+         
 
+    }
+
+   
     private void Mute_Button_Click(object sender, RoutedEventArgs e)
     {
 
@@ -66,6 +70,11 @@ namespace SausageChatClient
     }
 
     private void User_Message_client_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
+
+    private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
     {
 
     }
