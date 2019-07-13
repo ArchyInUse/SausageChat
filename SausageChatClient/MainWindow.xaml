@@ -8,97 +8,102 @@
         xmlns:local="clr-namespace:SausageChatClient"
         mc:Ignorable="d"
         Title="Client_view" Height="642.507" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <!-- Define the columns for the grid -->
+  <Grid Background="#FF008CFF">
+    <Grid.ColumnDefinitions>
+      <!-- Define the columns for the grid -->
 
-            <ColumnDefinition Width="*" />
-            <!-- The first row.  -->
-            <ColumnDefinition Width="*"/>
-            <!-- The Second Column  -->
-            <ColumnDefinition Width="*" />
-            <!-- The third column -->
-
-
-            <ColumnDefinition Width="*" />
-            <!-- The Fourth column -->
+      <ColumnDefinition Width="20*" />
+      <!-- The first row.  -->
+      <ColumnDefinition Width="2*"/>
+      <!-- The Second Column  -->
+      <ColumnDefinition Width="11*" />
+      <!-- The third column -->
 
 
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-
-            <RowDefinition  Height="auto"/>
-            <!-- The First Row -->
-            <RowDefinition  Height="*"/>
-            <!-- The Second Row -->
+      <ColumnDefinition Width="11*" />
+      <!-- The Fourth column -->
 
 
+    </Grid.ColumnDefinitions>
 
-        </Grid.RowDefinitions>
-        <RichTextBox x:Name="Chat_Box_client" TextChanged="Chat_Box_TextChanged" Margin="2,0,0,0" Height="234" VerticalAlignment="Top">
-            <!--  The chatbox of where the messages will go.-->
+    <Grid.RowDefinitions>
+
+      <RowDefinition  Height="auto" MinHeight="410"/>
+      <!-- The First Row -->
+      <RowDefinition/>
+      <!-- The Second Row -->
 
 
 
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="Name: [Message]"/>
-                </Paragraph>
-                <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-                    <Run Text="Server Message"/>
-                </Paragraph>
-                <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-                    <Run/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <StackPanel Grid.Column="2" Margin="0,0,63,0">
+    </Grid.RowDefinitions>
+    <RichTextBox x:Name="Chat_Box_client" TextChanged="Chat_Box_TextChanged" Margin="2,0,0,0" Height="234" VerticalAlignment="Top" Background="#FF419EEA">
+      <!--  The chatbox of where the messages will go.-->
 
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <!-- Give 10 margin space in height to each button -->
-                    <!-- Set target type of the style to button-->
-                    <Setter Property="Margin" Value="0,10,0,0"/>
-                </Style>
-            </StackPanel.Resources>
 
-            <Button x:Name="Mute_Button_client" Content="Mute" Height="38" VerticalAlignment="Top" Margin="0,10,15,0" Click="Mute_Button_Click"/>
-            <Button x:Name="Kick_Button_client" Content="Kick" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Kick_Button_Click"/>
-            <Button x:Name="Ban_Button_client" Content="Ban" Height="44" VerticalAlignment="Top" RenderTransformOrigin="0.275,1.364" Margin="0,10,15,0" Click="Ban_Button_Click"/>
-            <Button x:Name="Info_Button_client" Content="Info" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Info_Button_Click"/>
-            <Button x:Name="Freinds_button" Content="Friends" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Start_server_Click"/>
-        </StackPanel>
-        <ListBox x:Name="User_List_client" Grid.Column="2" Margin="35,32,51,63" SelectionChanged="ListBox_SelectionChanged" Grid.Row="1">
-            <ListBoxItem Content="Users List"/>
-      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected"/>
-      <ListBoxItem Content="User2"/>
+
+      <FlowDocument>
+        <Paragraph>
+          <Run Text="Name: [Message]"/>
+        </Paragraph>
+        <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
+          <Run Text="Server Message"/>
+        </Paragraph>
+        <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
+          <Run/>
+        </Paragraph>
+      </FlowDocument>
+    </RichTextBox>
+    <StackPanel Grid.Column="2" Margin="0,0,63,0">
+
+      <StackPanel.Resources>
+        <Style TargetType="{x:Type Button}">
+          <!-- Give 10 margin space in height to each button -->
+          <!-- Set target type of the style to button-->
+          <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+      </StackPanel.Resources>
+
+      <Button x:Name="Mute_Button_client" Content="Mute" Height="38" VerticalAlignment="Top" Margin="0,10,15,0" Click="Mute_Button_Click" Background="#FF419EEA"/>
+      <Button x:Name="Kick_Button_client" Content="Kick" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Kick_Button_Click" Background="#FF419EEA"/>
+      <Button x:Name="Ban_Button_client" Content="Ban" Height="44" VerticalAlignment="Top" RenderTransformOrigin="0.275,1.364" Margin="0,10,15,0" Click="Ban_Button_Click" Background="#FF419EEA"/>
+      <Button x:Name="Info_Button_client" Content="Info" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Info_Button_Click" Background="#FF419EEA"/>
+      <Button x:Name="Freinds_button" Content="Friends" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Start_server_Click" Background="#FF419EEA"/>
+    </StackPanel>
+    <ListBox x:Name="User_List_client" Grid.Column="2" Margin="35,32,51,63" SelectionChanged="ListBox_SelectionChanged" Grid.Row="1" Background="#FF419EEA">
+      <ListBoxItem Content="Users List" Background="#FF419EEA"/>
+      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA"/>
+      <ListBoxItem Content="User2" Background="#FF419EEA"/>
     </ListBox>
 
-      <TreeView x:Name="Freinds_List_view" Grid.Column="3" Margin="10,19,10,171" Background="{x:Null}">
-      <TreeViewItem Header="Friends" IsExpanded="True">
+    <TreeView x:Name="Freinds_List_view" Grid.Column="3" Margin="10,110,10,80" Background="#FF419EEA">
+      <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA">
 
-        <TreeViewItem Header="Online friends" IsExpanded="True">
-          <TreeViewItem Header="friend1" />
-          <TreeViewItem Header="friend2" />
+        <TreeViewItem Header="Online friends" IsExpanded="True" Background="#FF419EEA">
+          <TreeViewItem Header="friend1" Background="#FF419EEA" />
+          <TreeViewItem Header="friend2" Background="#FF419EEA" />
         </TreeViewItem>
-        
-        <TreeViewItem Header="Offline Friends" IsExpanded="True">
-          <TreeViewItem Header="friend1"  />
-          <TreeViewItem Header="friend2"  />
+
+        <TreeViewItem Header="Offline Friends" IsExpanded="True" Background="#FF419EEA">
+          <TreeViewItem Header="friend1" Background="#FF419EEA"  />
+          <TreeViewItem Header="friend2" Background="#FF419EEA"  />
 
         </TreeViewItem>
-      
+
       </TreeViewItem>
 
 
     </TreeView>
 
-   
-        <StackPanel Margin="2,239,0,38">
-            <TextBox x:Name="User_Message_client" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="User_Message_client_TextChanged"/>
-            <Button x:Name="Send_message_Button_client" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click"/>
-        </StackPanel>
 
-    </Grid>
+    <StackPanel Margin="2,239,0,38">
+      <TextBox x:Name="User_Message_client" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA"/>
+      <Button x:Name="Send_message_Button_client" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA"/>
+    </StackPanel>
+    <ComboBox x:Name="Select_IP_Combo_box" Grid.Column="3" Margin="31,38,17,0" VerticalAlignment="Top" BorderBrush="#FF419EEA" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="Black">
+      <ComboBoxItem Content="IP 1 192.168.9.2" Background="#FF419EEA" Margin="0,0,-2,0"/>
+      <ComboBoxItem Content="IP 2 72.67.168.0.2" Background="#FF419EEA" Margin="0,0,-2,0"/>
+    </ComboBox>
+    <Label Content="Select IP" HorizontalAlignment="Left" Margin="31,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Grid.Column="3" Width="120"/>
+
+  </Grid>
 </Controls:MetroWindow>
