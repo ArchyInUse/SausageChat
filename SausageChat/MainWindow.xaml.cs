@@ -19,18 +19,18 @@ namespace SausageChat
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
         public MainWindow()
         {
             InitializeComponent();
             var vm = new ViewModel();
             DataContext = vm;
-            Server.Vm = vm;
-            Server.Mw = this;
-        }
+      //Server.Vm = vm; //commeneted this out since it was giving me a error. 
+      //Server.Mw = this;   //commeneted this out since it was giving me a error. 
+    }
 
-        public async Task AddAsync(IMessage message)
+    public async Task AddAsync(IMessage message)
         {
             if (message is UserMessage)
             {
@@ -88,6 +88,11 @@ namespace SausageChat
     }
 
     private void Server_message_button_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+    }
+
+    private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
     {
 
     }
