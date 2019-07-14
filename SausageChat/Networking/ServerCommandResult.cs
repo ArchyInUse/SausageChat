@@ -12,6 +12,7 @@ namespace SausageChat.Networking
     enum ServerCommandResult
     {
         Success,
-        UserNotFound
+        UserNotFound,
+        UserIsNull
     }
 }

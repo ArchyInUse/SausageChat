@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Sockets;
 using SausageChat.Messaging;
 using SausageChat.Networking;
+using SausageChat.Helpers;
+using System.Collections.ObjectModel;
 
 namespace SausageChat.Networking
 {
@@ -17,7 +19,17 @@ namespace SausageChat.Networking
         public static MainWindow Mw { get; set; }
         public static Socket MainSocket { get; set; }
         public const int PORT = 60000;
-        public static List<User> ConnectedUsers { get; set; }
+        public static ObservableCollection<User> ConnectedUsers
+        {
+            get
+            {
+                return Vm.ConnectedUsers;
+            }
+            set
+            {
+                Vm.ConnectedUsers = value;
+            }
+        }
         public static List<IPEndPoint> Blacklisted { get; set; } = new List<IPEndPoint>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);
         
@@ -26,7 +38,7 @@ namespace SausageChat.Networking
             if(!IsOpen)
             {
                 MainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                ConnectedUsers = new List<User>();
+                ConnectedUsers = new ObservableCollection<User>();
                 MainSocket.Listen(10);
                 MainSocket.Bind(LocalIp);
                 MainSocket.BeginAccept(OnUserConnect, null);
@@ -40,7 +52,7 @@ namespace SausageChat.Networking
                 MainSocket.Close();
                 foreach(User u in ConnectedUsers)
                 {
-                    u._Socket.Close();
+                    u.Disconnect();
                 }
                 Mw.AddAsync(new ServerMessage("Closed all sockets"));
             }
@@ -48,9 +60,12 @@ namespace SausageChat.Networking
 
         public static ServerCommandResult Ban(User user)
         {
-            if (ConnectedUsers.Any(x => x == user))
+            if (user == null)
+                return ServerCommandResult.UserIsNull;
+            else if (ConnectedUsers.Any(x => x == user))
             {
                 Blacklisted.Add(user.Ip);
+                user.SendAsync($"<USER_BANNED>");
                 user.Disconnect();
                 return ServerCommandResult.Success;
             }
@@ -62,8 +77,11 @@ namespace SausageChat.Networking
 
         public static ServerCommandResult Kick(User user)
         {
-            if(ConnectedUsers.Any(x => x == user))
+            if (user == null)
+                return ServerCommandResult.UserIsNull;
+            else if (ConnectedUsers.Any(x => x == user))
             {
+                user.SendAsync("<USER_KICKED>");
                 user.Disconnect();
                 return ServerCommandResult.Success;
             }
@@ -75,13 +93,32 @@ namespace SausageChat.Networking
 
         public static ServerCommandResult Mute(User user)
         {
-            if (ConnectedUsers.Any(x => x == user))
+            if (user == null)
+                return ServerCommandResult.UserIsNull;
+            else if (ConnectedUsers.Any(x => x == user))
             {
-                user.SendAsync("<SERVER_MUTE>");
+                user.SendAsync("<USER_MUTED>");
+                user.IsMuted = true;
                 return ServerCommandResult.Success;
             }
             else
                 return ServerCommandResult.UserNotFound;
+        }
+
+        public static ServerCommandResult Unmute(User user)
+        {
+            if (user == null)
+                return ServerCommandResult.UserIsNull;
+            else if (user.IsMuted && ConnectedUsers.Any(x => x == user))
+            {
+                user.IsMuted = false;
+                user.SendAsync("<USER_UNMUTED>");
+                return ServerCommandResult.Success;
+            }
+            else
+            {
+                return ServerCommandResult.UserNotFound;
+            }
         }
 
         public static async void OnUserConnect(IAsyncResult ar)
@@ -90,7 +127,7 @@ namespace SausageChat.Networking
             if (!Blacklisted.Any(x => x == user.Ip))
             {
                 ConnectedUsers.Add(user);
-                Vm.Names.Add(user.Name);
+                Vm.ConnectedUsers = SortUsersList();
                 await Log(new ServerMessage($"{user} has joined."));
             }
             else
@@ -109,6 +146,14 @@ namespace SausageChat.Networking
             {
                 user.SendAsync(message.ToString());
             }
+        }
+
+        public static ObservableCollection<User> SortUsersList()
+        {
+            List<User> names = new List<User>(Vm.ConnectedUsers);
+            names.Sort(new UserComparer());
+
+            return new ObservableCollection<User>(names);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace SausageChat.Networking
         public byte[] Data { get; set; } = new byte[1024];
         // to be implemented in Listen functions
         public bool IsMuted { get; set; } = false;
+        public bool IsAdmin { get; set; } = false;
         public IPEndPoint Ip { get; set; }
         // not following name convention to avoid name colision
         public Socket _Socket { get; set; }
@@ -103,12 +104,15 @@ namespace SausageChat.Networking
         {
             string oldName = Name;
             Name = newName;
+            Server.Vm.ConnectedUsers.First(x => x == this).Name = newName;
+            Server.Vm.ConnectedUsers = Server.SortUsersList();
             return oldName;
         }
 
         public async Task Disconnect()
         {
             Server.ConnectedUsers.Remove(this);
+            Server.Vm.ConnectedUsers = Server.SortUsersList();
             _Socket.Close();
             await Server.Log(new ServerMessage($"{this} disconnected"));
         }
