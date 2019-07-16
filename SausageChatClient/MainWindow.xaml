@@ -60,7 +60,7 @@
     </TreeView>
 
 
-    <ItemsControl  x:Name ="UserMessageList" Background="White" Margin="0,0,10,58" Grid.Column="1"  >
+    <ItemsControl  x:Name ="MessageListThingWORK" Background="#FF0015E4" Margin="0,0,10,58" Grid.Column="1" Foreground="Red"  >
 
       <ItemsControl.ItemTemplate>
 
@@ -68,11 +68,9 @@
 
           <StackPanel Orientation ="Vertical">
 
-            <TextBlock Text="{Binding UserMessage}" ></TextBlock>
+            <TextBlock Text="{Binding Text, Source=ServerMessage}" ></TextBlock>
             <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
-            <TextBlock Text ="{Binding UserMessage}" ></TextBlock>
-            <!--This text block will hold the Server messages. It will generate a separate text block for each message.-->
-
+           
           </StackPanel>
 
 

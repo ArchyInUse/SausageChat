@@ -26,24 +26,26 @@ namespace SausageChatClient
 
     public partial class MainWindow 
     {
-        ObservableCollection<IMessage> MessageListThing { get; set; }
+       ObservableCollection<IMessage> MessageListThing { get; set; } =   new ObservableCollection<IMessage>();
 
-        public MainWindow()
+    public MainWindow()
         {
 
             SausageClient.Mw = this;
-            MessageListThing.Add(new UserMessage("Hello!"));
-            MessageListThing.Add(new ServerMessage("Server Announcment!!!"));
+      //MessageListThing.Add(new UserMessage("test"));
+           MessageListThing.Add(new ServerMessage("Server Announcment!!!"));
             SausageClient.Mw = this;
-        }
+      this.DataContext = this;
 
-       // public void Log(IMessage message)
-       // {
-          //  Chat_Box_client.AppendText(message.ToString());
-        //}
+    }
 
-   
-        private void Mute_Button_Click(object sender, RoutedEventArgs e)
+    // public void Log(IMessage message)
+    // {
+    //  Chat_Box_client.AppendText(message.ToString());
+    //}
+
+
+    private void Mute_Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
