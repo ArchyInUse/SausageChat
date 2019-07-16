@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SausageChatClient.Messaging
 {
-    interface IMessage
+    public interface IMessage
     {
         string Content { get; set; }
         string ToString();

@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using System.Collections.ObjectModel;
 
 namespace SausageChatClient
 {
@@ -23,9 +24,13 @@ namespace SausageChatClient
     /// </summary>
     public partial class MainWindow 
     {
+        public ObservableCollection<IMessage> MyProperty { get; set; }
+
         public MainWindow()
         {
-            SausageClient.Mw = this; 
+            SausageClient.Mw = this;
+            MyProperty.Add(new UserMessage("Hello!"));
+            MyProperty.Add(new ServerMessage("Server Announcment!!!"));
         }
 
         public void Log(IMessage message)
