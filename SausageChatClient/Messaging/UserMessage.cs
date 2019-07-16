@@ -13,7 +13,14 @@ namespace SausageChatClient.Messaging
 
         public UserMessage(string Content)
         {
+            this.Content = Content;
+            Author = "Me";
+        }
 
+        public UserMessage(string Content, string Author)
+        {
+            this.Content = Content;
+            this.Author = Author;
         }
 
         public override string ToString()
