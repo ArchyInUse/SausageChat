@@ -7,20 +7,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SausageChatClient"
         mc:Ignorable="d"
-        Title="Client_view" Height="642.507" Width="800">
+        Title="Client_view" Height="642.507" Width="915">
   <Grid Background="#FF008CFF">
     <Grid.ColumnDefinitions>
       <!-- Define the columns for the grid -->
 
-      <ColumnDefinition Width="20*" />
+      <ColumnDefinition Width="145*" />
+      <ColumnDefinition Width="576*"/>
       <!-- The first row.  -->
-      <ColumnDefinition Width="2*"/>
       <!-- The Second Column  -->
-      <ColumnDefinition Width="11*" />
       <!-- The third column -->
 
 
-      <ColumnDefinition Width="11*" />
+      <ColumnDefinition Width="186*" />
       <!-- The Fourth column -->
 
 
@@ -28,54 +27,20 @@
 
     <Grid.RowDefinitions>
 
-      <RowDefinition  Height="auto" MinHeight="410"/>
+      <RowDefinition  Height="612"/>
       <!-- The First Row -->
-      <RowDefinition/>
       <!-- The Second Row -->
 
 
 
     </Grid.RowDefinitions>
-    <RichTextBox x:Name="Chat_Box_client" TextChanged="Chat_Box_TextChanged" Margin="2,0,0,0" Height="234" VerticalAlignment="Top" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
-      <!--  The chatbox of where the messages will go.-->
-
-
-
-      <FlowDocument>
-        <Paragraph>
-          <Run Text="Name: [Message]"/>
-        </Paragraph>
-        <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-          <Run Text="Server Message"/>
-        </Paragraph>
-        <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-          <Run/>
-        </Paragraph>
-      </FlowDocument>
-    </RichTextBox>
-    <StackPanel Grid.Column="2" Margin="0,0,63,0">
-
-      <StackPanel.Resources>
-        <Style TargetType="{x:Type Button}">
-          <!-- Give 10 margin space in height to each button -->
-          <!-- Set target type of the style to button-->
-          <Setter Property="Margin" Value="0,10,0,0"/>
-        </Style>
-      </StackPanel.Resources>
-
-      <Button x:Name="Mute_Button_client" Content="Mute" Height="38" VerticalAlignment="Top" Margin="0,10,15,0" Click="Mute_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-      <Button x:Name="Kick_Button_client" Content="Kick" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Kick_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-      <Button x:Name="Ban_Button_client" Content="Ban" Height="44" VerticalAlignment="Top" RenderTransformOrigin="0.275,1.364" Margin="0,10,15,0" Click="Ban_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-      <Button x:Name="Info_Button_client" Content="Info" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Info_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-      <Button x:Name="Freinds_button" Content="Friends" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Start_server_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-    </StackPanel>
-    <ListBox x:Name="User_List_client" Grid.Column="2" Margin="35,32,51,63" SelectionChanged="ListBox_SelectionChanged" Grid.Row="1" Background="#FF419EEA" BorderBrush="#FF008CFF">
+    <ListBox x:Name="User_List_client" Margin="0,0,1,27" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2" Height="155" VerticalAlignment="Bottom">
       <ListBoxItem Content="Users List" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
     </ListBox>
 
-    <TreeView x:Name="Freinds_List_view" Grid.Column="3" Margin="10,110,10,80" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
+    <TreeView x:Name="Freinds_List_view" Margin="0,0,0,197" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Grid.Column="2">
       <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
         <TreeViewItem Header="Online friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF">
@@ -93,17 +58,34 @@
 
 
     </TreeView>
+    <StackPanel x:Name="stackPanel" Grid.Column="1" Margin="10,0,12,0">
+      <RichTextBox x:Name="Chat_Box_client" TextChanged="Chat_Box_TextChanged" Height="540" VerticalAlignment="Top" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Margin="1,0,0,0">
+        <!--  The chatbox of where the messages will go.-->
 
 
-    <StackPanel Margin="2,239,0,38">
-      <TextBox x:Name="User_Message_client" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-      <Button x:Name="Send_message_Button_client" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
+
+        <FlowDocument>
+          <Paragraph>
+            <Run Text="Name: [Message]"/>
+          </Paragraph>
+          <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
+            <Run Text="Server Message"/>
+          </Paragraph>
+          <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
+            <Run/>
+          </Paragraph>
+        </FlowDocument>
+      </RichTextBox>
+      <TextBox x:Name="User_Message_client" Height="17" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="1,0,0,0"/>
+      <Button x:Name="Send_message_Button_client" Content="Send" Height="34" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True"/>
     </StackPanel>
-    <ComboBox x:Name="Select_IP_Combo_box" Grid.Column="3" Margin="31,38,17,0" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="Black">
-      <ComboBoxItem Content="IP 1 192.168.9.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
-      <ComboBoxItem Content="IP 2 72.67.168.0.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
-    </ComboBox>
-    <Label Content="Select IP" HorizontalAlignment="Left" Margin="31,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Grid.Column="3" Width="120" Foreground="#FFFCFDFF"/>
+    <StackPanel Height="75" VerticalAlignment="Top">
+      <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Width="120" Foreground="#FFFCFDFF" Height="26"/>
+      <ComboBox x:Name="Select_IP_Combo_box" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="Black" Height="26">
+        <ComboBoxItem Content="IP 1 192.168.9.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
+        <ComboBoxItem Content="IP 2 72.67.168.0.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
+      </ComboBox>
+    </StackPanel>
 
   </Grid>
 </Controls:MetroWindow>
