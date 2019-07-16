@@ -84,7 +84,7 @@ namespace SausageChat
 
         private void Send_message_Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Log(new ServerMessage(Server_message_button.Text));
+            //Server.Log(new ServerMessage(Server_message_button.Text));
         }
     }
 }

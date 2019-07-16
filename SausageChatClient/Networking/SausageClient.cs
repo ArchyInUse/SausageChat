@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,7 +75,7 @@ namespace SausageChatClient.Networking
 
         public static void Log(IMessage message)
         {
-            Mw.Log(message);
+           // Mw.Log(message);
         }
     }
 }
