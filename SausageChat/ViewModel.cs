@@ -6,9 +6,9 @@ namespace SausageChat
 {
     class ViewModel
     {
-        public ObservableCollection<IMessage> Messages { get; set; }
+        public ObservableCollection<IMessage> Messages { get; set; } //a collection of messages
         // User names (for user list)
-        public ObservableCollection<User> ConnectedUsers { get; set; }
+        public ObservableCollection<User> ConnectedUsers { get; set; } // a collection of connected users 
         public User SelectedUser { get; set; } = null;
 
         public ViewModel()
