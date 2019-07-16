@@ -85,7 +85,7 @@
     
     <StackPanel Height="75" VerticalAlignment="Top">
       <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Width="120" Foreground="#FFFCFDFF" Height="26"/>
-      <ComboBox x:Name="Select_IP_Combo_box" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="Black" Height="26">
+      <ComboBox x:Name="Select_IP_Combo_box" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="Black" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged">
         <ComboBoxItem Content="IP 1 192.168.9.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
         <ComboBoxItem Content="IP 2 72.67.168.0.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
       </ComboBox>

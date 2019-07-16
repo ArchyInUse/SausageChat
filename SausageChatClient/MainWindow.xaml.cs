@@ -61,7 +61,7 @@ namespace SausageChatClient
 
         private void Info_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Start_server_Click(object sender, RoutedEventArgs e)
@@ -93,5 +93,10 @@ namespace SausageChatClient
         {
 
         }
+
+    private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
     }
+  }
 }
