@@ -22,21 +22,26 @@ namespace SausageChatClient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    ///
+
     public partial class MainWindow 
     {
-        public ObservableCollection<IMessage> MyProperty { get; set; }
 
-        public MainWindow()
+
+     ObservableCollection<IMessage> MyProperty { get; set; }
+    public MainWindow()
         {
-            SausageClient.Mw = this;
-            MyProperty.Add(new UserMessage("Hello!"));
-            MyProperty.Add(new ServerMessage("Server Announcment!!!"));
+
+      SausageClient.Mw = this;
+      MyProperty.Add(new UserMessage("Hello!"));
+      MyProperty.Add(new ServerMessage("Server Announcment!!!"));
+      SausageClient.Mw = this; 
         }
 
-        public void Log(IMessage message)
-        {
-            Chat_Box_client.AppendText(message.ToString());
-        }
+       // public void Log(IMessage message)
+       // {
+          //  Chat_Box_client.AppendText(message.ToString());
+        //}
 
    
         private void Mute_Button_Click(object sender, RoutedEventArgs e)

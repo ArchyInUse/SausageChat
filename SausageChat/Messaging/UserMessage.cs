@@ -1,10 +1,10 @@
-﻿using SausageChat.Networking;
+using SausageChat.Networking;
 namespace SausageChat.Messaging
 {
     class UserMessage : IMessage
     {
-        public string Content { get; set; }
-        public User Author { get; set; }
+        public string Content { get; set; } //allows to get or set the string.
+        public User Author { get; set; } // will allow us to get or set the user. User is custom defined type.
 
         public UserMessage(User author, string content)
         {
@@ -14,7 +14,7 @@ namespace SausageChat.Messaging
 
         public string FormatMessage()
         {
-            return ToString();
+            return ToString();  //this will show what is the current string of "toString". 
         }
 
         public override string ToString()

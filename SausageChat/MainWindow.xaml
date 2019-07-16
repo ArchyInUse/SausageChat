@@ -38,23 +38,28 @@
 
 
 
-    <RichTextBox x:Name="Chat_Box" TextChanged="Chat_Box_TextChanged" Margin="2,0,10,73" Grid.Column="0" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
-      <!--  The chatbox of where the messages will go.-->
+    <ItemsControl  x:Name ="Messages" Background="White" Margin="0,0,10,58"  >
+
+      <ItemsControl.ItemTemplate>
+
+        <DataTemplate>
+
+          <StackPanel Orientation ="Vertical">
+
+            <TextBlock Text="{Binding UserMessage}" ></TextBlock>
+            <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
+            <TextBlock Text ="{Binding UserMessage}" ></TextBlock>
+            <!--This text block will hold the Server messages. It will generate a separate text block for each message.-->
+
+          </StackPanel>
 
 
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
 
-      <FlowDocument>
-        <Paragraph>
-          <Run Text="Name: [Message]"/>
-        </Paragraph>
-        <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-          <Run Text="Server Message"/>
-        </Paragraph>
-        <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-          <Run/>
-        </Paragraph>
-      </FlowDocument>
-    </RichTextBox>
+
+    </ItemsControl>
+
     <StackPanel Margin="2,320,10,-34">
       <!--Why is the text box called Server_Message_Button???-->
       <!--Why is the text box called Server_Message_Button???-->

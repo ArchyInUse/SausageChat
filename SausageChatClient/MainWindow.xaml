@@ -58,27 +58,31 @@
 
 
     </TreeView>
-    <StackPanel x:Name="stackPanel" Grid.Column="1" Margin="10,0,12,0">
-      <RichTextBox x:Name="Chat_Box_client" TextChanged="Chat_Box_TextChanged" Height="540" VerticalAlignment="Top" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Margin="1,0,0,0">
-        <!--  The chatbox of where the messages will go.-->
 
 
+    <ItemsControl  x:Name ="MyProperty" Background="White" Margin="0,0,10,58" Grid.Column="1"  >
 
-        <FlowDocument>
-          <Paragraph>
-            <Run Text="Name: [Message]"/>
-          </Paragraph>
-          <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-            <Run Text="Server Message"/>
-          </Paragraph>
-          <Paragraph Margin="60,Auto,Auto,Auto" TextIndent="20">
-            <Run/>
-          </Paragraph>
-        </FlowDocument>
-      </RichTextBox>
-      <TextBox x:Name="User_Message_client" Height="17" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="1,0,0,0"/>
-      <Button x:Name="Send_message_Button_client" Content="Send" Height="34" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True"/>
-    </StackPanel>
+      <ItemsControl.ItemTemplate>
+
+        <DataTemplate>
+
+          <StackPanel Orientation ="Vertical">
+
+            <TextBlock Text="{Binding UserMessage}" ></TextBlock>
+            <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
+            <TextBlock Text ="{Binding UserMessage}" ></TextBlock>
+            <!--This text block will hold the Server messages. It will generate a separate text block for each message.-->
+
+          </StackPanel>
+
+
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+
+
+    </ItemsControl>
+
+    
     <StackPanel Height="75" VerticalAlignment="Top">
       <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Width="120" Foreground="#FFFCFDFF" Height="26"/>
       <ComboBox x:Name="Select_IP_Combo_box" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="Black" Height="26">
@@ -86,6 +90,9 @@
         <ComboBoxItem Content="IP 2 72.67.168.0.2" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
       </ComboBox>
     </StackPanel>
+    <Button x:Name="Send_message_Button_client" Content="Send" Height="34" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" Margin="75,560,321,18" Grid.Column="1"/>
+    <TextBox x:Name="User_Message_client" Height="17" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
+    <TextBox x:Name="User_Message_client_Copy" Height="17" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="371,560,10,22" Grid.Column="1"/>
 
   </Grid>
 </Controls:MetroWindow>
