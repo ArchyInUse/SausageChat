@@ -69,7 +69,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\UserComparer.cs" />
     <Compile Include="Messaging\IMessage.cs" />
-    <Compile Include="Networking\Server.cs" />
+    <Compile Include="Networking\SausageServer.cs" />
     <Compile Include="Messaging\ServerMessage.cs" />
     <Compile Include="Networking\ServerCommandResult.cs" />
     <Compile Include="Networking\User.cs" />

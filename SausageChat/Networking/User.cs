@@ -32,7 +32,7 @@ namespace SausageChat.Networking
 
             Messages = new List<UserMessage>();
 
-            Server.Log(new ServerMessage($"{Name} has connected"));
+            SausageServer.Log(new ServerMessage($"{Name} has connected"));
             ListenAsync();
         }
 
@@ -104,17 +104,17 @@ namespace SausageChat.Networking
         {
             string oldName = Name;
             Name = newName;
-            Server.Vm.ConnectedUsers.First(x => x == this).Name = newName;
-            Server.Vm.ConnectedUsers = Server.SortUsersList();
+            SausageServer.Vm.ConnectedUsers.First(x => x == this).Name = newName;
+            SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
             return oldName;
         }
 
         public async Task Disconnect()
         {
-            Server.ConnectedUsers.Remove(this);
-            Server.Vm.ConnectedUsers = Server.SortUsersList();
+            SausageServer.ConnectedUsers.Remove(this);
+            SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
             _Socket.Close();
-            await Server.Log(new ServerMessage($"{this} disconnected"));
+            await SausageServer.Log(new ServerMessage($"{this} disconnected"));
         }
 
         public async Task ParseMessage(string message)
@@ -122,7 +122,7 @@ namespace SausageChat.Networking
             // I'll change this later to check if the input is a message or a command, not sure on the syntax yet
             if(true)
             {
-                await Server.Log(new UserMessage(this, message));
+                await SausageServer.Log(new UserMessage(this, message));
             }
         }
 

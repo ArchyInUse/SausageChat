@@ -16,8 +16,8 @@ namespace SausageChat
             InitializeComponent();
             var vm = new ViewModel();
             DataContext = vm;
-            Server.Vm = vm;
-            Server.Mw = this;
+            SausageServer.Vm = vm;
+            SausageServer.Mw = this;
         }
 
         /// <summary>
@@ -45,22 +45,22 @@ namespace SausageChat
         // User list
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
         {
-            Server.Vm.SelectedUser = (User)e.AddedItems[0];
+            SausageServer.Vm.SelectedUser = (User)e.AddedItems[0];
         }
 
         private void Mute_Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Mute(Server.Vm.SelectedUser);
+            SausageServer.Mute(SausageServer.Vm.SelectedUser);
         }
 
         private void Kick_Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Kick(Server.Vm.SelectedUser);
+            SausageServer.Kick(SausageServer.Vm.SelectedUser);
         }
 
         private void Ban_Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Ban(Server.Vm.SelectedUser);
+            SausageServer.Ban(SausageServer.Vm.SelectedUser);
         }
 
         private void Info_Button_Click(object sender, RoutedEventArgs e) 
@@ -75,12 +75,12 @@ namespace SausageChat
 
         private void Stop_Server_Click(object sender, RoutedEventArgs e)
         {
-            Server.Close();
+            SausageServer.Close();
         }
 
         private void Start_server_Click(object sender, RoutedEventArgs e)
         {
-            Server.Open();
+            SausageServer.Open();
         }
 
         private void Server_message_button_TextChanged(object sender, TextChangedEventArgs e)
@@ -95,7 +95,7 @@ namespace SausageChat
 
         private void Send_message_Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Log(new ServerMessage(Server_message_button.Text));
+            SausageServer.Log(new ServerMessage(Server_message_button.Text));
         }
     }
 }
