@@ -26,15 +26,11 @@ namespace SausageChatClient
 
     public partial class MainWindow 
     {
-        ObservableCollection<IMessage> MessageListThing { get; set; } =   new ObservableCollection<IMessage>();
-
         public MainWindow()
         {
-           SausageClient.Mw = this;
-           MessageListThing.Add(new UserMessage("test"));
-           MessageListThing.Add(new ServerMessage("Server Announcment!!!"));
-           SausageClient.Mw = this;
-           this.DataContext = this;
+            SausageClient.Mw = this;
+            SausageClient.Mw = this;
+            this.DataContext = new ViewModel();
         }
 
     // public void Log(IMessage message)
