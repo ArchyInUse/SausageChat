@@ -27,21 +27,10 @@ namespace SausageChat
         /// <returns></returns>
         public async Task AddAsync(IMessage message)
         {
-            if (message is UserMessage)
-            {
-                Chat_Box.AppendText(message.FormatMessage());
-            }
-            else if (message is ServerMessage)
-            {
-                Chat_Box.AppendText(message.FormatMessage());
-            }
+          
         }
 
-        private void Chat_Box_TextChanged(object sender, TextChangedEventArgs e) //event hander for the Chat box. 
-        {
-
-        }
-
+      
         // User list
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
         {
@@ -95,7 +84,7 @@ namespace SausageChat
 
         private void Send_message_Button_Click(object sender, RoutedEventArgs e)
         {
-            SausageServer.Log(new ServerMessage(Server_message_button.Text));
+            Server.Log(new ServerMessage(Server_message_button.Text));
         }
     }
 }
