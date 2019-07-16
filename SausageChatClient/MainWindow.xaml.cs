@@ -26,16 +26,15 @@ namespace SausageChatClient
 
     public partial class MainWindow 
     {
+        ObservableCollection<IMessage> MessageListThing { get; set; }
 
-
-     ObservableCollection<IMessage> MyProperty { get; set; }
-    public MainWindow()
+        public MainWindow()
         {
 
-      SausageClient.Mw = this;
-      MyProperty.Add(new UserMessage("Hello!"));
-      MyProperty.Add(new ServerMessage("Server Announcment!!!"));
-      SausageClient.Mw = this; 
+            SausageClient.Mw = this;
+            MessageListThing.Add(new UserMessage("Hello!"));
+            MessageListThing.Add(new ServerMessage("Server Announcment!!!"));
+            SausageClient.Mw = this;
         }
 
        // public void Log(IMessage message)

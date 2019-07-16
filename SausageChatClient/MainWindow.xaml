@@ -60,7 +60,7 @@
     </TreeView>
 
 
-    <ItemsControl  x:Name ="MyProperty" Background="White" Margin="0,0,10,58" Grid.Column="1"  >
+    <ItemsControl  x:Name ="UserMessageList" Background="White" Margin="0,0,10,58" Grid.Column="1"  >
 
       <ItemsControl.ItemTemplate>
 
