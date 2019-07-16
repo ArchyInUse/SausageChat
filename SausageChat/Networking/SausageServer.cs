@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace SausageChat.Networking
 {
-    static class Server
+    static class SausageServer
     {
         public static bool IsOpen { get; set; } = false;
         public static ViewModel Vm { get; set; }
