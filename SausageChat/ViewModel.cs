@@ -14,6 +14,7 @@ namespace SausageChat
         public ViewModel()
         {
             Messages = new ObservableCollection<IMessage>();
+            Messages.Add(new ServerMessage("Hello!"));
         }
     }
 }

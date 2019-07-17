@@ -38,7 +38,7 @@
 
 
 
-    <ItemsControl  x:Name ="Messages" Background="White" Margin="0,0,10,58"  >
+    <ItemsControl ItemsSource="{Binding Messages}" x:Name ="Messages" Background="White" Margin="0,0,10,58"  >
 
       <ItemsControl.ItemTemplate>
 
@@ -46,9 +46,8 @@
 
           <StackPanel Orientation ="Vertical">
 
-            <TextBlock Text="{Binding UserMessage}" ></TextBlock>
+            <TextBlock Text="{Binding}" ></TextBlock>
             <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
-            <TextBlock Text ="{Binding UserMessage}" ></TextBlock>
             <!--This text block will hold the Server messages. It will generate a separate text block for each message.-->
 
           </StackPanel>
