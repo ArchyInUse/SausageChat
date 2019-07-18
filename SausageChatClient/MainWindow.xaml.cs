@@ -92,6 +92,15 @@ namespace SausageChatClient
         private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+      Window1 win2 = new Window1();
+      win2.Show();
+
     }
   }
+
+  
 }

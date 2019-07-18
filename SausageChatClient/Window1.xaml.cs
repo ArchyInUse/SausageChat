@@ -23,45 +23,32 @@ namespace SausageChatClient
     {
 
 
-     
 
       InitializeComponent();
     }
 
 
+   
 
 
 
-    private void addtext(object sender, EventArgs e)
-    {
-      if (Enter_name_input_box.Text == "Enter your name here")
-      {
-
-        Enter_name_input_box.Text = "TEST";
-      }
-    }
-
-    private void removetext(object sender, EventArgs e)
-    {
 
 
-      if (Enter_name_input_box.Text == "Enter your name here" & Enter_name_input_box.IsMouseOver == true)
-      {
-
-        Enter_name_input_box.Text = "";
-      }
-
-    }
-    
-    
-    
-
-
-    
 
     private void Enter_name_input_box_TextChanged(object sender, TextChangedEventArgs e)
     {
        
     }
+
+
+
+    string user_input_string;
+    private void Set_name_Button_Click(object sender,RoutedEventArgs e)
+    {
+      user_input_string = Enter_name_input_box.Text;
+     //need to manually close window 
+    }
+   
+
   }
 }

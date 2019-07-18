@@ -5,18 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SausageChatClient"
         mc:Ignorable="d"
-        Title="Change_Name" Height="137" Width="459" Background="#FF008CFF">
-    <Grid HorizontalAlignment="Right" Width="451">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="125,10,136,10">
-            <Label HorizontalContentAlignment="Center" x:Name="Enter_name_Label" Content="Enter New Name" Foreground="#FFFCFDFF" Background="{x:Null}" Height="30" Margin="0,0,0,7"/>
-            <TextBox x:Name="Enter_name_input_box"   HorizontalContentAlignment="Center" Height="28" TextWrapping="Wrap" Margin="0,0,0,6" Background="#FF419EEA" Foreground="#FFFCFDFF" TextChanged="Enter_name_input_box_TextChanged"/>
-        </StackPanel>
+        Title="Change_Name" Height="182" Width="459" Background="#FF008CFF">
+  <Grid HorizontalAlignment="Right" Width="451">
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <StackPanel Margin="125,10,136,10">
+      <Label HorizontalContentAlignment="Center" x:Name="Enter_name_Label" Content="Enter New Name" Foreground="#FFFCFDFF" Background="{x:Null}" Height="30" Margin="0,0,0,7"/>
 
-    </Grid>
+
+
+
+      <TextBox x:Name="Enter_name_input_box"  Text="Enter your name here" HorizontalContentAlignment="Center" Height="28" TextWrapping="Wrap" Margin="0,0,0,6" Background="#FF419EEA" Foreground="#FFFCFDFF" TextChanged="Enter_name_input_box_TextChanged">
+
+        <TextBox.Style>
+          <Style TargetType="TextBox">
+
+
+            <!---
+            Screw it. Wasting too much time on this crap. 
+            <Style.Triggers>
+              <MultiTrigger>
+
+                <MultiTrigger.Conditions>
+                  <Condition Property="Text" Value="Enter your name here">
+                    
+                  </Condition>
+                  <Condition Property="IsMouseOver" Value="True"> </Condition>
+                </MultiTrigger.Conditions>
+                <Setter Property="g"  Value=""></Setter>
+              </MultiTrigger>
+
+                
+               -->
+
+
+
+
+
+          </Style>
+
+        </TextBox.Style>
+      </TextBox>
+      <Button x:Name="Set_name_Button" Content="Set Name"  HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="190" Background="#FF419EEA" BorderBrush="#FFABADB3" Foreground="#FFFCFDFF" Click="Set_name_Button_Click"/>
+
+
+    </StackPanel>
+
+  </Grid>
 </Window>
