@@ -25,31 +25,26 @@ namespace SausageChat
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task AddAsync(IMessage message)
-        {
-          
-        }
-
-      
+        
         // User list
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
         {
             SausageServer.Vm.SelectedUser = (User)e.AddedItems[0];
         }
 
-        private void Mute_Button_Click(object sender, RoutedEventArgs e)
+        private async void Mute_Button_Click(object sender, RoutedEventArgs e)
         {
-            SausageServer.Mute(SausageServer.Vm.SelectedUser);
+            await SausageServer.Mute(SausageServer.Vm.SelectedUser);
         }
 
-        private void Kick_Button_Click(object sender, RoutedEventArgs e)
+        private async void Kick_Button_Click(object sender, RoutedEventArgs e)
         {
-            SausageServer.Kick(SausageServer.Vm.SelectedUser);
+            await SausageServer.Kick(SausageServer.Vm.SelectedUser);
         }
 
-        private void Ban_Button_Click(object sender, RoutedEventArgs e)
+        private async void Ban_Button_Click(object sender, RoutedEventArgs e)
         {
-            SausageServer.Ban(SausageServer.Vm.SelectedUser);
+            await SausageServer.Ban(SausageServer.Vm.SelectedUser);
         }
 
         private void Info_Button_Click(object sender, RoutedEventArgs e) 

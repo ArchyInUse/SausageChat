@@ -11,12 +11,24 @@ namespace SausageChatClient.Networking
 {
     static class SausageClient
     {
+        // TD -> Save IPs for DM features
         // not a prop to pass it as ref in StripData()
         public static byte[] Data = new byte[1024];
         public static Dictionary<string, IPEndPoint> IpPool { get; set; } = new Dictionary<string, IPEndPoint>()
         {
             ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.180.73"), 60000)
         };
+        public static Dictionary<string, IPEndPoint> Friends
+        {
+            get
+            {
+                return Vm.Friends;
+            }
+            set
+            {
+                Vm.Friends = value;
+            }
+        }
         public static IPEndPoint Ip { get; set; }
         public static Socket Socket { get; set; }
         public static bool Connected { get; set; } = false;
@@ -89,7 +101,7 @@ namespace SausageChatClient.Networking
             Array.Resize(ref Data, newSize);
         }
 
-        public static async Task Send(string message)
+        public static void Send(string message)
         {
             if (!Socket.Connected) return;
 
@@ -98,7 +110,7 @@ namespace SausageChatClient.Networking
             Socket.BeginSend(bytesMessage, 0, bytesMessage.Length, SocketFlags.None, OnSendComplete, null);
         }
 
-        public static async Task Send(IMessage message) => await Send(message.ToString());
+        public static async Task Send(IMessage message) => Send(message.ToString());
 
         private static async void OnSendComplete(IAsyncResult ar) => Socket.EndSend(ar);
 
@@ -111,8 +123,13 @@ namespace SausageChatClient.Networking
 
         public static async Task Rename(string newName)
         {
-            await Send($"<NC>{newName}");
+            Send($"<NC>{newName}");
             Name = newName;
+        }
+
+        public static async Task AddFriend(string Name)
+        {
+
         }
     }
 }

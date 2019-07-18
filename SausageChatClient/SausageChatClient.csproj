@@ -111,6 +111,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SausageChat.Core\SausageChat.Core.csproj">
+      <Project>{669db426-decf-4fac-8f6d-cba74f045141}</Project>
+      <Name>SausageChat.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
