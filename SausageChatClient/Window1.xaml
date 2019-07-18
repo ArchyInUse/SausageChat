@@ -1,0 +1,22 @@
+<Window x:Name="Popup_window" x:Class="SausageChatClient.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SausageChatClient"
+        mc:Ignorable="d"
+        Title="Change_Name" Height="137" Width="459" Background="#FF008CFF">
+    <Grid HorizontalAlignment="Right" Width="451">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="125,10,136,10">
+            <Label HorizontalContentAlignment="Center" x:Name="Enter_name_Label" Content="Enter New Name" Foreground="#FFFCFDFF" Background="{x:Null}" Height="30" Margin="0,0,0,7"/>
+            <TextBox x:Name="Enter_name_input_box"   HorizontalContentAlignment="Center" Height="28" TextWrapping="Wrap" Margin="0,0,0,6" Background="#FF419EEA" Foreground="#FFFCFDFF" TextChanged="Enter_name_input_box_TextChanged"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
