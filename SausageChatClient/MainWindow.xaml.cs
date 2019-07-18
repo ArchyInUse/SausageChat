@@ -39,30 +39,6 @@ namespace SausageChatClient
     //}
 
 
-        private void Mute_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Kick_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Ban_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Info_Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Start_server_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -98,6 +74,31 @@ namespace SausageChatClient
     {
       Window1 win2 = new Window1();
       win2.ShowDialog();
+
+    }
+
+    private void Ban_Button_client_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Mute_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Kick_Button_client_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Info_button_client_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Freinds_button_client_Click(object sender, RoutedEventArgs e)
+    {
 
     }
   }
