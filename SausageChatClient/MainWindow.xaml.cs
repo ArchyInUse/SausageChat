@@ -97,7 +97,7 @@ namespace SausageChatClient
     private void Button_Click(object sender, RoutedEventArgs e)
     {
       Window1 win2 = new Window1();
-      win2.Show();
+      win2.ShowDialog();
 
     }
   }
