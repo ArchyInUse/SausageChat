@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using SausageChat.Messaging;
 using SausageChat.Helpers;
+using SausageChat.Core;
 using System.Collections.ObjectModel;
 
 namespace SausageChat.Networking
@@ -28,7 +29,7 @@ namespace SausageChat.Networking
                 Vm.ConnectedUsers = value;
             }
         }
-        public static List<IPEndPoint> Blacklisted { get; set; } = new List<IPEndPoint>();
+        public static List<IPAddress> Blacklisted { get; set; } = new List<IPAddress>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);
         
         public static void Open()
@@ -52,19 +53,19 @@ namespace SausageChat.Networking
                 {
                     u.Disconnect();
                 }
-                Mw.AddAsync(new ServerMessage("Closed all sockets"));
+                Vm.Messages.Add(new ServerMessage("Closed all sockets"));
             }
         }
 
-        public static ServerCommandResult Ban(User user)
+        public static async Task<ServerCommandResult> Ban(User user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                Blacklisted.Add(user.Ip);
-                user.SendAsync($"<USER_BANNED>");
-                user.Disconnect();
+                Blacklisted.Add(user.Ip.Address);
+                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserBanned)}{user.Name}"));
+                await user.Disconnect();
                 return ServerCommandResult.Success;
             }
             else
@@ -73,14 +74,14 @@ namespace SausageChat.Networking
             }
         }
 
-        public static ServerCommandResult Kick(User user)
+        public static async Task<ServerCommandResult> Kick(User user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                user.SendAsync("<USER_KICKED>");
-                user.Disconnect();
+                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserKicked)}{user.Name}"));
+                await user.Disconnect();
                 return ServerCommandResult.Success;
             }
             else
@@ -89,13 +90,13 @@ namespace SausageChat.Networking
             }
         }
 
-        public static ServerCommandResult Mute(User user)
+        public static async Task<ServerCommandResult> Mute(User user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                user.SendAsync("<USER_MUTED>");
+                await user.SendAsync($"{CommandParser.ToString(CommandType.UserMuted)}{user.Name}");
                 user.IsMuted = true;
                 return ServerCommandResult.Success;
             }
@@ -103,14 +104,15 @@ namespace SausageChat.Networking
                 return ServerCommandResult.UserNotFound;
         }
 
-        public static ServerCommandResult Unmute(User user)
+        public static async Task<ServerCommandResult> Unmute(User user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (user.IsMuted && ConnectedUsers.Any(x => x == user))
             {
                 user.IsMuted = false;
-                user.SendAsync("<USER_UNMUTED>");
+                await user.SendAsync($"{CommandParser.ToString(CommandType.UserUnmuted)}{user.Name}");
+                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserUnmuted)}{user.Name}"), user);
                 return ServerCommandResult.Success;
             }
             else
@@ -122,27 +124,28 @@ namespace SausageChat.Networking
         public static async void OnUserConnect(IAsyncResult ar)
         {
             var user = new User(MainSocket.EndAccept(ar));
-            if (!Blacklisted.Any(x => x == user.Ip))
+            if (!Blacklisted.Any(x => x == user.Ip.Address))
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                await Log(new ServerMessage($"{user} has joined."));
+                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserListAppend)}{user.Name}"));
             }
             else
             {
-                await user.SendAsync("<CLIENT_IS_BANNED>");
+                await user.SendAsync($"{CommandParser.ToString(CommandType.UserBlackListed)}");
+                await user.Disconnect();
             }
             MainSocket.BeginAccept(OnUserConnect, null);
         }
 
-        public async static Task Log(IMessage message)
+        public async static Task Log(IMessage message, User ignore = null)
         {
             Vm.Messages.Add(message);
-            await Mw.AddAsync(message);
 
             foreach(var user in ConnectedUsers)
             {
-                user.SendAsync(message.ToString());
+                if(user != ignore)
+                    user.SendAsync(message.ToString());
             }
         }
 

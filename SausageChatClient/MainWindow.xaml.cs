@@ -22,15 +22,15 @@ namespace SausageChatClient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    ///
 
     public partial class MainWindow 
     {
         public MainWindow()
         {
+            ViewModel Vm = new ViewModel();
             SausageClient.Mw = this;
-            SausageClient.Mw = this;
-            this.DataContext = new ViewModel();
+            SausageClient.Vm = Vm;
+            this.DataContext = Vm;
         }
 
     // public void Log(IMessage message)
@@ -89,17 +89,9 @@ namespace SausageChatClient
 
         }
 
-    private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
+        private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
-
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-      Window1 win2 = new Window1();
-      win2.Show();
-      this.Close();
-
-    }
-  }
 }

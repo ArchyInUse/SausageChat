@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using SausageChat.Messaging;
+using SausageChat.Core;
 
 namespace SausageChat.Networking
 {
@@ -119,8 +120,47 @@ namespace SausageChat.Networking
 
         public async Task ParseMessage(string message)
         {
-            // I'll change this later to check if the input is a message or a command, not sure on the syntax yet
-            if(true)
+            // Friend Request (For now, other party doesn't need to accept, needs implementation)
+            if (message.Contains(CommandParser.ToString(CommandType.IpRequest)))
+            {
+                string CommandCode = CommandParser.ToString(CommandType.IpRequest);
+                foreach (User user in SausageServer.ConnectedUsers)
+                {
+                    if (user.Name == message.Substring(CommandCode.Length))
+                    {
+                        await SendAsync($"{CommandCode}{user.Ip.Address.ToString()}");
+                    }
+                }
+            }
+            // Rename
+            else if (message.Contains(CommandParser.ToString(CommandType.NameChanged)))
+                Rename(message.Substring(CommandParser.ToString(CommandType.NameChanged).Length));
+            // on user join (need to send all the usernames for ViewModel)
+            else if (message.Contains(CommandParser.ToString(CommandType.OnJoinUserList)))
+            {
+                // since user gets added in SausageServer OnUserConnect method, this will never be 0 on connect)
+                if (SausageServer.ConnectedUsers.Count == 1)
+                    await SendAsync($"{CommandParser.ToString(CommandType.OnJoinUserList)}NULL");
+                else
+                {
+                    string ListUsersToSring = "";
+                    for (int i = 0; i < SausageServer.ConnectedUsers.Count; i++)
+                    {
+                        if (i == SausageServer.ConnectedUsers.Count - 1)
+                            ListUsersToSring += SausageServer.ConnectedUsers[i];
+                        else
+                            ListUsersToSring += SausageServer.ConnectedUsers[i] + ",";
+                    }
+
+                    await SendAsync($"{CommandParser.ToString(CommandType.OnJoinUserList)}{ListUsersToSring}");
+                    await SausageServer.Log(
+                        new ServerMessage($"{CommandParser.ToString(CommandType.UserListAppend)}{Name}"), 
+                        this);
+                }
+            }
+            else if (message.Contains(CommandParser.ToString(CommandType.UserDisconnect)))
+                await Disconnect();
+            else
             {
                 await SausageServer.Log(new UserMessage(this, message));
             }
