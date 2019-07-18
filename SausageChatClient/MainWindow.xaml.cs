@@ -92,6 +92,6 @@ namespace SausageChatClient
         private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        }
     }
+  }
 }
