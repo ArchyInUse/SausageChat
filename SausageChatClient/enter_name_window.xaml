@@ -19,7 +19,7 @@
 
 
 
-      <TextBox x:Name="Enter_name_input_box"  Text="Enter your name here" HorizontalContentAlignment="Center" Height="28" TextWrapping="Wrap" Margin="0,0,0,6" Background="#FF419EEA" Foreground="#FFFCFDFF" TextChanged="Enter_name_input_box_TextChanged">
+      <TextBox x:Name="Enter_name_input_box" HorizontalContentAlignment="Center" Height="28" TextWrapping="Wrap" Margin="0,0,0,6" Background="#FF419EEA" Foreground="#FFFCFDFF" TextChanged="Enter_name_input_box_TextChanged">
 
         <TextBox.Style>
           <Style TargetType="TextBox">
