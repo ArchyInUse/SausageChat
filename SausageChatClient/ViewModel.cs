@@ -13,11 +13,13 @@ namespace SausageChatClient
     public class ViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<IMessage> Messages { get; set; }
-        public Dictionary<string, IPEndPoint> Friends { get; set; }
+        public ObservableCollection<string> Users { get; set; }
+        public Dictionary<string, IPAddress> Friends { get; set; }
 
         public ViewModel()
         {
-            Friends = new Dictionary<string, IPEndPoint>();
+            Users = new ObservableCollection<string>();
+            Friends = new Dictionary<string, IPAddress>();
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("Hello!"));
         }

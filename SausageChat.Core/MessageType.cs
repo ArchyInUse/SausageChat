@@ -1,6 +1,6 @@
 ﻿namespace SausageChat.Core
 {
-    public enum CommandType
+    public enum MessageType
     {
         // when a user joins, a complete list of the current users online gets sent to him
         OnJoinUserList,
@@ -21,6 +21,8 @@
         // when a user disconnects, this flag is used to notify everyone
         UserDisconnect,
         // for friend requests, we save Ips, so we need to make a request (this is used for DMing)
-        IpRequest
+        IpRequest,
+        // for user messages
+        UserMessage
     }
 }

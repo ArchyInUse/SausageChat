@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace SausageChat.Networking
 {
+    // TD -> when renaming, make sure there isn't another user called the same name (would mess up Mute/Kick/Ban)
     static class SausageServer
     {
         public static bool IsOpen { get; set; } = false;
@@ -64,7 +65,7 @@ namespace SausageChat.Networking
             else if (ConnectedUsers.Any(x => x == user))
             {
                 Blacklisted.Add(user.Ip.Address);
-                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserBanned)}{user.Name}"));
+                await Log(new ServerMessage($"{MessageType.UserBanned.ToStr()}{user.Name}"));
                 await user.Disconnect();
                 return ServerCommandResult.Success;
             }
@@ -80,7 +81,7 @@ namespace SausageChat.Networking
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserKicked)}{user.Name}"));
+                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserKicked)}{user.Name}"));
                 await user.Disconnect();
                 return ServerCommandResult.Success;
             }
@@ -96,7 +97,7 @@ namespace SausageChat.Networking
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                await user.SendAsync($"{CommandParser.ToString(CommandType.UserMuted)}{user.Name}");
+                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserMuted)}{user.Name}");
                 user.IsMuted = true;
                 return ServerCommandResult.Success;
             }
@@ -111,8 +112,8 @@ namespace SausageChat.Networking
             else if (user.IsMuted && ConnectedUsers.Any(x => x == user))
             {
                 user.IsMuted = false;
-                await user.SendAsync($"{CommandParser.ToString(CommandType.UserUnmuted)}{user.Name}");
-                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserUnmuted)}{user.Name}"), user);
+                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.Name}");
+                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.Name}"), user);
                 return ServerCommandResult.Success;
             }
             else
@@ -128,11 +129,11 @@ namespace SausageChat.Networking
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                await Log(new ServerMessage($"{CommandParser.ToString(CommandType.UserListAppend)}{user.Name}"));
+                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserListAppend)}{user.Name}"));
             }
             else
             {
-                await user.SendAsync($"{CommandParser.ToString(CommandType.UserBlackListed)}");
+                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserBlackListed)}");
                 await user.Disconnect();
             }
             MainSocket.BeginAccept(OnUserConnect, null);

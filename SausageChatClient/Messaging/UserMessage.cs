@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SausageChat.Core;
 
 namespace SausageChatClient.Messaging
 {
@@ -23,9 +24,6 @@ namespace SausageChatClient.Messaging
             this.Author = Author;
         }
 
-        public override string ToString()
-        {
-            return $"<{Author}>:{Content}";
-        }
+        public override string ToString() => $"{MessageType.UserMessage}<{Author}>:{Content}";
     }
 }

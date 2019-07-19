@@ -1,24 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using SausageChatClient.Messaging;
+using SausageChat.Core;
 
 namespace SausageChatClient.Networking
 {
     static class SausageClient
     {
-        // TD -> Save IPs for DM features
+        /* TD -> add try{}catch(){} to Send/Recieve methods
+         * TD -> Add ID (using GUID) system (will fix naming issues)
+        */ 
         // not a prop to pass it as ref in StripData()
         public static byte[] Data = new byte[1024];
         public static Dictionary<string, IPEndPoint> IpPool { get; set; } = new Dictionary<string, IPEndPoint>()
         {
-            ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.180.73"), 60000)
+            ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.175.8"), 60000)
         };
-        public static Dictionary<string, IPEndPoint> Friends
+        public static Dictionary<string, IPAddress> Friends
         {
             get
             {
@@ -71,14 +75,71 @@ namespace SausageChatClient.Networking
             Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnMessageRecieved, null);
         }
 
-        public static async void OnMessageRecieved(IAsyncResult ar)
+        public static void OnMessageRecieved(IAsyncResult ar)
         {
             Socket.EndReceive(ar);
 
             StripData();
             string message = Encoding.ASCII.GetString(Data);
-            if (message.Contains("<SM>"))
-                Log(new ServerMessage(message.Remove(message.IndexOf("<SM>"), 4)));
+            Parse(message);
+
+            Data = new byte[1024];
+            Listen();
+        }
+
+        private static void Parse(string message)
+        {
+            if (message.Contains(MessageType.IpRequest))
+            {
+                string ip;
+                string name;
+                message = message.Substring(MessageType.IpRequest.ToStr().Length);
+                ip = message.Substring(0, message.IndexOf(','));
+                name = message.Substring(message.IndexOf(',') + 1);
+                Friends.Add(name, IPAddress.Parse(ip));
+            }
+            else if(message.Contains(MessageType.OnJoinUserList))
+            {
+                message = message.Substring(MessageType.OnJoinUserList.ToStr().Length);
+                if (message == "NULL")
+                    Vm.Users = new ObservableCollection<string>();
+                else
+                {
+                    string[] users = message.Split(',');
+                    foreach(string user in users)
+                    {
+                        Vm.Users.Add(user);
+                    }
+                }
+            }
+            else if(message.Contains(MessageType.UserMuted))
+            {
+                message = message.Substring(MessageType.UserMuted.ToStr().Length);
+                if(Name == message)
+                    Mw.User_Message_client_Copy.IsEnabled = false;
+            }
+            else if(message.Contains(MessageType.UserUnmuted))
+            {
+                message = message.Substring(MessageType.UserUnmuted.ToStr().Length);
+                if (Name == message)
+                    Mw.User_Message_client_Copy.IsEnabled = true;
+            }
+            else if(message.Contains(MessageType.UserKicked))
+            {
+                message = message.Substring(MessageType.UserKicked.ToStr().Length);
+                if (Name == message)
+                {
+                    Disconnect(MessageType.UserKicked);
+                }
+            }
+            else if(message.Contains(MessageType.UserBanned))
+            {
+                message = message.Substring(MessageType.UserBanned.ToStr().Length);
+                if (Name == message)
+                {
+                    Disconnect(MessageType.UserBanned);
+                }
+            }
             else
             {
                 var Author = message.Substring(0, message.IndexOf(":"));
@@ -86,9 +147,6 @@ namespace SausageChatClient.Networking
 
                 Log(new UserMessage(msg, Author));
             }
-
-            Data = new byte[1024];
-            Listen();
         }
 
         /// <summary>
@@ -110,26 +168,42 @@ namespace SausageChatClient.Networking
             Socket.BeginSend(bytesMessage, 0, bytesMessage.Length, SocketFlags.None, OnSendComplete, null);
         }
 
-        public static async Task Send(IMessage message) => Send(message.ToString());
+        public static void Send(IMessage message) => Send(message.ToString());
 
-        private static async void OnSendComplete(IAsyncResult ar) => Socket.EndSend(ar);
+        private static void OnSendComplete(IAsyncResult ar) => Socket.EndSend(ar);
 
         public static void Log(string msg) => Log(new UserMessage(msg));
 
-        public static void Log(IMessage message)
-        {
-            Vm.Messages.Add(message);
-        }
+        public static void Log(IMessage message) => Vm.Messages.Add(message);
 
-        public static async Task Rename(string newName)
+        public static void Rename(string newName)
         {
-            Send($"<NC>{newName}");
+            Send($"{MessageType.NameChanged.ToStr()}{newName}");
             Name = newName;
         }
 
-        public static async Task AddFriend(string Name)
+        public static void AddFriend(string Name)
         {
+            Send($"{MessageType.IpRequest}{Name}");
+        }
 
+        public static void Disconnect(MessageType? Ct = null)
+        {
+            try
+            {
+                if (Socket.Connected) return;
+                Socket.Close();
+
+                if (Ct == null) return;
+                if (Ct == MessageType.UserBanned)
+                    Log(new ServerMessage("You were banned."));
+                else if (Ct == MessageType.UserKicked)
+                    Log(new ServerMessage("You were kicked."));
+            }
+            catch(SocketException)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

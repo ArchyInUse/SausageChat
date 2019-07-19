@@ -88,7 +88,7 @@ namespace SausageChat.Networking
             try
             {
                 var BytesRec = _Socket.EndReceive(ar);
-                Task.Run(() => ParseMessage(Encoding.ASCII.GetString(Data)));
+                Task.Run(() => Parse(Encoding.ASCII.GetString(Data)));
             }
             catch(SocketException)
             {
@@ -107,6 +107,7 @@ namespace SausageChat.Networking
             Name = newName;
             SausageServer.Vm.ConnectedUsers.First(x => x == this).Name = newName;
             SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
+            SausageServer.Log(new ServerMessage($"{oldName} has changed their name to {Name}"));
             return oldName;
         }
 
@@ -118,58 +119,55 @@ namespace SausageChat.Networking
             await SausageServer.Log(new ServerMessage($"{this} disconnected"));
         }
 
-        public async Task ParseMessage(string message)
+        public async Task Parse(string message)
         {
             // Friend Request (For now, other party doesn't need to accept, needs implementation)
-            if (message.Contains(CommandParser.ToString(CommandType.IpRequest)))
+            if (message.Contains(MessageType.IpRequest))
             {
-                string CommandCode = CommandParser.ToString(CommandType.IpRequest);
+                string CommandCode = MessageType.IpRequest.ToStr();
                 foreach (User user in SausageServer.ConnectedUsers)
                 {
                     if (user.Name == message.Substring(CommandCode.Length))
                     {
-                        await SendAsync($"{CommandCode}{user.Ip.Address.ToString()}");
+                        await SendAsync($"{CommandCode}{user.Ip.Address.ToString()},{user.Name}");
                     }
                 }
             }
             // Rename
-            else if (message.Contains(CommandParser.ToString(CommandType.NameChanged)))
-                Rename(message.Substring(CommandParser.ToString(CommandType.NameChanged).Length));
+            else if (message.Contains(MessageType.NameChanged))
+                Rename(message.Substring(MessageType.NameChanged.ToStr().Length));
             // on user join (need to send all the usernames for ViewModel)
-            else if (message.Contains(CommandParser.ToString(CommandType.OnJoinUserList)))
+            else if (message.Contains(MessageType.OnJoinUserList))
             {
                 // since user gets added in SausageServer OnUserConnect method, this will never be 0 on connect)
                 if (SausageServer.ConnectedUsers.Count == 1)
-                    await SendAsync($"{CommandParser.ToString(CommandType.OnJoinUserList)}NULL");
+                    await SendAsync($"{MessageType.OnJoinUserList.ToStr()}NULL");
                 else
                 {
                     string ListUsersToSring = "";
                     for (int i = 0; i < SausageServer.ConnectedUsers.Count; i++)
                     {
                         if (i == SausageServer.ConnectedUsers.Count - 1)
-                            ListUsersToSring += SausageServer.ConnectedUsers[i];
+                            ListUsersToSring += SausageServer.ConnectedUsers[i].ToString();
                         else
-                            ListUsersToSring += SausageServer.ConnectedUsers[i] + ",";
+                            ListUsersToSring += SausageServer.ConnectedUsers[i].ToString() + ",";
                     }
 
-                    await SendAsync($"{CommandParser.ToString(CommandType.OnJoinUserList)}{ListUsersToSring}");
+                    await SendAsync($"{MessageType.OnJoinUserList.ToStr()}{ListUsersToSring}");
                     await SausageServer.Log(
-                        new ServerMessage($"{CommandParser.ToString(CommandType.UserListAppend)}{Name}"), 
+                        new ServerMessage($"{MessageType.UserListAppend.ToStr()}{Name}"), 
                         this);
                 }
             }
-            else if (message.Contains(CommandParser.ToString(CommandType.UserDisconnect)))
+            else if (message.Contains(MessageType.UserDisconnect))
                 await Disconnect();
-            else
+            else if(message.Contains(MessageType.UserMessage))
             {
                 await SausageServer.Log(new UserMessage(this, message));
             }
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => Name;
 
         public override bool Equals(object obj)
         {
