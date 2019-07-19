@@ -31,6 +31,7 @@ namespace SausageChatClient
             SausageClient.Mw = this;
             SausageClient.Vm = Vm;
             this.DataContext = Vm;
+      Select_IP_Combo_box.SelectedIndex = ;
         }
 
     // public void Log(IMessage message)
@@ -67,7 +68,7 @@ namespace SausageChatClient
 
         private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
     private void Button_Click(object sender, RoutedEventArgs e)
@@ -98,6 +99,11 @@ namespace SausageChatClient
     }
 
     private void Freinds_button_client_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Connect_Button_Client_Click(object sender, RoutedEventArgs e)
     {
 
     }
