@@ -87,6 +87,7 @@ namespace SausageChatClient.Networking
             Listen();
         }
 
+        // Needs rename implement
         private static void Parse(string message)
         {
             if (message.Contains(MessageType.IpRequest))
@@ -142,7 +143,7 @@ namespace SausageChatClient.Networking
             }
             else
             {
-                var Author = message.Substring(0, message.IndexOf(":"));
+                var Author = message.Substring(4, message.IndexOf(":"));
                 var msg = message.Substring(message.IndexOf(":") + 1);
 
                 Log(new UserMessage(msg, Author));

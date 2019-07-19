@@ -37,6 +37,12 @@ namespace SausageChat.Networking
             ListenAsync();
         }
 
+        /// <summary>
+        /// TEST CTOR DON'T USE
+        /// </summary>
+        /// <param name="n"></param>
+        public User(string n) => Name = n;
+
         public async Task SendAsync(string data) => await SendAsync(Encoding.ASCII.GetBytes(data));
 
         public async Task SendAsync(byte[] data)

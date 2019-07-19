@@ -15,6 +15,9 @@ namespace SausageChat
         {
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new ServerMessage("Hello!"));
+            ConnectedUsers = new ObservableCollection<User>();
+            ConnectedUsers.Add(new User("Sally"));
+            ConnectedUsers.Add(new User("Bob"));
         }
     }
 }

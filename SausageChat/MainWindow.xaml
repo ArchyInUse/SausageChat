@@ -94,12 +94,8 @@
       <Button x:Name="Start_server" Content="Start Server" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Start_server_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
     </StackPanel>
     <!--The item source should be bound to the Users list in the VM, and it can bind to the name property-->
-    <ListBox x:Name="User_List" Grid.Column="2" Margin="45,0,39,0" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
-      <!--This shouldn't be a user item, but a label-->
-      <ListBoxItem Content="Users List" Background="#FF419EEA" BorderBrush="Black" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User 1" Selected="ListBoxItem_Selected" Background="#FF419EEA" BorderBrush="Black" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User 2" BorderBrush="Black" Foreground="#FFFCFDFF" Background="#FF419EEA"/>
-    </ListBox>
+        <ListBox ItemsSource="{Binding ConnectedUsers}" x:Name="User_List" Grid.Column="2" Margin="45,0,39,0" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
+        </ListBox>
 
   </Grid>
 </Controls:MetroWindow>
