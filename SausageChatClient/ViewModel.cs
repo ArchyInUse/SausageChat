@@ -25,6 +25,7 @@ namespace SausageChatClient
             Friends = new Dictionary<string, IPAddress>();
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("Hello!"));
+      Users.Add("User1");
 
     //  char examplevalue23 = 'a';
 

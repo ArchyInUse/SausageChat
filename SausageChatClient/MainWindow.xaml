@@ -59,14 +59,15 @@
 
 
 
-    <ListBox  ItemsSource="{Binding ConnectedUsers}" x:Name="User_List_client" Margin="0,320,1,157" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2">
-
-      <!--- <ListBoxItem Content="Users List" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-
+    <ListBox  ItemsSource="{Binding Users}" x:Name="User_List_client" Margin="0,320,1,157" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2">
+</ListBox>
+      
+      <!--
+      
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       -->
-    </ListBox>
+    
 
     <TreeView x:Name="Freinds_List_view" Margin="0,0,0,312" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Grid.Column="2">
       <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
@@ -118,17 +119,17 @@
     <StackPanel Height="75" VerticalAlignment="Top">
       <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Width="120" Foreground="#FFFCFDFF" Height="26"/>
 
-      <ComboBox x:Name="Select_IP_Combo_box" SelectedIndex="0" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="White" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged">
+      <ComboBox x:Name="Select_IP_Combo_box" SelectedIndex="0" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="White" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged" OpacityMask="#FF003BB0">
 
         <ComboBoxItem Content="Disco's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
         <!-- This is index 0-->
-        <ComboBoxItem Content="Monte's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF" Foreground="White"/>
+        <ComboBoxItem Content="Monte's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="#FF003BB0"/>
         <!-- This is index 1-->
       </ComboBox>
     </StackPanel>
     <Button x:Name="Send_message_Button_client" Content="Send" Height="31" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" Margin="0,559,10,22" Grid.Column="1" Width="118" HorizontalAlignment="Right"/>
     <TextBox x:Name="User_Message_client" Height="30" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
-    <TextBox x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="0,559,10,22" Grid.Column="1"/>
+    <TextBox   Controls:TextBoxHelper.Watermark="Enter Message" x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap"  SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="0,559,10,22" Grid.Column="1" CaretBrush="#FF003BB0"/>
 
     <StackPanel Height="435" Margin="4,105,5,0" VerticalAlignment="Top">
 
@@ -144,6 +145,6 @@
 
     <!-- If user is admin, have the button appear. If user is not admin. Then have button disappear.-->
     <Label Content="You are Admin"  HorizontalContentAlignment="Center" Margin="4,558,16,22" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
-    <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="107" Margin="0,483,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="214" Background="#FF419EEA" BorderBrush="#FF008CFF" CaretBrush="#FF008CFF"/>
+    <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="107" Margin="0,483,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="214" Background="#FF419EEA" BorderBrush="#FF008CFF" CaretBrush="#FF008CFF" Foreground="White"/>
   </Grid>
 </Controls:MetroWindow>
