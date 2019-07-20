@@ -59,7 +59,7 @@
 
 
 
-    <ListBox  ItemsSource="{Binding ConnectedUsers}" x:Name="User_List_client" Margin="0,0,1,27" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2" Height="155" VerticalAlignment="Bottom">
+    <ListBox  ItemsSource="{Binding ConnectedUsers}" x:Name="User_List_client" Margin="0,430,1,58" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2">
 
       <!--- <ListBoxItem Content="Users List" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
 

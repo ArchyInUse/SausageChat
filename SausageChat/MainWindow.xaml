@@ -1,13 +1,11 @@
 <Controls:MetroWindow x:Name="Server_Window" x:Class="SausageChat.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        
-
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Server_Window" Height="543" Width="800">
+        Title="Server_Window" Height="543" Width="800" Background="#FF008CFF" BorderBrush="#FF008CFF">
   <Grid Background="#FF008CFF">
 
     <Grid.ColumnDefinitions>
@@ -63,7 +61,7 @@
       <!--Why is the text box called Server_Message_Button???-->
       <!--Why is the text box called Server_Message_Button???-->
       <!--Why is the text box called Server_Message_Button???-->
-      <TextBox x:Name="Server_message_button" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="Server_message_button_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
+      <TextBox x:Name="Server_message_button" Height="33" TextWrapping="Wrap" Text="Enter Server Message" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="Server_message_button_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
       <Button x:Name="Send_message_Button" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Send_message_Button_Click"/>
     </StackPanel>
 
@@ -94,8 +92,8 @@
       <Button x:Name="Start_server" Content="Start Server" Height="44" VerticalAlignment="Top" Margin="0,10,15,0" Click="Start_server_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
     </StackPanel>
     <!--The item source should be bound to the Users list in the VM, and it can bind to the name property-->
-        <ListBox ItemsSource="{Binding ConnectedUsers}" x:Name="User_List" Grid.Column="2" Margin="45,0,39,0" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
-        </ListBox>
+    <ListBox ItemsSource="{Binding ConnectedUsers}" x:Name="User_List" Grid.Column="2" Margin="45,0,39,0" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
+    </ListBox>
 
   </Grid>
 </Controls:MetroWindow>
