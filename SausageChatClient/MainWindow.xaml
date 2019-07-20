@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SausageChatClient"
         mc:Ignorable="d"
-        Title="Client_view" Height="642.507" Width="915">
+        Title="Client_view" Height="642.507" Width="1074">
 
 
   <Window.Resources>
@@ -31,14 +31,14 @@
     <Grid.ColumnDefinitions>
       <!-- Define the columns for the grid -->
 
-      <ColumnDefinition Width="145*" />
-      <ColumnDefinition Width="576*"/>
+      <ColumnDefinition Width="255*" />
+      <ColumnDefinition Width="592*"/>
       <!-- The first row.  -->
       <!-- The Second Column  -->
       <!-- The third column -->
 
 
-      <ColumnDefinition Width="186*" />
+      <ColumnDefinition Width="219*" />
       <!-- The Fourth column -->
 
 
@@ -59,7 +59,7 @@
 
 
 
-    <ListBox  ItemsSource="{Binding ConnectedUsers}" x:Name="User_List_client" Margin="0,430,1,58" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2">
+    <ListBox  ItemsSource="{Binding ConnectedUsers}" x:Name="User_List_client" Margin="0,320,1,157" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Grid.Column="2">
 
       <!--- <ListBoxItem Content="Users List" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
 
@@ -68,7 +68,7 @@
       -->
     </ListBox>
 
-    <TreeView x:Name="Freinds_List_view" Margin="0,0,0,197" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Grid.Column="2">
+    <TreeView x:Name="Freinds_List_view" Margin="0,0,0,312" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Grid.Column="2">
       <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
         <TreeViewItem Header="Online friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF">
@@ -127,8 +127,8 @@
       </ComboBox>
     </StackPanel>
     <Button x:Name="Send_message_Button_client" Content="Send" Height="31" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" Margin="0,559,10,22" Grid.Column="1" Width="118" HorizontalAlignment="Right"/>
-    <TextBox x:Name="User_Message_client" Height="17" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
-    <TextBox x:Name="User_Message_client_Copy" Height="17" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="0,559,10,22" Grid.Column="1"/>
+    <TextBox x:Name="User_Message_client" Height="30" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
+    <TextBox x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="0,559,10,22" Grid.Column="1"/>
 
     <StackPanel Height="435" Margin="4,105,5,0" VerticalAlignment="Top">
 
@@ -144,5 +144,6 @@
 
     <!-- If user is admin, have the button appear. If user is not admin. Then have button disappear.-->
     <Label Content="You are Admin"  HorizontalContentAlignment="Center" Margin="4,558,16,22" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
+    <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="107" Margin="0,483,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="214" Background="#FF419EEA" BorderBrush="#FF008CFF" CaretBrush="#FF008CFF"/>
   </Grid>
 </Controls:MetroWindow>
