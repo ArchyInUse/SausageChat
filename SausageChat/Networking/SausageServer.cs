@@ -8,6 +8,8 @@ using SausageChat.Core.Messaging;
 using SausageChat.Helpers;
 using SausageChat.Core;
 using System.Collections.ObjectModel;
+using SausageChat.Core.Networking;
+using Newtonsoft.Json;
 
 namespace SausageChat.Networking
 {
@@ -30,6 +32,7 @@ namespace SausageChat.Networking
                 Vm.ConnectedUsers = value;
             }
     }
+        public static Dictionary<Guid, User> UsersDictionary { get; set; }
         public static List<IPAddress> Blacklisted { get; set; } = new List<IPAddress>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);
         
@@ -58,68 +61,24 @@ namespace SausageChat.Networking
             }
         }
 
-        public static async Task<ServerCommandResult> Ban(SausageConnection user)
+        public static async Task<ServerCommandResult?> Ban(SausageConnection user)
         {
-            if (user == null)
-                return ServerCommandResult.UserIsNull;
-            else if (ConnectedUsers.Any(x => x == user))
-            {
-                Blacklisted.Add(user.Ip.Address);
-                await Log(new ServerMessage($"{MessageType.UserBanned.ToStr()}{user.UserInfo.Name}"));
-                await user.Disconnect();
-                return ServerCommandResult.Success;
-            }
-            else
-            {
-                return ServerCommandResult.UserNotFound;
-            }
+            return null;
         }
 
-        public static async Task<ServerCommandResult> Kick(SausageConnection user)
+        public static async Task<ServerCommandResult?> Kick(SausageConnection user)
         {
-            if (user == null)
-                return ServerCommandResult.UserIsNull;
-            else if (ConnectedUsers.Any(x => x == user))
-            {
-                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserKicked)}{user.UserInfo.Name}"));
-                await user.Disconnect();
-                return ServerCommandResult.Success;
-            }
-            else
-            {
-                return ServerCommandResult.UserNotFound;
-            }
+            return null;
         }
 
-        public static async Task<ServerCommandResult> Mute(SausageConnection user)
+        public static async Task<ServerCommandResult?> Mute(SausageConnection user)
         {
-            if (user == null)
-                return ServerCommandResult.UserIsNull;
-            else if (ConnectedUsers.Any(x => x == user))
-            {
-                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserMuted)}{user.UserInfo.Name}");
-                user.UserInfo.IsMuted = true;
-                return ServerCommandResult.Success;
-            }
-            else
-                return ServerCommandResult.UserNotFound;
+            return null;
         }
 
-        public static async Task<ServerCommandResult> Unmute(SausageConnection user)
+        public static async Task<ServerCommandResult?> Unmute(SausageConnection user)
         {
-            if (user == null)
-                return ServerCommandResult.UserIsNull;
-            else if (user.UserInfo.IsMuted && ConnectedUsers.Any(x => x == user))
-            {
-                user.UserInfo.IsMuted = false;
-                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.UserInfo.Name}");
-                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.UserInfo.Name}"), user);
-                return ServerCommandResult.Success;
-            }
-            else
-            {
-                return ServerCommandResult.UserNotFound;
-            }
+            return null;
         }
 
         public static async void OnUserConnect(IAsyncResult ar)
@@ -129,24 +88,27 @@ namespace SausageChat.Networking
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserListAppend)}{user.UserInfo.Name}"));
+                // TODO: need to log
             }
             else
             {
-                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserBlackListed)}");
-                await user.Disconnect();
+                // TODO: need to log
+                user.Disconnect();
             }
             MainSocket.BeginAccept(OnUserConnect, null);
         }
 
-        public async static Task Log(IMessage message, SausageConnection ignore = null)
+        public async static Task Log(PacketFormat message, SausageConnection ignore = null)
         {
-            Vm.Messages.Add(message);
+            if (message.Option == PacketOption.ClientMessage)
+                Vm.Messages.Add(new UserMessage(message.Content, UsersDictionary[message.Guid]));
+            else
+                Vm.Messages.Add(new ServerMessage(message.Content));
 
             foreach(var user in ConnectedUsers)
             {
                 if(user != ignore)
-                    user.SendAsync(message.ToString());
+                    user.SendAsync(JsonConvert.SerializeObject(message));
             }
         }
 
