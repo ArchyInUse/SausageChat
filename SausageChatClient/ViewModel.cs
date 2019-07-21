@@ -20,8 +20,12 @@ namespace SausageChatClient
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("Hello!"));
             Users.Add(new User("User1"));
-        }
+            Users.Add(new User("User2"));
+            Users.Add(new User("User3"));
+          
 
-        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
         }
 }
