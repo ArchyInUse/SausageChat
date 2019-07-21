@@ -45,24 +45,16 @@
           <StackPanel Orientation ="Vertical">
 
             <TextBlock Text="{Binding}" ></TextBlock>
-            <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
-            <!--This text block will hold the Server messages. It will generate a separate text block for each message.-->
-
-          </StackPanel>
-
-
+            </StackPanel>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
 
 
     </ItemsControl>
 
-    <StackPanel Margin="0,320,10,-34">
-      <!--Why is the text box called Server_Message_Button???-->
-      <!--Why is the text box called Server_Message_Button???-->
-      <!--Why is the text box called Server_Message_Button???-->
-      <TextBox x:Name="Server_message_button" Height="33" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Enter Server Message"  VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="Server_message_button_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
-      <Button x:Name="Send_message_Button" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Send_message_Button_Click"/>
+        <StackPanel Margin="0,320,10,-34">
+            <TextBox x:Name="Server_message_button" Height="33" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Enter Server Message"  VerticalAlignment="Top" SpellCheck.IsEnabled="True" Margin="0,0,0,11" TextChanged="Server_message_button_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
+        <Button x:Name="Send_message_Button" Content="Send" Height="33" VerticalAlignment="Top" RenderTransformOrigin="0.542,1.415" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Send_message_Button_Click"/>
     </StackPanel>
 
 

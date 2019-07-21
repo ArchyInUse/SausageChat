@@ -29,7 +29,7 @@ namespace SausageChat
         // User list
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
         {
-            SausageServer.Vm.SelectedUser = (User)e.AddedItems[0];
+            SausageServer.Vm.SelectedUser = (SausageConnection)e.AddedItems[0];
         }
 
         private async void Mute_Button_Click(object sender, RoutedEventArgs e)

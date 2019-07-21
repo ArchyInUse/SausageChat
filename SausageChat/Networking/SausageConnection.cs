@@ -5,35 +5,32 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using SausageChat.Messaging;
 using SausageChat.Core;
+using SausageChat.Core.Messaging;
 
 namespace SausageChat.Networking
 {
-    class User
+    class SausageConnection
     {
         public byte[] Data { get; set; } = new byte[1024];
-        // to be implemented in Listen functions
-        public bool IsMuted { get; set; } = false;
-        public bool IsAdmin { get; set; } = false;
         public IPEndPoint Ip { get; set; }
         // not following name convention to avoid name colision
         public Socket _Socket { get; set; }
-        public string Name { get; set; }
+        public User UserInfo { get; set; }
 
         public List<UserMessage> Messages { get; set; }
 
-        public User(Socket socket)
+        public SausageConnection(Socket socket)
         {
             _Socket = socket;
             Ip = _Socket.RemoteEndPoint as IPEndPoint;
 
             // returns just the ip
-            Name = _Socket.RemoteEndPoint.ToString().Substring(0, _Socket.RemoteEndPoint.ToString().Length - 6);
+            UserInfo.Name = _Socket.RemoteEndPoint.ToString().Substring(0, _Socket.RemoteEndPoint.ToString().Length - 6);
 
             Messages = new List<UserMessage>();
 
-            SausageServer.Log(new ServerMessage($"{Name} has connected"));
+            SausageServer.Log(new ServerMessage($"{UserInfo.Name} has connected"));
             ListenAsync();
         }
 
@@ -41,7 +38,7 @@ namespace SausageChat.Networking
         /// TEST CTOR DON'T USE
         /// </summary>
         /// <param name="n"></param>
-        public User(string n) => Name = n;
+        public SausageConnection(string n) => UserInfo.Name = n;
 
         public async Task SendAsync(string data) => await SendAsync(Encoding.ASCII.GetBytes(data));
 
@@ -109,11 +106,11 @@ namespace SausageChat.Networking
         // need to change the VM names lists, maybe change it to a dictionary
         public string Rename(string newName)
         {
-            string oldName = Name;
-            Name = newName;
-            SausageServer.Vm.ConnectedUsers.First(x => x == this).Name = newName;
+            string oldName = UserInfo.Name;
+            UserInfo.Name = newName;
+            SausageServer.Vm.ConnectedUsers.First(x => x == this).UserInfo.Name = newName;
             SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
-            SausageServer.Log(new ServerMessage($"{oldName} has changed their name to {Name}"));
+            SausageServer.Log(new ServerMessage($"{oldName} has changed their name to {UserInfo.Name}"));
             return oldName;
         }
 
@@ -131,11 +128,11 @@ namespace SausageChat.Networking
             if (message.Contains(MessageType.IpRequest))
             {
                 string CommandCode = MessageType.IpRequest.ToStr();
-                foreach (User user in SausageServer.ConnectedUsers)
+                foreach (SausageConnection user in SausageServer.ConnectedUsers)
                 {
-                    if (user.Name == message.Substring(CommandCode.Length))
+                    if (user.UserInfo.Name == message.Substring(CommandCode.Length))
                     {
-                        await SendAsync($"{CommandCode}{user.Ip.Address.ToString()},{user.Name}");
+                        await SendAsync($"{CommandCode}{user.Ip.Address.ToString()},{user.UserInfo.Name}");
                     }
                 }
             }
@@ -143,11 +140,11 @@ namespace SausageChat.Networking
             else if (message.Contains(MessageType.NameChanged))
                 Rename(message.Substring(MessageType.NameChanged.ToStr().Length));
             // on user join (need to send all the usernames for ViewModel)
-            else if (message.Contains(MessageType.OnJoinUserList))
+            else if (message.Contains(MessageType.UserList))
             {
                 // since user gets added in SausageServer OnUserConnect method, this will never be 0 on connect)
                 if (SausageServer.ConnectedUsers.Count == 1)
-                    await SendAsync($"{MessageType.OnJoinUserList.ToStr()}NULL");
+                    await SendAsync($"{MessageType.UserList.ToStr()}NULL");
                 else
                 {
                     string ListUsersToSring = "";
@@ -159,9 +156,9 @@ namespace SausageChat.Networking
                             ListUsersToSring += SausageServer.ConnectedUsers[i].ToString() + ",";
                     }
 
-                    await SendAsync($"{MessageType.OnJoinUserList.ToStr()}{ListUsersToSring}");
+                    await SendAsync($"{MessageType.UserList.ToStr()}{ListUsersToSring}");
                     await SausageServer.Log(
-                        new ServerMessage($"{MessageType.UserListAppend.ToStr()}{Name}"), 
+                        new ServerMessage($"{MessageType.UserListAppend.ToStr()}{UserInfo.Name}"), 
                         this);
                 }
             }
@@ -169,23 +166,36 @@ namespace SausageChat.Networking
                 await Disconnect();
             else if(message.Contains(MessageType.UserMessage))
             {
-                await SausageServer.Log(new UserMessage(this, message));
+                await SausageServer.Log(new UserMessage(message, UserInfo));
             }
         }
 
-        public override string ToString() => Name;
+        public override string ToString() => UserInfo.Name;
 
         public override bool Equals(object obj)
         {
-            if(obj is User)
+            if(obj is SausageConnection)
             {
-                User u = obj as User;
+                SausageConnection u = obj as SausageConnection;
                 return u.Ip == this.Ip;
             }
             else
             {
                 return false;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -333338465;
+            hashCode = hashCode * -1521134295 + EqualityComparer<byte[]>.Default.GetHashCode(Data);
+            hashCode = hashCode * -1521134295 + UserInfo.IsMuted.GetHashCode();
+            hashCode = hashCode * -1521134295 + UserInfo.IsAdmin.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<IPEndPoint>.Default.GetHashCode(Ip);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Socket>.Default.GetHashCode(_Socket);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserInfo.Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<UserMessage>>.Default.GetHashCode(Messages);
+            return hashCode;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-using SausageChat.Messaging;
+using SausageChat.Core.Messaging;
 using SausageChat.Helpers;
 using SausageChat.Core;
 using System.Collections.ObjectModel;
@@ -19,7 +19,7 @@ namespace SausageChat.Networking
         public static MainWindow Mw { get; set; }
         public static Socket MainSocket { get; set; }
         public const int PORT = 60000;
-        public static ObservableCollection<User> ConnectedUsers
+        public static ObservableCollection<SausageConnection> ConnectedUsers
         {
             get
             {
@@ -38,7 +38,7 @@ namespace SausageChat.Networking
             if(!IsOpen)
             {
                 MainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                ConnectedUsers = new ObservableCollection<User>();
+                ConnectedUsers = new ObservableCollection<SausageConnection>();
                 MainSocket.Listen(10);
                 MainSocket.Bind(LocalIp);
                 MainSocket.BeginAccept(OnUserConnect, null);
@@ -50,7 +50,7 @@ namespace SausageChat.Networking
             if(IsOpen)
             {
                 MainSocket.Close();
-                foreach(User u in ConnectedUsers)
+                foreach(SausageConnection u in ConnectedUsers)
                 {
                     u.Disconnect();
                 }
@@ -58,14 +58,14 @@ namespace SausageChat.Networking
             }
         }
 
-        public static async Task<ServerCommandResult> Ban(User user)
+        public static async Task<ServerCommandResult> Ban(SausageConnection user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
                 Blacklisted.Add(user.Ip.Address);
-                await Log(new ServerMessage($"{MessageType.UserBanned.ToStr()}{user.Name}"));
+                await Log(new ServerMessage($"{MessageType.UserBanned.ToStr()}{user.UserInfo.Name}"));
                 await user.Disconnect();
                 return ServerCommandResult.Success;
             }
@@ -75,13 +75,13 @@ namespace SausageChat.Networking
             }
         }
 
-        public static async Task<ServerCommandResult> Kick(User user)
+        public static async Task<ServerCommandResult> Kick(SausageConnection user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserKicked)}{user.Name}"));
+                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserKicked)}{user.UserInfo.Name}"));
                 await user.Disconnect();
                 return ServerCommandResult.Success;
             }
@@ -91,29 +91,29 @@ namespace SausageChat.Networking
             }
         }
 
-        public static async Task<ServerCommandResult> Mute(User user)
+        public static async Task<ServerCommandResult> Mute(SausageConnection user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
             else if (ConnectedUsers.Any(x => x == user))
             {
-                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserMuted)}{user.Name}");
-                user.IsMuted = true;
+                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserMuted)}{user.UserInfo.Name}");
+                user.UserInfo.IsMuted = true;
                 return ServerCommandResult.Success;
             }
             else
                 return ServerCommandResult.UserNotFound;
         }
 
-        public static async Task<ServerCommandResult> Unmute(User user)
+        public static async Task<ServerCommandResult> Unmute(SausageConnection user)
         {
             if (user == null)
                 return ServerCommandResult.UserIsNull;
-            else if (user.IsMuted && ConnectedUsers.Any(x => x == user))
+            else if (user.UserInfo.IsMuted && ConnectedUsers.Any(x => x == user))
             {
-                user.IsMuted = false;
-                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.Name}");
-                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.Name}"), user);
+                user.UserInfo.IsMuted = false;
+                await user.SendAsync($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.UserInfo.Name}");
+                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserUnmuted)}{user.UserInfo.Name}"), user);
                 return ServerCommandResult.Success;
             }
             else
@@ -124,12 +124,12 @@ namespace SausageChat.Networking
 
         public static async void OnUserConnect(IAsyncResult ar)
         {
-            var user = new User(MainSocket.EndAccept(ar));
+            var user = new SausageConnection(MainSocket.EndAccept(ar));
             if (!Blacklisted.Any(x => x == user.Ip.Address))
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserListAppend)}{user.Name}"));
+                await Log(new ServerMessage($"{SausageHelper.CommandToString(MessageType.UserListAppend)}{user.UserInfo.Name}"));
             }
             else
             {
@@ -139,7 +139,7 @@ namespace SausageChat.Networking
             MainSocket.BeginAccept(OnUserConnect, null);
         }
 
-        public async static Task Log(IMessage message, User ignore = null)
+        public async static Task Log(IMessage message, SausageConnection ignore = null)
         {
             Vm.Messages.Add(message);
 
@@ -153,7 +153,7 @@ namespace SausageChat.Networking
         public static ObservableCollection<User> SortUsersList()
         {
             List<User> names = new List<User>(Vm.ConnectedUsers);
-            names.Sort(new UserComparer());
+            names.Sort(new ConnectionComparer());
 
             return new ObservableCollection<User>(names);
         }

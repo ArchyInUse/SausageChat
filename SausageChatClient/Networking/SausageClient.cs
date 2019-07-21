@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-using SausageChatClient.Messaging;
+using SausageChat.Core.Messaging;
 using SausageChat.Core;
+using SausageChat.Core.Messaging;
 
 namespace SausageChatClient.Networking
 {
@@ -22,7 +22,7 @@ namespace SausageChatClient.Networking
         {
             ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.175.8"), 60000)
         };
-        public static Dictionary<string, IPAddress> Friends
+        public static Dictionary<string, User> Friends
         {
             get
             {
@@ -33,21 +33,32 @@ namespace SausageChatClient.Networking
                 Vm.Friends = value;
             }
         }
-        public static IPEndPoint Ip { get; set; }
+        public static IPEndPoint ServerIp { get; set; }
         public static Socket Socket { get; set; }
-        public static bool Connected { get; set; } = false;
         public static MainWindow Mw { get; set; }
         public static ViewModel Vm { get; set; }
-        public static string Name { get; set; }
+        public static User ClientInfo { get; set; }
+        public static ObservableCollection<User> Users
+        {
+            get
+            {
+                return Vm.Users;
+            }
+            set
+            {
+                Vm.Users = value;
+            }
+        }
 
         public static void Start()
         {
             try
             {
-                Ip = IpPool["Disco"];
-                Socket = new Socket(Ip.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                Socket.BeginConnect(Ip, OnConnect, null);
-                Name = new WebClient().DownloadString("http://ipinfo.io/ip").Trim();
+                Users = new ObservableCollection<User>();
+                ServerIp = IpPool["Disco"];
+                Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                Socket.BeginConnect(ServerIp, OnConnect, null);
+                ClientInfo = new User(new WebClient().DownloadString("http://ipinfo.io/ip").Trim());
             }
             catch (SocketException)
             {
@@ -90,45 +101,46 @@ namespace SausageChatClient.Networking
         // Needs rename implement
         private static void Parse(string message)
         {
-            if (message.Contains(MessageType.IpRequest))
+            // Needs implementation
+            //if (message.Contains(MessageType.IpRequest))
+            //{
+            //    string ip;
+            //    string name;
+            //    message = message.Substring(MessageType.IpRequest.ToStr().Length);
+            //    ip = message.Substring(0, message.IndexOf(','));
+            //    name = message.Substring(message.IndexOf(',') + 1);
+            //    Friends.Add(name, IPAddress.Parse(ip));
+            //}
+            if(message.Contains(MessageType.UserList))
             {
-                string ip;
-                string name;
-                message = message.Substring(MessageType.IpRequest.ToStr().Length);
-                ip = message.Substring(0, message.IndexOf(','));
-                name = message.Substring(message.IndexOf(',') + 1);
-                Friends.Add(name, IPAddress.Parse(ip));
-            }
-            else if(message.Contains(MessageType.OnJoinUserList))
-            {
-                message = message.Substring(MessageType.OnJoinUserList.ToStr().Length);
+                message = message.Substring(MessageType.UserList.ToStr().Length);
                 if (message == "NULL")
-                    Vm.Users = new ObservableCollection<string>();
+                    Vm.Users = new ObservableCollection<User>();
                 else
                 {
                     string[] users = message.Split(',');
                     foreach(string user in users)
                     {
-                        Vm.Users.Add(user);
+                        Vm.Users.Add(new User(user));
                     }
                 }
             }
             else if(message.Contains(MessageType.UserMuted))
             {
                 message = message.Substring(MessageType.UserMuted.ToStr().Length);
-                if(Name == message)
+                if(ClientInfo.Name == message)
                     Mw.User_Message_client_Copy.IsEnabled = false;
             }
             else if(message.Contains(MessageType.UserUnmuted))
             {
                 message = message.Substring(MessageType.UserUnmuted.ToStr().Length);
-                if (Name == message)
+                if (ClientInfo.Name == message)
                     Mw.User_Message_client_Copy.IsEnabled = true;
             }
             else if(message.Contains(MessageType.UserKicked))
             {
                 message = message.Substring(MessageType.UserKicked.ToStr().Length);
-                if (Name == message)
+                if (ClientInfo.Name == message)
                 {
                     Disconnect(MessageType.UserKicked);
                 }
@@ -136,14 +148,14 @@ namespace SausageChatClient.Networking
             else if(message.Contains(MessageType.UserBanned))
             {
                 message = message.Substring(MessageType.UserBanned.ToStr().Length);
-                if (Name == message)
+                if (ClientInfo.Name == message)
                 {
                     Disconnect(MessageType.UserBanned);
                 }
             }
             else
             {
-                var Author = message.Substring(4, message.IndexOf(":"));
+                var Author = new User(message.Substring(4, message.IndexOf(":")));
                 var msg = message.Substring(message.IndexOf(":") + 1);
 
                 Log(new UserMessage(msg, Author));
@@ -180,7 +192,7 @@ namespace SausageChatClient.Networking
         public static void Rename(string newName)
         {
             Send($"{MessageType.NameChanged.ToStr()}{newName}");
-            Name = newName;
+            ClientInfo.Name = newName;
         }
 
         public static void AddFriend(string Name)

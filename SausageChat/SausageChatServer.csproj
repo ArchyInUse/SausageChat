@@ -67,13 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\UserComparer.cs" />
-    <Compile Include="Messaging\IMessage.cs" />
+    <Compile Include="Helpers\ConnectionComparer.cs" />
     <Compile Include="Networking\SausageServer.cs" />
-    <Compile Include="Messaging\ServerMessage.cs" />
     <Compile Include="Networking\ServerCommandResult.cs" />
-    <Compile Include="Networking\User.cs" />
-    <Compile Include="Messaging\UserMessage.cs" />
+    <Compile Include="Networking\SausageConnection.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

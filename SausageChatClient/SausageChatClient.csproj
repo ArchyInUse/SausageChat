@@ -78,7 +78,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Messaging\IMessage.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -89,8 +88,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messaging\ServerMessage.cs" />
-    <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Networking\SausageClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
