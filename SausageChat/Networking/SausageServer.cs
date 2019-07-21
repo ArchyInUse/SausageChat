@@ -24,15 +24,11 @@ namespace SausageChat.Networking
             get
             {
                 return Vm.ConnectedUsers;
-        //TODO:Error.  Please, if you can, fix this. 
             }
             set
             {
                 Vm.ConnectedUsers = value;
-        //TODO:Error.  Please, if you can, fix this. 
-
-
-      }
+            }
     }
         public static List<IPAddress> Blacklisted { get; set; } = new List<IPAddress>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);

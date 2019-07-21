@@ -7,14 +7,12 @@ using System.Net;
 using System.Net.Sockets;
 using SausageChat.Core.Messaging;
 using SausageChat.Core;
-using SausageChat.Core.Messaging;
 
 namespace SausageChatClient.Networking
 {
     static class SausageClient
     {
         /* TD -> add try{}catch(){} to Send/Recieve methods
-         * TD -> Add ID (using GUID) system (will fix naming issues)
         */ 
         // not a prop to pass it as ref in StripData()
         public static byte[] Data = new byte[1024];
