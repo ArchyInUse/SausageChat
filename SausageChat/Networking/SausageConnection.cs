@@ -38,7 +38,7 @@ namespace SausageChat.Networking
         /// TEST CTOR DON'T USE
         /// </summary>
         /// <param name="n"></param>
-        public SausageConnection(string n) => UserInfo.Name = n;
+        public SausageConnection(string n) => UserInfo = new User(n);
 
         public async Task SendAsync(string data) => await SendAsync(Encoding.ASCII.GetBytes(data));
 

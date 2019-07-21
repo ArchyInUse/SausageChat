@@ -154,12 +154,12 @@ namespace SausageChat.Networking
             }
         }
 
-        public static ObservableCollection<User> SortUsersList()
+        public static ObservableCollection<SausageConnection> SortUsersList()
         {
-            List<User> names = new List<User>(Vm.ConnectedUsers);
+            List<SausageConnection> names = new List<SausageConnection>(Vm.ConnectedUsers);
             names.Sort(new ConnectionComparer());
 
-            return new ObservableCollection<User>(names);
+            return new ObservableCollection<SausageConnection>(names);
         }
     }
 }

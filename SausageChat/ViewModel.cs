@@ -9,16 +9,16 @@ namespace SausageChat
   {
     public ObservableCollection<IMessage> Messages { get; set; } //a collection of messages
                                                                  // User names (for user list)
-    public ObservableCollection<User> ConnectedUsers { get; set; } // a collection of connected users 
+    public ObservableCollection<SausageConnection> ConnectedUsers { get; set; } // a collection of connected users 
     public SausageConnection SelectedUser { get; set; } = null;
 
     public ViewModel()
     {
       Messages = new ObservableCollection<IMessage>();
       Messages.Add(new ServerMessage("Hello!"));
-      ConnectedUsers = new ObservableCollection<User>();
-      ConnectedUsers.Add(new User("Sally"));
-      ConnectedUsers.Add(new User("Bob"));
+      ConnectedUsers = new ObservableCollection<SausageConnection>();
+      ConnectedUsers.Add(new SausageConnection("Sally"));
+      ConnectedUsers.Add(new SausageConnection("Bob"));
     }
   }
 }
