@@ -14,19 +14,18 @@ namespace SausageChat.Networking
     {
         public byte[] Data { get; set; } = new byte[1024];
         public IPEndPoint Ip { get; set; }
-        // not following name convention to avoid name colision
-        public Socket _Socket { get; set; }
+        public Socket Socket { get; set; }
         public User UserInfo { get; set; }
 
         public List<UserMessage> Messages { get; set; }
 
         public SausageConnection(Socket socket)
         {
-            _Socket = socket;
-            Ip = _Socket.RemoteEndPoint as IPEndPoint;
+            Socket = socket;
+            Ip = Socket.RemoteEndPoint as IPEndPoint;
 
             // returns just the ip
-            UserInfo.Name = _Socket.RemoteEndPoint.ToString().Substring(0, _Socket.RemoteEndPoint.ToString().Length - 6);
+            UserInfo.Name = Socket.RemoteEndPoint.ToString().Substring(0, Socket.RemoteEndPoint.ToString().Length - 6);
 
             Messages = new List<UserMessage>();
 
@@ -46,7 +45,7 @@ namespace SausageChat.Networking
         {
             try
             {
-                _Socket.BeginSend(data, 0, data.Length, SocketFlags.None, OnSendComplete, null);
+                Socket.BeginSend(data, 0, data.Length, SocketFlags.None, OnSendComplete, null);
             }
             catch (SocketException)
             {
@@ -62,7 +61,7 @@ namespace SausageChat.Networking
         {
             try
             {
-                _Socket.EndSend(ar);
+                Socket.EndSend(ar);
             }
             catch(SocketException)
             {
@@ -74,7 +73,7 @@ namespace SausageChat.Networking
         {
             try
             {
-                _Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnDataRecieve, null);
+                Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnDataRecieve, null);
             }
             catch(SocketException)
             {
@@ -90,7 +89,7 @@ namespace SausageChat.Networking
         {
             try
             {
-                var BytesRec = _Socket.EndReceive(ar);
+                var BytesRec = Socket.EndReceive(ar);
                 Task.Run(() => Parse(Encoding.ASCII.GetString(Data)));
             }
             catch(SocketException)
@@ -108,9 +107,8 @@ namespace SausageChat.Networking
         {
             string oldName = UserInfo.Name;
             UserInfo.Name = newName;
-    //TODO:Error. Please if you can, fix this. 
-      // SausageServer.Vm.ConnectedUsers.First(x => x == this).UserInfo.Name = newName;  
-      SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
+            SausageServer.Vm.ConnectedUsers.First(x => x == this).UserInfo.Name = newName;  
+            SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
             SausageServer.Log(new ServerMessage($"{oldName} has changed their name to {UserInfo.Name}"));
             return oldName;
         }
@@ -119,10 +117,11 @@ namespace SausageChat.Networking
         {
             SausageServer.ConnectedUsers.Remove(this);
             SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
-            _Socket.Close();
+            Socket.Close();
             await SausageServer.Log(new ServerMessage($"{this} disconnected"));
         }
 
+        // needs reimplementation with JSON
         public async Task Parse(string message)
         {
             // Friend Request (For now, other party doesn't need to accept, needs implementation)
@@ -193,7 +192,7 @@ namespace SausageChat.Networking
             hashCode = hashCode * -1521134295 + UserInfo.IsMuted.GetHashCode();
             hashCode = hashCode * -1521134295 + UserInfo.IsAdmin.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<IPEndPoint>.Default.GetHashCode(Ip);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Socket>.Default.GetHashCode(_Socket);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Socket>.Default.GetHashCode(Socket);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserInfo.Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<List<UserMessage>>.Default.GetHashCode(Messages);
             return hashCode;
