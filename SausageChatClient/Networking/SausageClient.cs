@@ -22,17 +22,17 @@ namespace SausageChatClient.Networking
         {
             ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.175.8"), 60000)
         };
-        public static Dictionary<string, User> Friends
-        {
-            get
-            {
-                return Vm.Friends;
-            }
-            set
-            {
-                Vm.Friends = value;
-            }
-        }
+        // TODO: Please fix this public static Dictionary<string, User> Friends
+        //{ 
+            //get
+            //{
+              //  return Vm.okFriends;
+            //}
+            //set
+            //{
+                //Vm.Friends = value;
+            //}
+        //}
         public static IPEndPoint ServerIp { get; set; }
         public static Socket Socket { get; set; }
         public static MainWindow Mw { get; set; }
