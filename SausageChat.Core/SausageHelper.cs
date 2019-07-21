@@ -4,6 +4,7 @@
  * so I've decided to keep them separated
  * - Archy (Disco)
  */
+using SausageChat.Core.Messaging;
 
 namespace SausageChat.Core
 {
@@ -15,7 +16,7 @@ namespace SausageChat.Core
             {
                 case MessageType.NameChanged:
                     return "<NC>";
-                case MessageType.OnJoinUserList:
+                case MessageType.UserList:
                     return "<UL>";
                 case MessageType.UserBanned:
                     return "<UB>";

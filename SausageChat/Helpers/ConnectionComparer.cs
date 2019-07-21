@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using SausageChat.Networking;
+using SausageChat.Core;
 
 namespace SausageChat.Helpers
 {
-    class UserComparer : IComparer<User>
+    class ConnectionComparer : IComparer<User>
     {
         public int Compare(User x, User y)
         {

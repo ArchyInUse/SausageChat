@@ -1,9 +1,9 @@
-﻿namespace SausageChat.Core
+﻿namespace SausageChat.Core.Messaging
 {
     public enum MessageType
     {
         // when a user joins, a complete list of the current users online gets sent to him
-        OnJoinUserList,
+        UserList,
         // when a new user joins, a message is sent (to everyone but him) to add him to the list.
         UserListAppend,
         // when a user gets banned, this flag is used to notify everyone (including the current user)

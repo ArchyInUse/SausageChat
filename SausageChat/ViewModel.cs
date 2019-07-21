@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using SausageChat.Messaging;
 using SausageChat.Networking;
+using SausageChat.Core.Messaging;
+using SausageChat.Core;
 
 namespace SausageChat
 {
@@ -9,7 +10,7 @@ namespace SausageChat
         public ObservableCollection<IMessage> Messages { get; set; } //a collection of messages
         // User names (for user list)
         public ObservableCollection<User> ConnectedUsers { get; set; } // a collection of connected users 
-        public User SelectedUser { get; set; } = null;
+        public SausageConnection SelectedUser { get; set; } = null;
 
         public ViewModel()
         {
