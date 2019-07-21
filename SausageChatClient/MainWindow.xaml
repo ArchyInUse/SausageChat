@@ -27,7 +27,7 @@
 
   </Window.Resources>
 
-  <Grid Background="#FF008CFF">
+  <Grid x:Name="Grid_client_view" Background="#FF008CFF">
     <Grid.ColumnDefinitions>
       <!-- Define the columns for the grid -->
 
@@ -89,7 +89,7 @@
     </TreeView>
 
 
-    <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="Red" BorderBrush="#FF008CFF"  >
+    <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="White" BorderBrush="#FF008CFF"  >
 
       <ItemsControl.ItemTemplate>
 
