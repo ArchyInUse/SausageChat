@@ -70,7 +70,7 @@
     <Compile Include="enter_name_window.xaml.cs">
       <DependentUpon>enter_name_window.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Client_view_window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -78,8 +78,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Client_view_window.xaml.cs">
+      <DependentUpon>Client_view_window.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="enter_name_window.xaml">

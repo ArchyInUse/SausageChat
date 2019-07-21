@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -108,8 +108,9 @@ namespace SausageChat.Networking
         {
             string oldName = UserInfo.Name;
             UserInfo.Name = newName;
-            SausageServer.Vm.ConnectedUsers.First(x => x == this).UserInfo.Name = newName;
-            SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
+    //TODO:Error. Please if you can, fix this. 
+      // SausageServer.Vm.ConnectedUsers.First(x => x == this).UserInfo.Name = newName;  
+      SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
             SausageServer.Log(new ServerMessage($"{oldName} has changed their name to {UserInfo.Name}"));
             return oldName;
         }

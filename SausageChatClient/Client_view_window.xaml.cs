@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using SausageChatClient.Networking;
-using SausageChatClient.Messaging;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -19,18 +18,18 @@ using System.Collections.ObjectModel;
 
 namespace SausageChatClient
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
 
-    public partial class MainWindow 
+  public partial class MainWindow
+  {
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            ViewModel Vm = new ViewModel();
-            SausageClient.Mw = this;
-            SausageClient.Vm = Vm;
-            this.DataContext = Vm;
+      ViewModel Vm = new ViewModel();
+      SausageClient.Mw = this;
+      SausageClient.Vm = Vm;
+      this.DataContext = Vm;
     }
 
 
@@ -76,15 +75,15 @@ namespace SausageChatClient
     public string Which_IP_is_selected(string option)
     {
 
-      if(Select_IP_Combo_box.SelectedIndex == 0)
+      if (Select_IP_Combo_box.SelectedIndex == 0)
       {
         //user has selected Disco IP
-         option = "disco's IP";
-        
+        option = "disco's IP";
+
 
       }
 
-      if(Select_IP_Combo_box.SelectedIndex == 1)
+      if (Select_IP_Combo_box.SelectedIndex == 1)
       {
         //user has selected  Montes IP
         option = "Montes IP";
@@ -93,40 +92,40 @@ namespace SausageChatClient
 
       }
 
-      
+
 
       return option;
     }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+    private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
 
-        }
+    }
 
-        private void Chat_Box_TextChanged(object sender, TextChangedEventArgs e)
-        {
+    private void Chat_Box_TextChanged(object sender, TextChangedEventArgs e)
+    {
 
-        }
+    }
 
-        private void Send_message_Button_Click(object sender, RoutedEventArgs e)
-        {
+    private void Send_message_Button_Click(object sender, RoutedEventArgs e)
+    {
 
-        }
+    }
 
-        private void User_Message_client_TextChanged(object sender, TextChangedEventArgs e)
-        {
+    private void User_Message_client_TextChanged(object sender, TextChangedEventArgs e)
+    {
 
-        }
+    }
 
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
+    private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+    {
 
-        }
+    }
 
-        private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
+    private void Select_IP_Combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
@@ -166,5 +165,5 @@ namespace SausageChatClient
     }
   }
 
-  
+
 }

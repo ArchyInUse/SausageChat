@@ -17,7 +17,7 @@ namespace SausageChatClient
   /// <summary>
   /// Interaction logic for Window1.xaml
   /// </summary>
-  public partial class Window1 
+  public partial class Window1
   {
     public Window1()
     {
@@ -34,17 +34,17 @@ namespace SausageChatClient
 
     private void Enter_name_input_box_TextChanged(object sender, TextChangedEventArgs e)
     {
-       
+
     }
 
 
 
-   
+
 
     private void Set_name_Button_Click(object sender, RoutedEventArgs e)
     {
       user_input_string = Enter_name_input_box.Text;
-     
+
 
       this.Close();
 
