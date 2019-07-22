@@ -9,6 +9,8 @@ namespace SausageChat.Core.Networking
         public PacketOption Option { get; set; }
         public Guid Guid { get; set; }
         public string NewName { get; set; }
+        public User[] UsersList { get; set; }
+        public string Content { get; set; } = "";
 
         public PacketFormat(PacketOption packetOption)
         {
@@ -16,12 +18,15 @@ namespace SausageChat.Core.Networking
         }
 
         // for Json.NET
-        #region ShouldSeralize
-
-        public bool ShouldSerializeGuid() => Option == PacketOption.ClientMessage
-                                          || Option == PacketOption.NameChange;
+        #region JsonMethods
+        
+        public bool ShouldSerializeGuid() => Option != PacketOption.IsServer ||
+                                             Option != PacketOption.UserList;
         public bool ShouldSerializeOption => false;
-        public bool ShouldSerialieNewName => Option == PacketOption.NameChange;
+        public bool ShouldSerializeNewName => Option == PacketOption.NameChange;
+        public bool ShouldSerializeUsersList => Option == PacketOption.UserList;
+        public bool ShouldSerializeContent => Option != PacketOption.NameChange ||
+                                              Option != PacketOption.UserList;
 
         #endregion
     }

@@ -12,9 +12,12 @@ namespace SausageChat.Core
         public bool IsMuted { get; set; } = false;
         public List<IMessage> Messages { get; set; }
 
-        public User(string Name = null)
+        public User(string Name = null, Guid guid = default(Guid))
         {
-            Guid = Guid.NewGuid();
+            if (guid == default(Guid))
+                Guid = Guid.NewGuid();
+            else
+                Guid = guid;
             if (Name == null)
                 this.Name = "DefaultName";
             else
@@ -22,5 +25,13 @@ namespace SausageChat.Core
         }
 
         public override string ToString() => Name;
+
+        #region JsonMethods
+
+        public bool ShouldSerializeIsAdmin => false;
+        public bool ShouldSerializeIsMuted => false;
+        public bool ShouldSerializeMessages => false;
+
+        #endregion
     }
 }

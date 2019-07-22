@@ -7,9 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using SausageChat.Core;
 using SausageChat.Core.Messaging;
+using SausageChat.Core.Networking;
+using Newtonsoft.Json;
 
 namespace SausageChat.Networking
 {
+    // TODO: Log everything in Json format
     class SausageConnection
     {
         public byte[] Data { get; set; } = new byte[1024];
@@ -29,7 +32,6 @@ namespace SausageChat.Networking
 
             Messages = new List<UserMessage>();
 
-            SausageServer.Log(new ServerMessage($"{UserInfo.Name} has connected"));
             ListenAsync();
         }
 
@@ -39,9 +41,11 @@ namespace SausageChat.Networking
         /// <param name="n"></param>
         public SausageConnection(string n) => UserInfo = new User(n);
 
-        public async Task SendAsync(string data) => await SendAsync(Encoding.ASCII.GetBytes(data));
+        public void SendAsync(string data) => SendAsync(Encoding.ASCII.GetBytes(data));
 
-        public async Task SendAsync(byte[] data)
+        public void SendAsync(PacketFormat packet) => SendAsync(JsonConvert.SerializeObject(packet));
+
+        public void SendAsync(byte[] data)
         {
             try
             {
@@ -49,11 +53,11 @@ namespace SausageChat.Networking
             }
             catch (SocketException)
             {
-                await Disconnect();
+                Disconnect();
             }
             catch(ObjectDisposedException)
             {
-                await Disconnect();
+                Disconnect();
             }
         }
 
@@ -69,7 +73,7 @@ namespace SausageChat.Networking
             }
         }
 
-        public async Task ListenAsync()
+        public void ListenAsync()
         {
             try
             {
@@ -77,11 +81,11 @@ namespace SausageChat.Networking
             }
             catch(SocketException)
             {
-                await Disconnect();
+                Disconnect();
             }
             catch(ObjectDisposedException)
             {
-                await Disconnect();
+                Disconnect();
             }
         }
 
@@ -90,7 +94,8 @@ namespace SausageChat.Networking
             try
             {
                 var BytesRec = Socket.EndReceive(ar);
-                Task.Run(() => Parse(Encoding.ASCII.GetString(Data)));
+                Parse(Encoding.ASCII.GetString(Data));
+                ListenAsync();
             }
             catch(SocketException)
             {
@@ -109,64 +114,41 @@ namespace SausageChat.Networking
             UserInfo.Name = newName;
             SausageServer.Vm.ConnectedUsers.First(x => x == this).UserInfo.Name = newName;  
             SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
-            SausageServer.Log(new ServerMessage($"{oldName} has changed their name to {UserInfo.Name}"));
             return oldName;
         }
 
-        public async Task Disconnect()
+        public void Disconnect()
         {
             SausageServer.ConnectedUsers.Remove(this);
             SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
             Socket.Close();
-            await SausageServer.Log(new ServerMessage($"{this} disconnected"));
         }
 
-        // needs reimplementation with JSON
-        public async Task Parse(string message)
+        private void Parse(string msg)
         {
-            // Friend Request (For now, other party doesn't need to accept, needs implementation)
-            if (message.Contains(MessageType.IpRequest))
-            {
-                string CommandCode = MessageType.IpRequest.ToStr();
-                foreach (SausageConnection user in SausageServer.ConnectedUsers)
-                {
-                    if (user.UserInfo.Name == message.Substring(CommandCode.Length))
-                    {
-                        await SendAsync($"{CommandCode}{user.Ip.Address.ToString()},{user.UserInfo.Name}");
-                    }
-                }
-            }
-            // Rename
-            else if (message.Contains(MessageType.NameChanged))
-                Rename(message.Substring(MessageType.NameChanged.ToStr().Length));
-            // on user join (need to send all the usernames for ViewModel)
-            else if (message.Contains(MessageType.UserList))
-            {
-                // since user gets added in SausageServer OnUserConnect method, this will never be 0 on connect)
-                if (SausageServer.ConnectedUsers.Count == 1)
-                    await SendAsync($"{MessageType.UserList.ToStr()}NULL");
-                else
-                {
-                    string ListUsersToSring = "";
-                    for (int i = 0; i < SausageServer.ConnectedUsers.Count; i++)
-                    {
-                        if (i == SausageServer.ConnectedUsers.Count - 1)
-                            ListUsersToSring += SausageServer.ConnectedUsers[i].ToString();
-                        else
-                            ListUsersToSring += SausageServer.ConnectedUsers[i].ToString() + ",";
-                    }
+            PacketFormat Message = JsonConvert.DeserializeObject<PacketFormat>(msg);
 
-                    await SendAsync($"{MessageType.UserList.ToStr()}{ListUsersToSring}");
-                    await SausageServer.Log(
-                        new ServerMessage($"{MessageType.UserListAppend.ToStr()}{UserInfo.Name}"), 
-                        this);
-                }
-            }
-            else if (message.Contains(MessageType.UserDisconnect))
-                await Disconnect();
-            else if(message.Contains(MessageType.UserMessage))
+            switch (Message.Option)
             {
-                await SausageServer.Log(new UserMessage(message, UserInfo));
+                case PacketOption.ClientMessage:
+                    SausageServer.Log(Message);
+                    break;
+                case PacketOption.NameChange:
+                    SausageServer.Log(Message);
+                    SausageServer.UsersDictionary[Message.Guid].Name = Message.NewName;
+                    break;
+                // don't need to check for user connected as that is dealt with in OnUserConnect
+                case PacketOption.UserDisconnected:
+                    SausageServer.Log(Message);
+                    SausageServer.UsersDictionary.Remove(Message.Guid);
+                    break;
+                case PacketOption.UserList:
+                    PacketFormat packet = new PacketFormat(PacketOption.UserList)
+                    {
+                        UsersList = SausageServer.UsersDictionary.Values.ToArray()
+                    };
+                    SendAsync(packet);
+                    break;
             }
         }
 
