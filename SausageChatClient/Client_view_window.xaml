@@ -85,18 +85,16 @@
 
 
     <TreeView x:Name="Freinds_List_view" Margin="0,25,0,312" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Grid.Column="2">
+    
       <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
-        <TreeViewItem Header="Online friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF" ItemsSource="{Binding Freinds}">
-          <TreeViewItem Header="friend1" Background="#FF419EEA" Foreground="#FFFCFDFF" />
-          <TreeViewItem Header="friend2" Background="#FF419EEA" Foreground="#FFFCFDFF" />
-        </TreeViewItem>
+        <TreeViewItem Header="Online friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF" ItemsSource="{Binding Friends[OnlineFriends]}"/>
 
-        <TreeViewItem Header="Offline Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF">
-          <TreeViewItem Header="friend1" Background="#FF419EEA" Foreground="#FFFCFDFF"  />
-          <TreeViewItem Header="friend2" Background="#FF419EEA" Foreground="#FFFCFDFF"  />
 
-        </TreeViewItem>
+        <TreeViewItem Header="Offline Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF"  ItemsSource="{Binding Friends[Offlineusers]}"/>
+
+
+
 
       </TreeViewItem>
 

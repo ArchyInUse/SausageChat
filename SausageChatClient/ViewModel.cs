@@ -10,8 +10,10 @@ namespace SausageChatClient
     {
         public ObservableCollection<IMessage> Messages { get; set; }
         public ObservableCollection<User> Users { get; set; }
-        // Bind to: "OnlineFriends", "OfflineFriends"
-        public Dictionary<string, ObservableCollection<User>> Friends { get; set; }
+    public ObservableCollection<User> offlineUsers { get; set; }
+
+    // Bind to: "OnlineFriends", "OfflineFriends"
+    public Dictionary<string, ObservableCollection<User>> Friends { get; set; }
 
         public ViewModel()
         {
@@ -23,7 +25,19 @@ namespace SausageChatClient
                 new User("Bob"),
                 new User("Francis")
             });
-            Messages = new ObservableCollection<IMessage>();
+
+
+
+
+      Friends.Add("Offlineusers", new ObservableCollection<User>()
+            {
+                new User("jay"),
+                new User("john"),
+                new User("sasha")
+            });
+
+
+      Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("Hello!"));
             Users.Add(new User("User1"));
             Users.Add(new User("User2"));
