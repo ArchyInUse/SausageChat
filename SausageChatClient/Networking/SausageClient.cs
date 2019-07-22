@@ -123,6 +123,7 @@ namespace SausageChatClient.Networking
                     else
                     {
                         Log(new ServerMessage($"You changed your name to {ClientInfo.Name}"));
+                        break;
                     }
                 case PacketOption.UserBanned:
                     if(ClientInfo.Guid == Message.Guid)
