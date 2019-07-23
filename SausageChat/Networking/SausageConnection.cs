@@ -26,9 +26,8 @@ namespace SausageChat.Networking
         {
             Socket = socket;
             Ip = Socket.RemoteEndPoint as IPEndPoint;
-
-            // returns just the ip
-            UserInfo.Name = Socket.RemoteEndPoint.ToString().Substring(0, Socket.RemoteEndPoint.ToString().Length - 6);
+            UserInfo = new User();
+            UserInfo.Name = UserInfo.Guid.ToString();
 
             Messages = new List<UserMessage>();
 
@@ -131,7 +130,8 @@ namespace SausageChat.Networking
             switch (Message.Option)
             {
                 case PacketOption.ClientMessage:
-                    SausageServer.Log(Message);
+                    if(!SausageServer.UsersDictionary[Message.Guid].IsMuted)
+                        SausageServer.Log(Message);
                     break;
                 case PacketOption.NameChange:
                     SausageServer.Log(Message);

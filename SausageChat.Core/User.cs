@@ -19,7 +19,7 @@ namespace SausageChat.Core
             else
                 Guid = guid;
             if (Name == null)
-                this.Name = "DefaultName";
+                this.Name = Guid.ToString();
             else
                 this.Name = Name;
         }
@@ -28,9 +28,9 @@ namespace SausageChat.Core
 
         #region JsonMethods
 
-        public bool ShouldSerializeIsAdmin => false;
-        public bool ShouldSerializeIsMuted => false;
-        public bool ShouldSerializeMessages => false;
+        public bool ShouldSerializeIsAdmin() => false;
+        public bool ShouldSerializeIsMuted() => false;
+        public bool ShouldSerializeMessages() => false;
 
         #endregion
     }

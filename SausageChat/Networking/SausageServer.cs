@@ -10,6 +10,7 @@ using SausageChat.Core;
 using System.Collections.ObjectModel;
 using SausageChat.Core.Networking;
 using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace SausageChat.Networking
 {
@@ -61,24 +62,106 @@ namespace SausageChat.Networking
             }
         }
 
-        public static async Task<ServerCommandResult?> Ban(SausageConnection user)
+        public static async Task Ban(SausageConnection user)
         {
-            return null;
+            try
+            {
+                // user exists
+                if (ConnectedUsers.Any(x => x.UserInfo.Guid == user.UserInfo.Guid))
+                {
+                    Blacklisted.Add(user.Ip.Address);
+                    PacketFormat packet = new PacketFormat(PacketOption.UserBanned)
+                    {
+                        Guid = user.UserInfo.Guid,
+                        Content = "Place-holder reason"
+                    };
+                    Log(packet);
+                }
+                else
+                {
+                    MessageBox.Show("User not found", "Ban result");
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                MessageBox.Show($"User returned null {e}", "Exception Caught");
+            }
         }
 
-        public static async Task<ServerCommandResult?> Kick(SausageConnection user)
+        public static async Task Kick(SausageConnection user)
         {
-            return null;
+            try
+            {
+                // user exists
+                if (ConnectedUsers.Any(x => x.UserInfo.Guid == user.UserInfo.Guid))
+                {
+                    PacketFormat packet = new PacketFormat(PacketOption.UserKicked)
+                    {
+                        Guid = user.UserInfo.Guid,
+                        Content = "Place-holder reason"
+                    };
+                    Log(packet);
+                }
+                else
+                {
+                    MessageBox.Show("User not found", "Kick result");
+                }
+            }
+            catch(ArgumentNullException e)
+            {
+                MessageBox.Show($"User returned null {e}", "Exception Caught");
+            }
         }
 
-        public static async Task<ServerCommandResult?> Mute(SausageConnection user)
+        public static async Task Mute(SausageConnection user)
         {
-            return null;
+            try
+            {
+                // user exists
+                if (ConnectedUsers.Any(x => x.UserInfo.Guid == user.UserInfo.Guid))
+                {
+                    PacketFormat packet = new PacketFormat(PacketOption.UserMuted)
+                    {
+                        Guid = user.UserInfo.Guid,
+                        Content = "Place-holder reason"
+                    };
+                    user.UserInfo.IsMuted = true;
+                    Log(packet);
+                }
+                else
+                {
+                    MessageBox.Show("User not found", "Kick result");
+                }
+            }
+            catch(ArgumentNullException e)
+            {
+                MessageBox.Show($"User returned null {e}", "Exception Caught");
+            }
         }
 
-        public static async Task<ServerCommandResult?> Unmute(SausageConnection user)
+        public static async Task Unmute(SausageConnection user)
         {
-            return null;
+            try
+            {
+                // user exists
+                if (ConnectedUsers.Any(x => x.UserInfo.Guid == user.UserInfo.Guid))
+                {
+                    PacketFormat packet = new PacketFormat(PacketOption.UserUnmuted)
+                    {
+                        Guid = user.UserInfo.Guid
+                    };
+                    user.UserInfo.IsMuted = false;
+                    Log(packet);
+                }
+                else
+                {
+                    MessageBox.Show("User not found", "Kick result");
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                MessageBox.Show($"User returned null {e}", "Exception Caught");
+            }
         }
 
         public static async void OnUserConnect(IAsyncResult ar)
@@ -88,16 +171,22 @@ namespace SausageChat.Networking
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                // TODO: need to log
+                PacketFormat packet = new PacketFormat(PacketOption.UserConnected)
+                {
+                    Guid = user.UserInfo.Guid,
+                    NewName = user.UserInfo.Name
+                };
+                Log(packet);
             }
             else
             {
-                // TODO: need to log
+                // doesn't log if the user is blacklisted
                 user.Disconnect();
             }
             MainSocket.BeginAccept(OnUserConnect, null);
         }
 
+        // TODO: make a switch for the user messge (some packets don't have content)
         public async static Task Log(PacketFormat message, SausageConnection ignore = null)
         {
             if (message.Option == PacketOption.ClientMessage)

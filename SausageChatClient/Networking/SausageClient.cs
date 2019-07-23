@@ -60,7 +60,7 @@ namespace SausageChatClient.Networking
                 ServerIp = IpPool["Disco"];
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.BeginConnect(ServerIp, OnConnect, null);
-                ClientInfo = new User(new WebClient().DownloadString("http://ipinfo.io/ip").Trim());
+                ClientInfo = new User();
             }
             catch (SocketException)
             {
@@ -120,11 +120,8 @@ namespace SausageChatClient.Networking
                         user.Name = Message.NewName;
                         break;
                     }
-                    else
-                    {
-                        Log(new ServerMessage($"You changed your name to {ClientInfo.Name}"));
-                        break;
-                    }
+                    Log(new ServerMessage($"You changed your name to {ClientInfo.Name}"));
+                    break;
                 case PacketOption.UserBanned:
                     if(ClientInfo.Guid == Message.Guid)
                     {
@@ -163,7 +160,7 @@ namespace SausageChatClient.Networking
                     break;
                 case PacketOption.UserConnected:
                     Log(new ServerMessage($"{Message.Guid} has joined"));
-                    UsersDictionary.Add(Message.Guid, new User(Message.Guid.ToString(), Message.Guid));
+                    UsersDictionary.Add(Message.Guid, new User(Message.NewName, Message.Guid));
                     break;
                 case PacketOption.UserDisconnected:
                     Log(new ServerMessage($"{UsersDictionary[Message.Guid]} has disconnected"));
@@ -196,27 +193,42 @@ namespace SausageChatClient.Networking
 
         public static void Send(IMessage message) => Send(message.ToString());
 
+        public static void Send(PacketFormat packet) => Send(JsonConvert.SerializeObject(packet));
+
         private static void OnSendComplete(IAsyncResult ar) => Socket.EndSend(ar);
 
         public static void Log(string msg) => Log(new UserMessage(msg));
 
         public static void Log(IMessage message) => Vm.Messages.Add(message);
 
-        // the server will return the rename message thus no need for logging
-        public static void Rename(string newName) => ClientInfo.Name = newName;
+        // the server will return the rename message thus no need for logging (in client 
+        public static void Rename(string newName)
+        {
+            ClientInfo.Name = newName;
+            PacketFormat packet = new PacketFormat(PacketOption.NameChange)
+            {
+                Guid = ClientInfo.Guid,
+                NewName = newName
+            };
+            Send(packet);
+        }
 
         // Needs implementation
-        public static void AddFriend(string Name)
+        public static void AddFriend(Guid guid)
         {
         }
 
-        // TODO: log
-        public static void Disconnect(PacketOption? Ct = null)
+        public static void Disconnect(PacketOption? Po = null)
         {
             try
             {
                 if (Socket.Connected) return;
-                Socket.Close();
+                PacketFormat packet = new PacketFormat(PacketOption.UserDisconnected)
+                {
+                    Guid = ClientInfo.Guid,
+                };
+                byte[] inBytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(packet));
+                Socket.BeginSend(inBytes, 0, inBytes.Length, SocketFlags.None, OnDisconnectDone, null);
 
                 Log(new ServerMessage("Disconnected"));
             }
@@ -224,6 +236,12 @@ namespace SausageChatClient.Networking
             {
                 throw new NotImplementedException();
             }
+        }
+
+        private static void OnDisconnectDone(IAsyncResult ar)
+        {
+            Socket.EndSend(ar);
+            Socket.Close();
         }
     }
 }
