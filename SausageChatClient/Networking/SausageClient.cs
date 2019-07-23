@@ -52,12 +52,12 @@ namespace SausageChatClient.Networking
         }
         public static Dictionary<Guid, User> UsersDictionary { get; set; }
 
-        public static void Start()
+        public static void Start(string option)
         {
             try
             {
                 Users = new ObservableCollection<User>();
-                ServerIp = IpPool["Disco"];
+                ServerIp = IpPool[option];
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.BeginConnect(ServerIp, OnConnect, null);
                 ClientInfo = new User();
