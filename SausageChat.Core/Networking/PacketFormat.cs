@@ -22,11 +22,14 @@ namespace SausageChat.Core.Networking
         
         public bool ShouldSerializeGuid() => Option != PacketOption.IsServer ||
                                              Option != PacketOption.UserList;
-        public bool ShouldSerializeOption => false;
-        public bool ShouldSerializeNewName => Option == PacketOption.NameChange;
-        public bool ShouldSerializeUsersList => Option == PacketOption.UserList;
-        public bool ShouldSerializeContent => Option != PacketOption.NameChange ||
-                                              Option != PacketOption.UserList;
+        public bool ShouldSerializeOption() => false;
+        public bool ShouldSerializeNewName() => Option == PacketOption.NameChange ||
+                                                Option == PacketOption.UserConnected;
+        public bool ShouldSerializeUsersList() => Option == PacketOption.UserList;
+        public bool ShouldSerializeContent() => Option != PacketOption.NameChange ||
+                                              Option != PacketOption.UserList ||
+                                              Option != PacketOption.UserConnected ||
+                                              Option != PacketOption.UserDisconnected;
 
         #endregion
     }

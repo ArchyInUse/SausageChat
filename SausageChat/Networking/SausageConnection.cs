@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using SausageChat.Core;
 using SausageChat.Core.Messaging;
 using SausageChat.Core.Networking;
@@ -26,9 +25,8 @@ namespace SausageChat.Networking
         {
             Socket = socket;
             Ip = Socket.RemoteEndPoint as IPEndPoint;
-
-            // returns just the ip
-            UserInfo.Name = Socket.RemoteEndPoint.ToString().Substring(0, Socket.RemoteEndPoint.ToString().Length - 6);
+            UserInfo = new User();
+            UserInfo.Name = UserInfo.Guid.ToString();
 
             Messages = new List<UserMessage>();
 
@@ -131,7 +129,8 @@ namespace SausageChat.Networking
             switch (Message.Option)
             {
                 case PacketOption.ClientMessage:
-                    SausageServer.Log(Message);
+                    if(!SausageServer.UsersDictionary[Message.Guid].IsMuted)
+                        SausageServer.Log(Message);
                     break;
                 case PacketOption.NameChange:
                     SausageServer.Log(Message);
