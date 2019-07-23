@@ -30,8 +30,15 @@ namespace SausageChatClient
       SausageClient.Mw = this;
       SausageClient.Vm = Vm;
       this.DataContext = Vm;
+
+     
+
+
+
+
     }
 
+    //MenuItem root = new MenuItem() { Title = "Menu" };
 
 
     public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -160,6 +167,11 @@ namespace SausageChatClient
     }
 
     private void Connect_Button_Client_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Add_Freind_button_client_Click(object sender, RoutedEventArgs e)
     {
 
     }

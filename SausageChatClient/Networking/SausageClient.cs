@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using SausageChat.Core.Messaging;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace SausageChatClient.Networking
 {
@@ -94,13 +94,13 @@ namespace SausageChatClient.Networking
 
             StripData();
             string message = Encoding.ASCII.GetString(Data);
-            Parse(message);
+         //   Parse(message);
 
             Data = new byte[1024];
             Listen();
         }
         
-        private static void Parse(string msg)
+        /*private static void Parse(string msg)  TODO:Please, if you can, fix this. 
         {
             PacketFormat Message =  JsonConvert.DeserializeObject<PacketFormat>(msg);
 
@@ -171,7 +171,7 @@ namespace SausageChatClient.Networking
                     break;
             }
         }
-
+        */
         /// <summary>
         /// removes all null characters
         /// </summary>
