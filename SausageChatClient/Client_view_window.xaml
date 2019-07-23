@@ -37,6 +37,13 @@
 
     </Style>
 
+
+    <Style TargetType="{x:Type TreeViewItem}">
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="Background" Value="#FF419EEA"/>
+      <Setter Property="BorderBrush" Value="#FF008CFF"/>
+    </Style>
+
   </Window.Resources>
 
   <Grid x:Name="Grid_client_view" Background="#FF008CFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -88,7 +95,7 @@
     
       <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
-        <TreeViewItem Header="Online friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF" ItemsSource="{Binding Friends[OnlineFriends]}"/>
+        <TreeViewItem Header="Online Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF" ItemsSource="{Binding Friends[OnlineFriends]}"/>
 
 
         <TreeViewItem Header="Offline Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF"  ItemsSource="{Binding Friends[Offlineusers]}"/>

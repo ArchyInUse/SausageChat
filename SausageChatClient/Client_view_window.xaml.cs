@@ -79,13 +79,14 @@ namespace SausageChatClient
     //  Disco's IP  =  index 0
     // Monte's IP  = This is index 1
 
+    string option;
     public string Which_IP_is_selected()
     {
 
       if (Select_IP_Combo_box.SelectedIndex == 0)
       {
         //user has selected Disco IP
-        option = "Disco";
+      string option = "Disco";
 
 
       }
@@ -93,7 +94,7 @@ namespace SausageChatClient
       if (Select_IP_Combo_box.SelectedIndex == 1)
       {
         //user has selected  Montes IP
-        option = "Monte";
+        string option = "Monte";
 
 
 
