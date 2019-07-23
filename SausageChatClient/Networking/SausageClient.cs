@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using SausageChat.Core.Messaging;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace SausageChatClient.Networking
 {
@@ -99,12 +99,13 @@ namespace SausageChatClient.Networking
             Data = new byte[1024];
             Listen();
         }
-        
-        /*private static void Parse(string msg)  TODO:Please, if you can, fix this. 
-        {
-            PacketFormat Message =  JsonConvert.DeserializeObject<PacketFormat>(msg);
 
-            switch(Message.Option)
+
+        private static void Parse(string msg)
+        {
+            PacketFormat Message = JsonConvert.DeserializeObject<PacketFormat>(msg);
+
+            switch (Message.Option)
             {
                 case PacketOption.ClientMessage:
                     Log(new UserMessage(Message.Content, UsersDictionary[Message.Guid]));
@@ -123,7 +124,7 @@ namespace SausageChatClient.Networking
                     Log(new ServerMessage($"You changed your name to {ClientInfo.Name}"));
                     break;
                 case PacketOption.UserBanned:
-                    if(ClientInfo.Guid == Message.Guid)
+                    if (ClientInfo.Guid == Message.Guid)
                     {
                         Disconnect();
                         Log(new ServerMessage("You've been banned:"));
@@ -171,7 +172,6 @@ namespace SausageChatClient.Networking
                     break;
             }
         }
-        */
         /// <summary>
         /// removes all null characters
         /// </summary>
