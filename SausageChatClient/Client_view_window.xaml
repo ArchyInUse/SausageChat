@@ -120,7 +120,7 @@
 
     <Button x:Name="Send_message_Button_client" Content="Send" Height="31" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" Margin="0,559,10,22" Grid.Column="1" Width="118" HorizontalAlignment="Right"/>
     <TextBox x:Name="User_Message_client" Height="30" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
-    <TextBox   Controls:TextBoxHelper.Watermark="Enter Message" x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap"  SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Bottom" Margin="0,0,10,22" Grid.Column="1" CaretBrush="#FF003BB0"/>
+    <TextBox KeyDown="User_Message_client_Copy_KeyDown" Controls:TextBoxHelper.Watermark="Enter Message" x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap"  SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Bottom" Margin="0,0,10,22" Grid.Column="1" CaretBrush="#FF003BB0"/>
 
     <StackPanel Margin="4,0,5,23" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="494">
 

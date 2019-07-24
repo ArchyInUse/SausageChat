@@ -43,8 +43,8 @@ namespace SausageChat.Networking
             {
                 MainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 ConnectedUsers = new ObservableCollection<SausageConnection>();
-                MainSocket.Listen(10);
                 MainSocket.Bind(LocalIp);
+                MainSocket.Listen(10);
                 MainSocket.BeginAccept(OnUserConnect, null);
             }
         }
@@ -171,12 +171,14 @@ namespace SausageChat.Networking
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
+                Mw.AddText($"User connected on {user.Ip}\n");
                 PacketFormat packet = new PacketFormat(PacketOption.UserConnected)
                 {
                     Guid = user.UserInfo.Guid,
                     NewName = user.UserInfo.Name
                 };
                 Log(packet);
+                Mw.AddText($"Logging now...");
             }
             else
             {

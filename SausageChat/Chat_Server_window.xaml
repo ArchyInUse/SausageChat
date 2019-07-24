@@ -79,7 +79,7 @@
     <!--The item source should be bound to the Users list in the VM, and it can bind to the name property-->
     <ListBox ItemsSource="{Binding ConnectedUsers}" x:Name="User_List" Grid.Column="2" Margin="10,25,0,78" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
     </ListBox>
-    <TextBox Grid.Column="2" Height="197" Margin="10,306,0,-124" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
+    <TextBox x:Name="DebugBox" Grid.Column="2" Height="197" Margin="10,306,0,-124" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
     <Label  HorizontalContentAlignment="Center" Content="User List" Grid.Column="2" HorizontalAlignment="Left" Height="25" Margin="15,0,0,0" VerticalAlignment="Top" Width="271" Foreground="White"/>
 
   </Grid>
