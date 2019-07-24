@@ -139,14 +139,9 @@
     <!-- If user is admin, have the button appear. If user is not admin. Then have button disappear.-->
     <TextBox Visibility="Hidden" x:Name="Debug_Textbox_for_Disco" Grid.Column="2" Margin="0,483,0,23" TextWrapping="Wrap" Text="TextBox" Background="#FF419EEA" BorderBrush="#FF008CFF" CaretBrush="#FF008CFF" Foreground="White" d:IsHidden="True"/>
 
-    <StackPanel Grid.Column="1" Margin="587,335,5,0" Grid.ColumnSpan="2" >
-      <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,6,0" Height="23"/>
-      <ListBox    x:Name="User_List_client" Margin="10,2,0,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="129" VerticalAlignment="Bottom"/>
-    </StackPanel>
 
 
-
-    <StackPanel Grid.Column="1" Margin="587,30,0,295" Grid.ColumnSpan="2">
+    <StackPanel Grid.Column="2" Margin="0,0,-5,104">
       <!--
       
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
@@ -155,15 +150,7 @@
 
 
       <Label  HorizontalContentAlignment="Center" Content="Friends List" Height="25" VerticalAlignment="Top" Foreground="White" Margin="0,0,5,0"/>
-
-      <!--
-      
-      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-      -->
-
-
-      <TreeView x:Name="Freinds_List_view" Margin="0,29,5,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="250" HorizontalAlignment="Right" Width="209">
+      <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="226">
 
         <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
@@ -179,6 +166,14 @@
 
 
       </TreeView>
+      <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,11,0" Height="23"/>
+      <ListBox    x:Name="User_List_client" Margin="2,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="161"/>
+
+      <!--
+      
+      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
+      <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
+      -->
       <!--
       
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
