@@ -9,6 +9,7 @@ using SausageChat.Core.Messaging;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace SausageChatClient.Networking
 {
@@ -51,6 +52,7 @@ namespace SausageChatClient.Networking
             }
         }
         public static Dictionary<Guid, User> UsersDictionary { get; set; }
+        public static SynchronizationContext UiCtx { get; set; }
 
         public static void Start(string option)
         {
@@ -62,6 +64,7 @@ namespace SausageChatClient.Networking
                 Socket.Connect(ServerIp);
                 ClientInfo = new User();
                 Log("Connected");
+                UiCtx = SynchronizationContext.Current;
                 Listen();
             }
             catch (SocketException)
@@ -202,7 +205,10 @@ namespace SausageChatClient.Networking
 
         public static void Log(string msg) => Log(new UserMessage(msg));
 
-        public static void Log(IMessage message) => Vm.Messages.Add(message);
+        public static void Log(IMessage message)
+        {
+            uiCtx.Send(x => Vm.Messages.Add(message), null);
+        }
 
         // the server will return the rename message thus no need for logging (in client 
         public static void Rename(string newName)

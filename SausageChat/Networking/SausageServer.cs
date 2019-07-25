@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using SausageChat.Core.Networking;
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace SausageChat.Networking
 {
@@ -36,6 +37,7 @@ namespace SausageChat.Networking
         public static Dictionary<Guid, User> UsersDictionary { get; set; }
         public static List<IPAddress> Blacklisted { get; set; } = new List<IPAddress>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);
+        public static SynchronizationContext UiCtx { get; set; }
         
         public static void Open()
         {
@@ -45,6 +47,7 @@ namespace SausageChat.Networking
                 ConnectedUsers = new ObservableCollection<SausageConnection>();
                 MainSocket.Bind(LocalIp);
                 MainSocket.Listen(10);
+                UiCtx = SynchronizationContext.Current;
                 MainSocket.BeginAccept(OnUserConnect, null);
             }
         }
@@ -171,14 +174,14 @@ namespace SausageChat.Networking
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                Mw.AddTextToDebugBox($"User connected on {user.Ip}\n");
+                UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"), null);
                 PacketFormat packet = new PacketFormat(PacketOption.UserConnected)
                 {
                     Guid = user.UserInfo.Guid,
                     NewName = user.UserInfo.Name
                 };
                 Log(packet);
-                Mw.AddTextToDebugBox($"Logging now...");
+                UiCtx.Send(x => Mw.AddTextToDebugBox($"Logging now..."), null);
             }
             else
             {
@@ -192,9 +195,9 @@ namespace SausageChat.Networking
         public async static Task Log(PacketFormat message, SausageConnection ignore = null)
         {
             if (message.Option == PacketOption.ClientMessage)
-                Vm.Messages.Add(new UserMessage(message.Content, UsersDictionary[message.Guid]));
+                UiCtx.Send(x => Vm.Messages.Add(new UserMessage(message.Content, UsersDictionary[message.Guid])), null);
             else
-                Vm.Messages.Add(new ServerMessage(message.Content));
+                UiCtx.Send(x => Vm.Messages.Add(new ServerMessage(message.Content)), null);
 
             foreach(var user in ConnectedUsers)
             {
