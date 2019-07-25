@@ -172,8 +172,8 @@ namespace SausageChat.Networking
             var user = new SausageConnection(MainSocket.EndAccept(ar));
             if (!Blacklisted.Any(x => x == user.Ip.Address))
             {
-                ConnectedUsers.Add(user);
-                Vm.ConnectedUsers = SortUsersList();
+                UiCtx.Send(x => ConnectedUsers.Add(user), null);
+                UiCtx.Send(x => Vm.ConnectedUsers = SortUsersList(), null);
                 UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"), null);
                 PacketFormat packet = new PacketFormat(PacketOption.UserConnected)
                 {
