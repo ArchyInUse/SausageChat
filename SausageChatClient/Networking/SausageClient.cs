@@ -207,7 +207,7 @@ namespace SausageChatClient.Networking
 
         public static void Log(IMessage message)
         {
-            uiCtx.Send(x => Vm.Messages.Add(message), null);
+            UiCtx.Send(x => Vm.Messages.Add(message), null);
         }
 
         // the server will return the rename message thus no need for logging (in client 
