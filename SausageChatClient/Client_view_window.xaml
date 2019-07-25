@@ -151,7 +151,7 @@
 
 
             <Label  HorizontalContentAlignment="Center" Content="Friends List" Height="auto" Width="auto" VerticalAlignment="Top" Foreground="White" Margin="0,0,5,0"/>
-            <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="auto">
+      <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
                 <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
@@ -168,7 +168,7 @@
 
             </TreeView>
             <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,11,0" Height="auto" Width="auto"/>
-            <ListBox    x:Name="User_List_client"  Height="auto"  Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
+      <ListBox    x:Name="User_List_client"  Height="auto"  Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
 
             <!--
       
