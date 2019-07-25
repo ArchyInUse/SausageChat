@@ -47,7 +47,7 @@ namespace SausageChat
             await SausageServer.Ban(SausageServer.Vm.SelectedUser);
         }
 
-        public void AddText(string text)
+        public void AddTextToDebugBox(string text)
         {
             DebugBox.Text += text;
         }

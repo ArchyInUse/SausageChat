@@ -3,17 +3,34 @@ using System.Collections.ObjectModel;
 using SausageChat.Core.Messaging;
 using System.ComponentModel;
 using SausageChat.Core;
+using System.Runtime.CompilerServices;
 
 namespace SausageChatClient
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<IMessage> Messages { get; set; }
+        private ObservableCollection<IMessage> messages;
+        public ObservableCollection<IMessage> Messages
+        {
+            get
+            {
+                return messages;
+            }
+            set
+            {
+                messages = value;
+                NotifyPropertyChanged();
+            }
+        }
         public ObservableCollection<User> Users { get; set; }
-    public ObservableCollection<User> offlineUsers { get; set; }
 
-    // Bind to: "OnlineFriends", "OfflineFriends"
-    public Dictionary<string, ObservableCollection<User>> Friends { get; set; }
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Bind to: "OnlineFriends", "OfflineFriends"
+        public Dictionary<string, ObservableCollection<User>> Friends { get; set; }
 
         public ViewModel()
         {

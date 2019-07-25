@@ -58,19 +58,6 @@ namespace SausageChatClient
             throw new NotImplementedException();
         }
 
-
-
-
-
-        // public void Log(IMessage message)
-        // {
-        //  Chat_Box_client.AppendText(message.ToString());
-        //}
-
-
-
-
-
         //  Disco's IP  =  index 0
         // Monte's IP  = This is index 1
         public string Which_IP_is_selected()
@@ -80,21 +67,13 @@ namespace SausageChatClient
             {
                 //user has selected Disco IP
                 option = "Disco";
-
-
             }
 
             if (Select_IP_Combo_box.SelectedIndex == 1)
             {
                 //user has selected  Montes IP
                 option = "Monte";
-
-
-
             }
-
-
-
             return option;
         }
 
@@ -110,7 +89,7 @@ namespace SausageChatClient
 
         private void Send_message_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            SausageClient.Send(User_Message_client_Copy.Text);
         }
 
         private void User_Message_client_TextChanged(object sender, TextChangedEventArgs e)

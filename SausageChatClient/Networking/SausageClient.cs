@@ -59,8 +59,10 @@ namespace SausageChatClient.Networking
                 Users = new ObservableCollection<User>();
                 ServerIp = IpPool[option];
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                Socket.BeginConnect(ServerIp, OnConnect, null);
+                Socket.Connect(ServerIp);
                 ClientInfo = new User();
+                Log("Connected");
+                Listen();
             }
             catch (SocketException)
             {
@@ -75,31 +77,26 @@ namespace SausageChatClient.Networking
             Socket.Close();
         }
 
-        public static void OnConnect(IAsyncResult ar)
-        {
-            Socket.EndConnect(ar);
-            Listen();
-        }
-
         public static void Listen()
         {
             if (!Socket.Connected) return;
+            Log("Started listening...");
             
             Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnMessageRecieved, null);
         }
 
         public static void OnMessageRecieved(IAsyncResult ar)
         {
+            Log("Recieved Message");
             Socket.EndReceive(ar);
 
             StripData();
             string message = Encoding.ASCII.GetString(Data);
-         //   Parse(message);
+            Parse(message);
 
             Data = new byte[1024];
             Listen();
         }
-
 
         private static void Parse(string msg)
         {
@@ -188,6 +185,8 @@ namespace SausageChatClient.Networking
 
             byte[] bytesMessage = Encoding.ASCII.GetBytes(message);
 
+            Log("Started Sending...");
+
             Socket.BeginSend(bytesMessage, 0, bytesMessage.Length, SocketFlags.None, OnSendComplete, null);
         }
 
@@ -195,7 +194,11 @@ namespace SausageChatClient.Networking
 
         public static void Send(PacketFormat packet) => Send(JsonConvert.SerializeObject(packet));
 
-        private static void OnSendComplete(IAsyncResult ar) => Socket.EndSend(ar);
+        private static void OnSendComplete(IAsyncResult ar)
+        {
+            Log("Sent Data");
+            Socket.EndSend(ar);
+        }
 
         public static void Log(string msg) => Log(new UserMessage(msg));
 

@@ -2,17 +2,40 @@ using System.Collections.ObjectModel;
 using SausageChat.Networking;
 using SausageChat.Core.Messaging;
 using SausageChat.Core;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System;
 
 namespace SausageChat
 {
-  class ViewModel
+  class ViewModel : INotifyPropertyChanged
   {
     public ObservableCollection<IMessage> Messages { get; set; } //a collection of messages
                                                                  // User names (for user list)
-    public ObservableCollection<SausageConnection> ConnectedUsers { get; set; } // a collection of connected users 
+        private ObservableCollection<SausageConnection> _connectedUsers;
+    public ObservableCollection<SausageConnection> ConnectedUsers
+        {
+            get
+            {
+                return _connectedUsers;
+            }
+            set
+            {
+                if(value != _connectedUsers)
+                {
+                    _connectedUsers = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     public SausageConnection SelectedUser { get; set; } = null;
 
-    public ViewModel()
+  private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+  {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public ViewModel()
     {
       Messages = new ObservableCollection<IMessage>();
       Messages.Add(new ServerMessage("Hello!"));
@@ -20,5 +43,7 @@ namespace SausageChat
       ConnectedUsers.Add(new SausageConnection("Sally"));
       ConnectedUsers.Add(new SausageConnection("Bob"));
     }
-  }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }

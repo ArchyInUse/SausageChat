@@ -164,21 +164,21 @@ namespace SausageChat.Networking
             }
         }
 
-        public static async void OnUserConnect(IAsyncResult ar)
+        public static void OnUserConnect(IAsyncResult ar)
         {
             var user = new SausageConnection(MainSocket.EndAccept(ar));
             if (!Blacklisted.Any(x => x == user.Ip.Address))
             {
                 ConnectedUsers.Add(user);
                 Vm.ConnectedUsers = SortUsersList();
-                Mw.AddText($"User connected on {user.Ip}\n");
+                Mw.AddTextToDebugBox($"User connected on {user.Ip}\n");
                 PacketFormat packet = new PacketFormat(PacketOption.UserConnected)
                 {
                     Guid = user.UserInfo.Guid,
                     NewName = user.UserInfo.Name
                 };
                 Log(packet);
-                Mw.AddText($"Logging now...");
+                Mw.AddTextToDebugBox($"Logging now...");
             }
             else
             {

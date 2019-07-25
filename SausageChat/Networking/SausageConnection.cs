@@ -73,18 +73,7 @@ namespace SausageChat.Networking
 
         public void ListenAsync()
         {
-            try
-            {
-                Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnDataRecieve, null);
-            }
-            catch(SocketException)
-            {
-                Disconnect();
-            }
-            catch(ObjectDisposedException)
-            {
-                Disconnect();
-            }
+            Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnDataRecieve, null);
         }
 
         private void OnDataRecieve(IAsyncResult ar)
