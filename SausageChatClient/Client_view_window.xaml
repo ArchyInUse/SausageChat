@@ -10,176 +10,178 @@
         Title="Client_view" Height="642.507" Width="1074" >
 
 
-  <Window.Resources>
+    <Window.Resources>
 
-    <Style TargetType="Button">
-      <Setter Property="Background" Value="#FF419EEA"></Setter>
-      <Setter Property="Foreground" Value="#FFFCFDFF"></Setter>
-      <Setter Property="BorderBrush" Value="#FF008CFF" ></Setter>
-      <Setter Property="BorderBrush" Value="#FF008CFF" ></Setter>
-      <Setter Property="Height" Value="45"></Setter>
-      <Setter Property="Width" Value="105"></Setter>
-      <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF419EEA"></Setter>
+            <Setter Property="Foreground" Value="#FFFCFDFF"></Setter>
+            <Setter Property="BorderBrush" Value="#FF008CFF" ></Setter>
+            <Setter Property="BorderBrush" Value="#FF008CFF" ></Setter>
+            <Setter Property="Height" Value="45"></Setter>
+            <Setter Property="Width" Value="105"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
 
-    </Style>
-
-
-
-
-    <Style TargetType="ListBoxItem">
-      <Setter Property="Background" Value="#FF419EEA"></Setter>
-      <Setter Property="Foreground" Value="#FFFCFDFF"></Setter>
-      <Setter Property="BorderBrush" Value="#FF008CFF" ></Setter>
-      <Setter Property="Height" Value="25" ></Setter>
-      <Setter Property="Margin" Value="0"></Setter>
+        </Style>
 
 
 
-    </Style>
 
-
-    <Style TargetType="{x:Type TreeViewItem}">
-      <Setter Property="Foreground" Value="White"/>
-      <Setter Property="Background" Value="#FF419EEA"/>
-      <Setter Property="BorderBrush" Value="#FF008CFF"/>
-    </Style>
-
-  </Window.Resources>
-
-  <Grid x:Name="Grid_client_view" Background="#FF008CFF"   >
-    <Grid.ColumnDefinitions>
-      <!-- Define the columns for the grid -->
-
-      <ColumnDefinition Width="255*" />
-      <ColumnDefinition Width="592*"/>
-      <!-- The first row.  -->
-      <!-- The Second Column  -->
-      <!-- The third column -->
-
-
-      <ColumnDefinition Width="219*" />
-      <!-- The Fourth column -->
-
-
-    </Grid.ColumnDefinitions>
-
-    <Grid.RowDefinitions>
-
-
-      <!-- The First Row -->
-      <!-- The Second Row -->
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Background" Value="#FF419EEA"></Setter>
+            <Setter Property="Foreground" Value="#FFFCFDFF"></Setter>
+            <Setter Property="BorderBrush" Value="Transparent" ></Setter>
+            <Setter Property="Height" Value="25" ></Setter>
+            <Setter Property="Margin" Value="0"></Setter>
 
 
 
-    </Grid.RowDefinitions>
-    <!--
+        </Style>
+
+
+        <Style TargetType="{x:Type TreeViewItem}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FF419EEA"/>
+            <Setter Property="BorderBrush" Value="#FF008CFF"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid x:Name="Grid_client_view" Background="#FF008CFF"   >
+        <Grid.ColumnDefinitions>
+            <!-- Define the columns for the grid -->
+
+            <ColumnDefinition Width="255*" />
+            <ColumnDefinition Width="592*"/>
+            <!-- The first row.  -->
+            <!-- The Second Column  -->
+            <!-- The third column -->
+
+
+            <ColumnDefinition Width="219*" />
+            <!-- The Fourth column -->
+
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+
+            <!-- The First Row -->
+            <!-- The Second Row -->
+
+
+
+        </Grid.RowDefinitions>
+        <!--
       
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       -->
 
 
-    <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="White" BorderBrush="#FF008CFF"  >
+        <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="White" BorderBrush="#FF008CFF"  >
 
-      <ItemsControl.ItemTemplate>
+            <ItemsControl.ItemTemplate>
 
-        <DataTemplate>
+                <DataTemplate>
 
-          <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
+                    <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
 
-            <TextBlock Text="{Binding}" ></TextBlock>
-            <TextBlock Text="{Binding ServerMessages}" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Text="{Binding}" ></TextBlock>
+                        <TextBlock Text="{Binding ServerMessages}" HorizontalAlignment="Center" ></TextBlock>
 
-            <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
+                        <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
 
-          </StackPanel>
-
-
-
-        </DataTemplate>
+                    </StackPanel>
 
 
 
-      </ItemsControl.ItemTemplate>
+                </DataTemplate>
 
 
-    </ItemsControl>
+
+            </ItemsControl.ItemTemplate>
 
 
-    <StackPanel Height="75" VerticalAlignment="Top">
-      <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Width="120" Foreground="#FFFCFDFF" Height="26"/>
+        </ItemsControl>
 
-      <ComboBox x:Name="Select_IP_Combo_box" SelectedIndex="0" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="White" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged" OpacityMask="#FF003BB0">
+        <StackPanel Height="75" VerticalAlignment="Top">
+           
+        </StackPanel>
+
+        <Button x:Name="Send_message_Button_client" Content="Send" Height="31" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Bottom" Padding="0" ScrollViewer.CanContentScroll="True" Margin="0,0,10,22" Grid.Column="1" Width="118" HorizontalAlignment="Right"/>
+        <TextBox  x:Name="User_Message_client" Height="30" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
+        <TextBox KeyDown="User_Message_client_Copy_KeyDown" Controls:TextBoxHelper.Watermark="Enter Message" x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap"  SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Bottom" Margin="0,0,10,22" CaretBrush="#FF003BB0" RenderTransformOrigin="0.541,2.29" Grid.Column="1"/>
+
+        <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Height="auto">
+
+          <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top" RenderTransformOrigin="12.105,-19.038" Width="120" Foreground="#FFFCFDFF" Height="26"/>
+
+      <ComboBox x:Name="Select_IP_Combo_box" SelectedIndex="0" VerticalAlignment="Top" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="White" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged" OpacityMask="#FF003BB0" Margin="0,0,0,40">
 
         <ComboBoxItem Content="Disco's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
         <!-- This is index 0-->
         <ComboBoxItem Content="Monte's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="#FF003BB0"/>
         <!-- This is index 1-->
       </ComboBox>
-    </StackPanel>
-
-    <Button x:Name="Send_message_Button_client" Content="Send" Height="31" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Center" Padding="0" ScrollViewer.CanContentScroll="True" Margin="0,559,10,22" Grid.Column="1" Width="118" HorizontalAlignment="Right"/>
-    <TextBox x:Name="User_Message_client" Height="30" TextWrapping="Wrap" Text="Enter Server Message" SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Center" Margin="100,270,281,312" Grid.Column="1"/>
-    <TextBox KeyDown="User_Message_client_Copy_KeyDown" Controls:TextBoxHelper.Watermark="Enter Message" x:Name="User_Message_client_Copy" Height="31" TextWrapping="Wrap"  SpellCheck.IsEnabled="True" TextChanged="User_Message_client_TextChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" MinHeight="31" Panel.ZIndex="-2" VerticalAlignment="Bottom" Margin="0,0,10,22" Grid.Column="1" CaretBrush="#FF003BB0"/>
-
-    <StackPanel Margin="4,0,5,23" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="494">
-
+          
       <Button  x:Name ="Connect_Button_Client"  Height="45" Margin="0,0,10,10"   Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Connect_Button_Client_Click" Width="Auto" Content="Connect" />
 
-      <Button   Height="45" Margin="0,0,10,0"   Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Button_Click" Width="Auto" Content="Change Name" />
-      <Button  x:Name="Ban_Button_client" Content="Ban" Height="45"  Width="Auto" Margin="0,10,10,0" Click="Ban_Button_client_Click"/>
-      <Button x:Name="Mute_Button_client" Content="Mute"  Height="45" Width="Auto" Click="Mute_Button_Click" Margin="0,10,10,0"/>
-      <Button x:Name="Kick_Button_client" Content="Kick" Margin="0,10,10,0" Width="Auto" Click="Kick_Button_client_Click"/>
-      <Button x:Name="Info_button_client" Content="Info" Margin="0,10,10,0" Width="Auto" Click="Info_button_client_Click" />
-      <Button x:Name="Freinds_button_client" Content="Friends" Margin="0,10,10,0" Width="Auto" Click="Freinds_button_client_Click" />
-      <Button x:Name="Add_friend_button_client" Content="Add Friend" Margin="0,10,10,0" Width="Auto" Click="Add_Freind_button_client_Click" />
-      <Label  VerticalContentAlignment="Center"  HorizontalContentAlignment="Center"  x:Name="Add_friend_button_client_Copy" Content="You are admin" Margin="0,10,10,0" Width="Auto" Height="45" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
-    </StackPanel>
+            <Button   Height="45" Margin="0,0,10,0"   Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Button_Click" Width="Auto" Content="Change Name" />
+            <Button  x:Name="Ban_Button_client" Content="Ban" Height="45"  Width="Auto" Margin="0,10,10,0" Click="Ban_Button_client_Click"/>
+            <Button x:Name="Mute_Button_client" Content="Mute"  Height="45" Width="Auto" Click="Mute_Button_Click" Margin="0,10,10,0"/>
+            <Button x:Name="Kick_Button_client" Content="Kick" Margin="0,10,10,0" Width="Auto" Click="Kick_Button_client_Click"/>
+            <Button x:Name="Info_button_client" Content="Info" Margin="0,10,10,0" Width="Auto" Click="Info_button_client_Click" />
+            <Button x:Name="Freinds_button_client" Content="Friends" Margin="0,10,10,0" Width="Auto" Click="Freinds_button_client_Click" />
+            <Button x:Name="Add_friend_button_client" Content="Add Friend" Margin="0,10,10,0" Width="Auto" Click="Add_Freind_button_client_Click" />
+            <Label  VerticalContentAlignment="Center"  HorizontalContentAlignment="Center"  x:Name="Add_friend_button_client_Copy" Content="You are admin" Margin="0,10,10,0" Width="Auto" Height="45" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF"/>
+        </StackPanel>
 
-    <!-- If user is admin, have the button appear. If user is not admin. Then have button disappear.-->
-    <TextBox Visibility="Hidden" x:Name="Debug_Textbox_for_Disco" Grid.Column="2" Margin="0,483,0,23" TextWrapping="Wrap" Text="TextBox" Background="#FF419EEA" BorderBrush="#FF008CFF" CaretBrush="#FF008CFF" Foreground="White" d:IsHidden="True"/>
+        <!-- If user is admin, have the button appear. If user is not admin. Then have button disappear.-->
+        <TextBox Visibility="Hidden" x:Name="Debug_Textbox_for_Disco" Grid.Column="2" Margin="0,483,0,23" TextWrapping="Wrap" Text="TextBox" Background="#FF419EEA" BorderBrush="#FF008CFF" CaretBrush="#FF008CFF" Foreground="White" d:IsHidden="True"/>
 
 
 
-    <StackPanel Grid.Column="2" Margin="0,0,-5,104">
-      <!--
+        <StackPanel Grid.Column="2" Margin="0,0,-5,104" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="auto" Width="auto">
+            <!--
       
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       -->
 
 
-      <Label  HorizontalContentAlignment="Center" Content="Friends List" Height="25" VerticalAlignment="Top" Foreground="White" Margin="0,0,5,0"/>
-      <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="226">
+            <Label  HorizontalContentAlignment="Center" Content="Friends List" Height="auto" Width="auto" VerticalAlignment="Top" Foreground="White" Margin="0,0,5,0"/>
+            <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="auto">
 
-        <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
+                <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
-          <TreeViewItem Header="Online Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF" ItemsSource="{Binding Friends[OnlineFriends]}"/>
-
-
-          <TreeViewItem Header="Offline Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF"  ItemsSource="{Binding Friends[Offlineusers]}"/>
+                    <TreeViewItem Header="Online Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF" ItemsSource="{Binding Friends[OnlineFriends]}"/>
 
 
+                    <TreeViewItem Header="Offline Friends" IsExpanded="True" Background="#FF419EEA" Foreground="#FFFCFDFF"  ItemsSource="{Binding Friends[Offlineusers]}"/>
 
 
-        </TreeViewItem>
 
 
-      </TreeView>
-      <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,11,0" Height="23"/>
-      <ListBox    x:Name="User_List_client" Margin="2,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" Height="161"/>
+                </TreeViewItem>
 
-      <!--
+
+            </TreeView>
+            <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,11,0" Height="auto" Width="auto"/>
+            <ListBox    x:Name="User_List_client"  Height="auto"  Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
+
+            <!--
       
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       -->
-      <!--
+            <!--
       
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
       -->
-    </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Width="582" Margin="0,0,0,53"/>
 
-  </Grid>
+    </Grid>
 </Controls:MetroWindow>
