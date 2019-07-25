@@ -172,12 +172,13 @@ namespace SausageChatClient.Networking
                     break;
             }
         }
+
         /// <summary>
         /// removes all null characters
         /// </summary>
         private static void StripData()
         {
-           int newSize = Array.FindLastIndex(Data, Data.Length - 1, x => x != 0) + 1;
+            int newSize = Array.FindLastIndex(Data, Data.Length - 1, x => x != 0) + 1;
 
             Array.Resize(ref Data, newSize);
         }

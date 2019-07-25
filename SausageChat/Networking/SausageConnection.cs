@@ -39,6 +39,7 @@ namespace SausageChat.Networking
         /// <param name="n"></param>
         public SausageConnection(string n) => UserInfo = new User(n);
 
+        // needs change to PacketFormat
         public void SendAsync(string data) => SendAsync(Encoding.ASCII.GetBytes(data));
 
         public void SendAsync(PacketFormat packet) => SendAsync(JsonConvert.SerializeObject(packet));

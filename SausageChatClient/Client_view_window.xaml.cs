@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Collections.ObjectModel;
+using SausageChat.Core.Networking;
 
 namespace SausageChatClient
 {
@@ -89,7 +90,12 @@ namespace SausageChatClient
 
         private void Send_message_Button_Click(object sender, RoutedEventArgs e)
         {
-            SausageClient.Send(User_Message_client_Copy.Text);
+            PacketFormat packet = new PacketFormat(PacketOption.ClientMessage)
+            {
+                Guid = SausageClient.ClientInfo.Guid,
+                Content = User_Message_client_Copy.Text
+            };
+            SausageClient.Send(packet);
         }
 
         private void User_Message_client_TextChanged(object sender, TextChangedEventArgs e)
