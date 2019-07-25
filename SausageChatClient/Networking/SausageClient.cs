@@ -51,7 +51,7 @@ namespace SausageChatClient.Networking
                 Vm.Users = value;
             }
         }
-        public static Dictionary<Guid, User> UsersDictionary { get; set; }
+        public static Dictionary<Guid, User> UsersDictionary { get; set; } = new Dictionary<Guid, User>();
         public static SynchronizationContext UiCtx { get; set; }
 
         public static void Start(string option)
@@ -63,8 +63,8 @@ namespace SausageChatClient.Networking
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.Connect(ServerIp);
                 ClientInfo = new User();
-                Log("Connected");
                 UiCtx = SynchronizationContext.Current;
+                Log("Connected");
                 Listen();
             }
             catch (SocketException)
@@ -177,7 +177,7 @@ namespace SausageChatClient.Networking
         /// </summary>
         private static void StripData()
         {
-            int newSize = Array.FindLastIndex(Data, Data.Length - 1, x => x != 0);
+           int newSize = Array.FindLastIndex(Data, Data.Length - 1, x => x != 0) + 1;
 
             Array.Resize(ref Data, newSize);
         }

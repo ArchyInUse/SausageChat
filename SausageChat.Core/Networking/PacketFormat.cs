@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SausageChat.Core;
 using System.Collections.Generic;
 
@@ -10,11 +10,13 @@ namespace SausageChat.Core.Networking
         public Guid Guid { get; set; }
         public string NewName { get; set; }
         public User[] UsersList { get; set; }
-        public string Content { get; set; } = "";
+    public string Content { get; set; } = "";
 
         public PacketFormat(PacketOption packetOption)
         {
             Option = packetOption;
+           
+           
         }
 
         // for Json.NET
@@ -22,7 +24,6 @@ namespace SausageChat.Core.Networking
         
         public bool ShouldSerializeGuid() => Option != PacketOption.IsServer ||
                                              Option != PacketOption.UserList;
-        public bool ShouldSerializeOption() => false;
         public bool ShouldSerializeNewName() => Option == PacketOption.NameChange ||
                                                 Option == PacketOption.UserConnected;
         public bool ShouldSerializeUsersList() => Option == PacketOption.UserList;
