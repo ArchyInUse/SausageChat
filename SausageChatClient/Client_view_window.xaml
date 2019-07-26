@@ -84,19 +84,21 @@
             <ItemsControl.ItemTemplate>
 
                 <DataTemplate>
+          <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Width="340" HorizontalAlignment="Left" Margin="12,0,0,0">
 
-                    <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
+            <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
 
-                        <TextBlock Text="{Binding}" ></TextBlock>
-                        <TextBlock Text="{Binding ServerMessages}" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Text="{Binding}" Foreground="Black" ></TextBlock>
+                        <TextBlock Text="{Binding ServerMessages}" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="Red"></TextBlock>
 
                         <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
 
                     </StackPanel>
 
 
+          </ScrollViewer>
 
-                </DataTemplate>
+        </DataTemplate>
 
 
 
