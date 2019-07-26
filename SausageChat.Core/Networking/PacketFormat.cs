@@ -10,7 +10,7 @@ namespace SausageChat.Core.Networking
         public Guid Guid { get; set; }
         public string NewName { get; set; }
         public User[] UsersList { get; set; }
-    public string Content { get; set; } = "";
+        public string Content { get; set; } = "";
 
         public PacketFormat(PacketOption packetOption)
         {
