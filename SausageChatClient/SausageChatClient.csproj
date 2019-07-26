@@ -70,6 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class1.cs" />
+    <Compile Include="datatemplateselect.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="enter_name_window.xaml.cs">
       <DependentUpon>enter_name_window.xaml</DependentUpon>

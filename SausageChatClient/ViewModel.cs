@@ -55,7 +55,9 @@ namespace SausageChatClient
 
 
       Messages = new ObservableCollection<IMessage>();
-            Messages.Add(new UserMessage("Hello!"));
+      Messages.Add(new UserMessage("This is a user message!"));
+      Messages.Add(new ServerMessage("This is a server message"));
+
             Users.Add(new User("User1"));
             Users.Add(new User("User2"));
             Users.Add(new User("User3"));

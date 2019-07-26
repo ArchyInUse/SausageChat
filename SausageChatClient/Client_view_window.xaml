@@ -5,7 +5,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SausageChatClient"
+        xmlns:local="clr-namespace:SausageChat.Core.Messaging;assembly=SausageChat.Core"
+        xmlns:messaging="clr-namespace:SausageChat.Core.Messaging;assembly=SausageChat.Core"
+              
         mc:Ignorable="d"
         Title="Client_view" Height="642.507" Width="1074" >
 
@@ -44,6 +46,17 @@
             <Setter Property="BorderBrush" Value="#FF008CFF"/>
         </Style>
 
+
+
+  <DataTemplate DataType="{x:Type local:UserMessage}">
+        <TextBlock  Text="{Binding UserMessage}" />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:ServerMessage}">
+        <TextBlock  Text="{Binding ServerMessage}"  Foreground="Black" />
+    </DataTemplate>
+
+      
     </Window.Resources>
 
     <Grid x:Name="Grid_client_view" Background="#FF008CFF"   >
@@ -79,26 +92,25 @@
       -->
 
 
-        <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="White" BorderBrush="#FF008CFF"  >
+    <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="White" BorderBrush="#FF008CFF"  >
 
             <ItemsControl.ItemTemplate>
 
-                <DataTemplate>
-          <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Width="340" HorizontalAlignment="Left" Margin="12,0,0,0">
+        <DataTemplate>
 
-            <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
+          <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
 
-                        <TextBlock Text="{Binding}" Foreground="Black" ></TextBlock>
-                        <TextBlock Text="{Binding ServerMessages}" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="Red"></TextBlock>
+            <!--<TextBlock Text="{Binding UserMessage}" ></TextBlock> -->
+            <TextBlock Text="{Binding}" ></TextBlock>
 
-                        <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
+
+            <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
 
                     </StackPanel>
 
 
-          </ScrollViewer>
 
-        </DataTemplate>
+                </DataTemplate>
 
 
 
