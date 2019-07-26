@@ -16,7 +16,7 @@
 
         public override string ToString()
         {
-            return $"<{Author}>:{Content}";
+            return $"<{Author}>: {Content}";
         }
     }
 }

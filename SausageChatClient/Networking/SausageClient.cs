@@ -172,6 +172,7 @@ namespace SausageChatClient.Networking
                 case PacketOption.GetGuid:
                     ClientInfo = new User(Message.Guid.ToString(), Message.Guid);
                     Log(new ServerMessage($"{Message.Guid.ToString()} has joined."));
+                    UsersDictionary.Add(Message.Guid, ClientInfo);
                     break;
             }
         }
