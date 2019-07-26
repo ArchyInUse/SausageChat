@@ -159,7 +159,10 @@ namespace SausageChatClient
         {
             if(e.Key == Key.Enter)
             {
+                // send the message
                 SausageClient.Send(User_Message_client_Copy.Text);
+                // reset the text box
+                User_Message_client_Copy.Text = string.Empty;
             }
         }
     }

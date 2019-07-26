@@ -79,6 +79,7 @@ namespace SausageChat.Networking
                         Content = "Place-holder reason"
                     };
                     Log(packet);
+                    UiCtx.Send(x => ConnectedUsers.Remove(user), null);
                 }
                 else
                 {
@@ -104,6 +105,7 @@ namespace SausageChat.Networking
                         Content = "Place-holder reason"
                     };
                     Log(packet);
+                    UiCtx.Send(x => ConnectedUsers.Remove(user), null);
                 }
                 else
                 {
