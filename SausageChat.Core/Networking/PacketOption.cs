@@ -21,6 +21,8 @@
         // on user connect will be sent to all other clients with his GUID & name
         UserConnected,
         // on user change name (includes GUID & NewName)
-        NameChange
+        NameChange,
+        // when a client joins the server, he needs to get a GUID
+        GetGuid
     }
 }

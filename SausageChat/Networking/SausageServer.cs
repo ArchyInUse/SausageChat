@@ -34,7 +34,7 @@ namespace SausageChat.Networking
                 Vm.ConnectedUsers = value;
             }
     }
-        public static Dictionary<Guid, User> UsersDictionary { get; set; }
+        public static Dictionary<Guid, User> UsersDictionary { get; set; } = new Dictionary<Guid, User>();
         public static List<IPAddress> Blacklisted { get; set; } = new List<IPAddress>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);
         public static SynchronizationContext UiCtx { get; set; }
@@ -175,12 +175,20 @@ namespace SausageChat.Networking
                 UiCtx.Send(x => ConnectedUsers.Add(user), null);
                 UiCtx.Send(x => Vm.ConnectedUsers = SortUsersList(), null);
                 UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"), null);
-                PacketFormat packet = new PacketFormat(PacketOption.UserConnected)
+                UsersDictionary.Add(user.UserInfo.Guid, user.UserInfo);
+                // global packet for all the users to know the user has joined
+                PacketFormat GlobalPacket = new PacketFormat(PacketOption.UserConnected)
                 {
                     Guid = user.UserInfo.Guid,
                     NewName = user.UserInfo.Name
                 };
-                Log(packet);
+                // local packet for the user (who joined) to get his GUID
+                PacketFormat LocalPacket = new PacketFormat(PacketOption.GetGuid)
+                {
+                    Guid = user.UserInfo.Guid
+                };
+                user.SendAsync(LocalPacket);
+                Log(GlobalPacket, user);
                 UiCtx.Send(x => Mw.AddTextToDebugBox($"Logging now..."), null);
             }
             else

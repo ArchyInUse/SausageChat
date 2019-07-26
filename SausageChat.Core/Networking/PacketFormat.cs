@@ -1,6 +1,4 @@
 ﻿using System;
-using SausageChat.Core;
-using System.Collections.Generic;
 
 namespace SausageChat.Core.Networking
 {
@@ -19,7 +17,7 @@ namespace SausageChat.Core.Networking
 
         // for Json.NET
         #region JsonMethods
-        
+
         public bool ShouldSerializeGuid() => Option != PacketOption.IsServer ||
                                              Option != PacketOption.UserList;
         public bool ShouldSerializeNewName() => Option == PacketOption.NameChange ||
@@ -28,7 +26,8 @@ namespace SausageChat.Core.Networking
         public bool ShouldSerializeContent() => Option != PacketOption.NameChange ||
                                               Option != PacketOption.UserList ||
                                               Option != PacketOption.UserConnected ||
-                                              Option != PacketOption.UserDisconnected;
+                                              Option != PacketOption.UserDisconnected ||
+                                              Option != PacketOption.GetGuid;
 
         #endregion
     }

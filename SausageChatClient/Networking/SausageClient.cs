@@ -62,7 +62,6 @@ namespace SausageChatClient.Networking
                 ServerIp = IpPool[option];
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.Connect(ServerIp);
-                ClientInfo = new User();
                 UiCtx = SynchronizationContext.Current;
                 Log("Connected");
                 Listen();
@@ -169,6 +168,10 @@ namespace SausageChatClient.Networking
                     break;
                 case PacketOption.UserList:
                     Vm.Users = new ObservableCollection<User>(Message.UsersList);
+                    break;
+                case PacketOption.GetGuid:
+                    ClientInfo = new User(Message.Guid.ToString(), Message.Guid);
+                    Log(new ServerMessage($"{Message.Guid.ToString()} has joined."));
                     break;
             }
         }
