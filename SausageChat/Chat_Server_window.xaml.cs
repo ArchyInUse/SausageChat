@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,7 +40,13 @@ namespace SausageChat
 
         private async void Kick_Button_Click(object sender, RoutedEventArgs e)
         {
-            await SausageServer.Kick(SausageServer.Vm.SelectedUser);
+            try
+            {
+                await SausageServer.Kick(SausageServer.Vm.SelectedUser);
+            }catch(Exception ex)
+            {
+                AddTextToDebugBox(ex.ToString());
+            }
         }
 
         private async void Ban_Button_Click(object sender, RoutedEventArgs e)

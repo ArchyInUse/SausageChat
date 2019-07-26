@@ -237,12 +237,8 @@ namespace SausageChatClient.Networking
             try
             {
                 if (Socket.Connected) return;
-                PacketFormat packet = new PacketFormat(PacketOption.UserDisconnected)
-                {
-                    Guid = ClientInfo.Guid,
-                };
-                byte[] inBytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(packet));
-                Socket.BeginSend(inBytes, 0, inBytes.Length, SocketFlags.None, OnDisconnectDone, null);
+
+                Socket.Close();
 
                 Log(new ServerMessage("Disconnected"));
             }
@@ -250,12 +246,6 @@ namespace SausageChatClient.Networking
             {
                 throw new NotImplementedException();
             }
-        }
-
-        private static void OnDisconnectDone(IAsyncResult ar)
-        {
-            Socket.EndSend(ar);
-            Socket.Close();
         }
     }
 }
