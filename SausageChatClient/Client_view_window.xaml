@@ -5,9 +5,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SausageChat.Core.Messaging;assembly=SausageChat.Core"
+        xmlns:local="clr-namespace:SausageChatClient"
         xmlns:messaging="clr-namespace:SausageChat.Core.Messaging;assembly=SausageChat.Core"
-              
         mc:Ignorable="d"
         Title="Client_view" Height="642.507" Width="1074" >
 
@@ -48,15 +47,15 @@
 
 
 
-  <DataTemplate DataType="{x:Type local:UserMessage}">
-        <TextBlock  Text="{Binding UserMessage}" />
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type messaging:UserMessage}">
+            <TextBlock  Text="{Binding UserMessage}" />
+        </DataTemplate>
 
-    <DataTemplate DataType="{x:Type local:ServerMessage}">
-        <TextBlock  Text="{Binding ServerMessage}"  Foreground="Black" />
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type messaging:UserMessage}">
+            <TextBlock  Text="{Binding ServerMessage}"  Foreground="Black" />
+        </DataTemplate>
 
-      
+
     </Window.Resources>
 
     <Grid x:Name="Grid_client_view" Background="#FF008CFF"   >
@@ -92,35 +91,10 @@
       -->
 
 
-    <ItemsControl   Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" Foreground="White" BorderBrush="#FF008CFF"  >
-
-            <ItemsControl.ItemTemplate>
-
-        <DataTemplate>
-
-          <StackPanel Orientation ="Vertical" Height="auto" VerticalAlignment="Stretch">
-
-            <!--<TextBlock Text="{Binding UserMessage}" ></TextBlock> -->
-            <TextBlock Text="{Binding}" ></TextBlock>
-
-
-            <!--This text block will hold the user messages. It will generate a separate text block for each message.-->
-
-                    </StackPanel>
-
-
-
-                </DataTemplate>
-
-
-
-            </ItemsControl.ItemTemplate>
-
-
-        </ItemsControl>
+        <ItemsControl Height="auto" VerticalAlignment="Stretch" ItemsSource="{Binding Messages}" x:Name ="MessageListThingWORK" Background="#FF419EEA" Margin="0,0,10,58" Grid.Column="1" BorderBrush="#FF008CFF"/>
 
         <StackPanel Height="75" VerticalAlignment="Top">
-           
+
         </StackPanel>
 
         <Button x:Name="Send_message_Button_client" Content="Send" Height="31" RenderTransformOrigin="0.542,1.415" Click="Send_message_Button_Click" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" VerticalAlignment="Bottom" Padding="0" ScrollViewer.CanContentScroll="True" Margin="0,0,10,22" Grid.Column="1" Width="118" HorizontalAlignment="Right"/>
@@ -129,17 +103,17 @@
 
         <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Height="auto">
 
-          <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top"  Width="120" Foreground="#FFFCFDFF" Height="26"/>
+            <Label Content="Select IP" HorizontalAlignment="Center" Margin="0,0,-60,0" VerticalAlignment="Top"  Width="120" Foreground="#FFFCFDFF" Height="26"/>
 
-      <ComboBox x:Name="Select_IP_Combo_box" SelectedIndex="0" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="White" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged" OpacityMask="#FF003BB0" Margin="0,0,0,40" VerticalAlignment="Top">
+            <ComboBox x:Name="Select_IP_Combo_box" SelectedIndex="0" BorderBrush="#FF008CFF" IsReadOnly="True" IsDropDownOpen="True" Background="#FF419EEA" Foreground="White" Height="26" SelectionChanged="Select_IP_Combo_box_SelectionChanged" OpacityMask="#FF003BB0" Margin="0,0,0,40" VerticalAlignment="Top">
 
-        <ComboBoxItem Content="Disco's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
-        <!-- This is index 0-->
-        <ComboBoxItem Content="Monte's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="#FF003BB0"/>
-        <!-- This is index 1-->
-      </ComboBox>
-          
-      <Button  x:Name ="Connect_Button_Client"  Height="45" Margin="0,0,10,10"   Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Connect_Button_Client_Click" Width="Auto" Content="Connect" />
+                <ComboBoxItem Content="Disco's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF"/>
+                <!-- This is index 0-->
+                <ComboBoxItem Content="Monte's IP" Background="#FF419EEA" Margin="0,0,-2,0" BorderBrush="#FF008CFF" Foreground="White" OpacityMask="#FF003BB0"/>
+                <!-- This is index 1-->
+            </ComboBox>
+
+            <Button  x:Name ="Connect_Button_Client"  Height="45" Margin="0,0,10,10"   Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Connect_Button_Client_Click" Width="Auto" Content="Connect" />
 
             <Button   Height="45" Margin="0,0,10,0"   Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Click="Button_Click" Width="Auto" Content="Change Name" />
             <Button  x:Name="Ban_Button_client" Content="Ban" Height="45"  Width="Auto" Margin="0,10,10,0" Click="Ban_Button_client_Click"/>
@@ -165,7 +139,7 @@
 
 
             <Label  HorizontalContentAlignment="Center" Content="Friends List" Height="auto" Width="auto" VerticalAlignment="Top" Foreground="White" Margin="0,0,5,0"/>
-      <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <TreeView x:Name="Freinds_List_view" Margin="0,29,7,12" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
                 <TreeViewItem Header="Friends" IsExpanded="True" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF">
 
@@ -182,7 +156,7 @@
 
             </TreeView>
             <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,11,0" Height="auto" Width="auto"/>
-      <ListBox    x:Name="User_List_client"  Height="auto"  Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
+            <ListBox    x:Name="User_List_client"  Height="auto"  Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
 
             <!--
       
