@@ -77,7 +77,7 @@
     <StackPanel Grid.Column="2" Margin="0,0,-4,0">
       <Label  HorizontalContentAlignment="Center" Content="User List" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="271" Foreground="White"/>
       <ListBox ItemsSource="{Binding ConnectedUsers}" x:Name="User_List" Margin="10,0,14,0" SelectionChanged="ListBox_SelectionChanged" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="#FFFCFDFF" Height="216"/>
-      <TextBox x:Name="DebugBox" Height="175" Margin="10,10,14,0" TextWrapping="Wrap" Text="TextBox" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
+      <TextBox x:Name="DebugBox" Height="175" Margin="10,10,14,0" TextWrapping="Wrap" Background="#FF419EEA" BorderBrush="#FF008CFF" Foreground="White"/>
     </StackPanel>
 
 
