@@ -104,8 +104,9 @@ namespace SausageChat.Networking
                         Guid = user.UserInfo.Guid,
                         Content = "Place-holder reason"
                     };
-                    Log(packet);
-                    UiCtx.Send(x => ConnectedUsers.Remove(user), null);
+                    await Log(packet);
+                    user.Disconnect();
+                    UiCtx.Send(x => Vm.ConnectedUsers.Remove(user), null);
                 }
                 else
                 {

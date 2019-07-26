@@ -43,7 +43,8 @@ namespace SausageChat
             try
             {
                 await SausageServer.Kick(SausageServer.Vm.SelectedUser);
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 AddTextToDebugBox(ex.ToString());
             }

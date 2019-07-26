@@ -108,7 +108,6 @@ namespace SausageChat.Networking
 
         public void Disconnect()
         {
-            SausageServer.ConnectedUsers.Remove(this);
             SausageServer.Vm.ConnectedUsers = SausageServer.SortUsersList();
             Socket.Close();
         }
