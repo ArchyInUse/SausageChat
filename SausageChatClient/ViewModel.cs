@@ -42,28 +42,22 @@ namespace SausageChatClient
                 new User("Bob"),
                 new User("Francis")
             });
-
-
-
-
-      Friends.Add("Offlineusers", new ObservableCollection<User>()
+            Friends.Add("Offlineusers", new ObservableCollection<User>()
             {
                 new User("jay"),
                 new User("john"),
                 new User("sasha")
             });
-
-
-      Messages = new ObservableCollection<IMessage>();
-      Messages.Add(new UserMessage("This is a user message!"));
-      Messages.Add(new ServerMessage("This is a server message"));
+            Messages = new ObservableCollection<IMessage>();
+            Messages.Add(new UserMessage("This is a user message!"));
+            Messages.Add(new ServerMessage("This is a server message"));
 
             Users.Add(new User("User1"));
             Users.Add(new User("User2"));
             Users.Add(new User("User3"));
-          
 
-    }
+
+        }
 
     public event PropertyChangedEventHandler PropertyChanged;
         }

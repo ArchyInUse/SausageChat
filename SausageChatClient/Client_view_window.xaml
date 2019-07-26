@@ -48,11 +48,11 @@
 
 
         <DataTemplate DataType="{x:Type messaging:UserMessage}">
-            <TextBlock  Text="{Binding UserMessage}" />
+            <TextBlock  Text="{Binding}" Foreground="White" HorizontalAlignment="Left" />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type messaging:UserMessage}">
-            <TextBlock  Text="{Binding ServerMessage}"  Foreground="Black" />
+        <DataTemplate DataType="{x:Type messaging:ServerMessage}">
+            <TextBlock  Text="{Binding}" Foreground="Black" HorizontalAlignment="Center"/>
         </DataTemplate>
 
 
