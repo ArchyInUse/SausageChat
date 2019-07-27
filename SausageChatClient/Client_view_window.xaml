@@ -152,7 +152,7 @@
 
             </TreeView>
             <Label  HorizontalContentAlignment="Center" Content="List of users" Foreground="White" Margin="0,15,11,0" Height="auto" Width="auto"/>
-            <ListBox    x:Name="User_List_client"  Height="auto"  Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged"  ItemsSource="{Binding Users}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
+            <ListBox x:Name="User_List_client" Height="auto" Width="auto" Margin="0,17,8,0" SelectionChanged="ListBox_SelectionChanged" ItemsSource="{Binding UsersDictionary.Values}" SelectedIndex="0" BorderBrush="Transparent" Foreground="White" OpacityMask="Red" Background="#FF419EEA" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True" />
 
             <!--
       

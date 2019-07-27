@@ -15,8 +15,6 @@ namespace SausageChatClient.Networking
 {
     static class SausageClient
     {
-        /* TD -> add try{}catch(){} to Send/Recieve methods
-        */ 
         // not a prop to pass it as ref in StripData()
         public static byte[] Data = new byte[1024];
         public static Dictionary<string, IPEndPoint> IpPool { get; set; } = new Dictionary<string, IPEndPoint>()
@@ -51,11 +49,26 @@ namespace SausageChatClient.Networking
                 Vm.Users = value;
             }
         }
-        public static Dictionary<Guid, User> UsersDictionary { get; set; } = new Dictionary<Guid, User>();
+        public static Dictionary<Guid, User> UsersDictionary {
+            get
+            {
+                return Vm.UsersDictionary;
+            }
+            set
+            {
+                Vm.UsersDictionary = value;
+            }
+        }
         public static SynchronizationContext UiCtx { get; set; }
 
         public static void Start(string option)
         {
+            try
+            {
+                if (Socket.Connected) return;
+            }
+            // socket will be default null at the beggining
+            catch (NullReferenceException) { }
             try
             {
                 Users = new ObservableCollection<User>();
@@ -74,27 +87,27 @@ namespace SausageChatClient.Networking
 
         public static void Stop()
         {
-            if (!Socket.Connected) return;
+            Users = new ObservableCollection<User>();
+            UsersDictionary = new Dictionary<Guid, User>();
 
-            Socket.Close();
+            Disconnect();
         }
 
         public static void Listen()
         {
             if (!Socket.Connected) return;
-            Log("Started listening...");
+            Log(new ServerMessage("Started listening..."));
             
             Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnMessageRecieved, null);
         }
 
         public static void OnMessageRecieved(IAsyncResult ar)
         {
-            Log("Recieved Message");
+            Log(new ServerMessage("Recieved Message"));
             Socket.EndReceive(ar);
 
             StripData();
-            string message = Encoding.ASCII.GetString(Data);
-            Parse(message);
+            Parse(Encoding.ASCII.GetString(Data));
 
             Data = new byte[1024];
             Listen();

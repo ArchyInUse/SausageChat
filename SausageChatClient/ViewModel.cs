@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SausageChat.Core.Messaging;
@@ -22,6 +23,21 @@ namespace SausageChatClient
                 NotifyPropertyChanged();
             }
         }
+
+        private Dictionary<Guid, User> usersDictionary;
+        public Dictionary<Guid, User> UsersDictionary
+        {
+            get
+            {
+                return usersDictionary;
+            }
+            set
+            {
+                usersDictionary = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ObservableCollection<User> Users { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -34,6 +50,7 @@ namespace SausageChatClient
 
         public ViewModel()
         {
+            UsersDictionary = new Dictionary<Guid, User>();
             Users = new ObservableCollection<User>();
             Friends = new Dictionary<string, ObservableCollection<User>>();
             Friends.Add("OnlineFriends", new ObservableCollection<User>()
@@ -52,11 +69,10 @@ namespace SausageChatClient
             Messages.Add(new UserMessage("This is a user message!"));
             Messages.Add(new ServerMessage("This is a server message"));
 
-            Users.Add(new User("User1"));
-            Users.Add(new User("User2"));
-            Users.Add(new User("User3"));
-
-
+            UsersDictionary[Guid.NewGuid()] = new User("UserName1");
+            UsersDictionary[Guid.NewGuid()] = new User("UserName2");
+            UsersDictionary[Guid.NewGuid()] = new User("UserName3");
+            UsersDictionary[Guid.NewGuid()] = new User("UserName4");
         }
 
     public event PropertyChangedEventHandler PropertyChanged;
