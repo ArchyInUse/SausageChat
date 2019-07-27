@@ -5,10 +5,17 @@
  * - Archy (Disco)
  */
 
+using System.Threading;
+
 namespace SausageChat.Core
 {
     public static class SausageHelper
     {
-
+        /// <summary>
+        /// wraps SynchronizationContext.Send() function with a null object state
+        /// </summary>
+        /// <param name="UiCtx">Thread context</param>
+        /// <param name="d">Callback</param>
+        public static void Send(this SynchronizationContext UiCtx, SendOrPostCallback d) => UiCtx.Send(d, null);
     }
 }

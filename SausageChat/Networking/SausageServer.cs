@@ -41,14 +41,20 @@ namespace SausageChat.Networking
         
         public static void Open()
         {
-            if(!IsOpen)
+            if (!IsOpen)
             {
                 MainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 ConnectedUsers = new ObservableCollection<SausageConnection>();
+                UsersDictionary = new Dictionary<Guid, User>();
                 MainSocket.Bind(LocalIp);
                 MainSocket.Listen(10);
                 UiCtx = SynchronizationContext.Current;
                 MainSocket.BeginAccept(OnUserConnect, null);
+                IsOpen = true;
+            }
+            else
+            {
+                MessageBox.Show("Server is already open", "Sausage Server");
             }
         }
 
@@ -63,12 +69,18 @@ namespace SausageChat.Networking
                 }
                 Vm.Messages.Add(new ServerMessage("Closed all sockets"));
             }
+            else
+            {
+                MessageBox.Show("Server is already closed", "Sausage Server");
+            }
         }
 
+        // TODO: logging
         public static async Task Ban(SausageConnection user)
         {
             try
             {
+                if (!(user.Socket.Connected || MainSocket.Connected)) return;
                 // user exists
                 if (ConnectedUsers.Any(x => x.UserInfo.Guid == user.UserInfo.Guid))
                 {
@@ -79,7 +91,10 @@ namespace SausageChat.Networking
                         Content = "Place-holder reason"
                     };
                     Log(packet);
-                    UiCtx.Send(x => ConnectedUsers.Remove(user), null);
+                    await Task.Delay(1000);
+                    // delay for waiting on the client to recieve a message
+                    user.Disconnect();
+                    UiCtx.Send(x => ConnectedUsers.Remove(user));
                 }
                 else
                 {
@@ -91,11 +106,12 @@ namespace SausageChat.Networking
                 MessageBox.Show($"User returned null {e}", "Exception Caught");
             }
         }
-
+        
         public static async Task Kick(SausageConnection user)
         {
             try
             {
+                if (!(user.Socket.Connected || MainSocket.Connected)) return;
                 // user exists
                 if (ConnectedUsers.Any(x => x.UserInfo.Guid == user.UserInfo.Guid))
                 {
@@ -105,8 +121,10 @@ namespace SausageChat.Networking
                         Content = "Place-holder reason"
                     };
                     await Log(packet);
+                    // delay for waiting on the client to recieve a message
+                    await Task.Delay(1000);
                     user.Disconnect();
-                    UiCtx.Send(x => Vm.ConnectedUsers.Remove(user), null);
+                    UiCtx.Send(x => Vm.ConnectedUsers.Remove(user));
                 }
                 else
                 {
@@ -132,7 +150,7 @@ namespace SausageChat.Networking
                         Content = "Place-holder reason"
                     };
                     user.UserInfo.IsMuted = true;
-                    Log(packet);
+                    await Log(packet);
                 }
                 else
                 {
@@ -157,7 +175,7 @@ namespace SausageChat.Networking
                         Guid = user.UserInfo.Guid
                     };
                     user.UserInfo.IsMuted = false;
-                    Log(packet);
+                    await Log(packet);
                 }
                 else
                 {
@@ -175,9 +193,9 @@ namespace SausageChat.Networking
             var user = new SausageConnection(MainSocket.EndAccept(ar));
             if (!Blacklisted.Any(x => x == user.Ip.Address))
             {
-                UiCtx.Send(x => ConnectedUsers.Add(user), null);
-                UiCtx.Send(x => Vm.ConnectedUsers = SortUsersList(), null);
-                UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"), null);
+                UiCtx.Send(x => ConnectedUsers.Add(user));
+                UiCtx.Send(x => Vm.ConnectedUsers = SortUsersList());
+                UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"));
                 UsersDictionary.Add(user.UserInfo.Guid, user.UserInfo);
                 // global packet for all the users to know the user has joined
                 PacketFormat GlobalPacket = new PacketFormat(PacketOption.UserConnected)
@@ -192,7 +210,6 @@ namespace SausageChat.Networking
                 };
                 user.SendAsync(LocalPacket);
                 Log(GlobalPacket, user);
-                UiCtx.Send(x => Mw.AddTextToDebugBox($"Logging now..."), null);
             }
             else
             {
@@ -206,9 +223,18 @@ namespace SausageChat.Networking
         public async static Task Log(PacketFormat message, SausageConnection ignore = null)
         {
             if (message.Option == PacketOption.ClientMessage)
-                UiCtx.Send(x => Vm.Messages.Add(new UserMessage(message.Content, UsersDictionary[message.Guid])), null);
+                UiCtx.Send(x => Vm.Messages.Add(new UserMessage(message.Content, UsersDictionary[message.Guid])));
             else
-                UiCtx.Send(x => Vm.Messages.Add(new ServerMessage(message.Content)), null);
+                switch(message.Option)
+                {
+                    case PacketOption.NameChange:
+                        UiCtx.Send(x => Vm.Messages.Add(
+                            new ServerMessage($"{UsersDictionary[message.Guid]} changed their name to {message.NewName}")));
+                        break;
+                    default:
+                        UiCtx.Send(x => Vm.Messages.Add(new ServerMessage(message.Content)));
+                        break;
+                }
 
             foreach(var user in ConnectedUsers)
             {
