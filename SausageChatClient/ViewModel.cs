@@ -68,11 +68,6 @@ namespace SausageChatClient
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("This is a user message!"));
             Messages.Add(new ServerMessage("This is a server message"));
-
-            UsersDictionary[Guid.NewGuid()] = new User("UserName1");
-            UsersDictionary[Guid.NewGuid()] = new User("UserName2");
-            UsersDictionary[Guid.NewGuid()] = new User("UserName3");
-            UsersDictionary[Guid.NewGuid()] = new User("UserName4");
         }
 
     public event PropertyChangedEventHandler PropertyChanged;

@@ -97,14 +97,28 @@ namespace SausageChatClient.Networking
         {
             if (!Socket.Connected) return;
             Log(new ServerMessage("Started listening..."));
-            
-            Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnMessageRecieved, null);
+
+            try
+            {
+                Socket.BeginReceive(Data, 0, Data.Length, SocketFlags.None, OnMessageRecieved, null);
+            }
+            catch(SocketException)
+            {
+                Disconnect();
+            }
         }
 
         public static void OnMessageRecieved(IAsyncResult ar)
         {
             Log(new ServerMessage("Recieved Message"));
-            Socket.EndReceive(ar);
+            try
+            {
+                Socket.EndReceive(ar); 
+            }
+            catch(SocketException)
+            {
+                return;
+            }
 
             StripData();
             Parse(Encoding.ASCII.GetString(Data));
@@ -180,6 +194,7 @@ namespace SausageChatClient.Networking
                     UsersDictionary.Remove(Message.Guid);
                     break;
                 case PacketOption.UserList:
+                    //TODO: fix this
                     Vm.Users = new ObservableCollection<User>(Message.UsersList);
                     break;
                 case PacketOption.GetGuid:
@@ -208,7 +223,14 @@ namespace SausageChatClient.Networking
 
             Log("Started Sending...");
 
-            Socket.BeginSend(bytesMessage, 0, bytesMessage.Length, SocketFlags.None, OnSendComplete, null);
+            try
+            {
+                Socket.BeginSend(bytesMessage, 0, bytesMessage.Length, SocketFlags.None, OnSendComplete, null);
+            }
+            catch(SocketException)
+            {
+                return;
+            }
         }
 
         public static void Send(IMessage message) => Send(message.ToString());
@@ -218,7 +240,14 @@ namespace SausageChatClient.Networking
         private static void OnSendComplete(IAsyncResult ar)
         {
             Log("Sent Data");
-            Socket.EndSend(ar);
+            try
+            {
+                Socket.EndSend(ar);
+            }
+            catch(SocketException)
+            {
+                return;
+            }
         }
 
         public static void Log(string msg) => Log(new UserMessage(msg));

@@ -9,6 +9,7 @@ using System.Threading;
 
 namespace SausageChat.Core
 {
+    // TODO: add StripData to this class and use it at both projects from here
     public static class SausageHelper
     {
         /// <summary>

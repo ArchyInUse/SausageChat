@@ -188,6 +188,7 @@ namespace SausageChat.Networking
             }
         }
 
+        // TODO: Add user list
         public static void OnUserConnect(IAsyncResult ar)
         {
             var user = new SausageConnection(MainSocket.EndAccept(ar));
