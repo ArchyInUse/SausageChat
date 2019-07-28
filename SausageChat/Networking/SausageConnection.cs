@@ -8,7 +8,6 @@ using SausageChat.Core;
 using SausageChat.Core.Messaging;
 using SausageChat.Core.Networking;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
 
 namespace SausageChat.Networking
 {
@@ -128,6 +127,7 @@ namespace SausageChat.Networking
                     break;
                 // don't need to check for user connected as that is dealt with in OnUserConnect
                 case PacketOption.UserDisconnected:
+                    SausageServer.Log(Message);
                     Disconnect();
                     SausageServer.UsersDictionary.Remove(Message.Guid);
                     break;

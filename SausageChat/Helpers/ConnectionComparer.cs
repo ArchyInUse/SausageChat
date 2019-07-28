@@ -4,6 +4,9 @@ using SausageChat.Networking;
 
 namespace SausageChat.Helpers
 {
+    /// <summary>
+    /// This class is used to compare the names of the connections (NOT the guid)
+    /// </summary>
     class ConnectionComparer : IComparer<SausageConnection>
     {
         public int Compare(SausageConnection x, SausageConnection y)
