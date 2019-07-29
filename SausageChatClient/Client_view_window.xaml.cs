@@ -35,7 +35,6 @@ namespace SausageChatClient
       this.DataContext = Vm;
     }
 
-    //MenuItem root = new MenuItem() { Title = "Menu" };
     /// <summary>
     /// The Convert
     /// </summary>
@@ -73,8 +72,6 @@ namespace SausageChatClient
       throw new NotImplementedException();
     }
 
-    //  Disco's IP  =  index 0
-    // Monte's IP  = This is index 1
     /// <summary>
     /// The Which_IP_is_selected
     /// </summary>

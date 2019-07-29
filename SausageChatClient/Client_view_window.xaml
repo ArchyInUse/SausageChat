@@ -322,44 +322,48 @@
                 HorizontalContentAlignment="Center"
                 Content="Friends List"
                 Foreground="White" />
-            <TreeView
-                x:Name="Freinds_List_view"
-                Height="auto"
-                Margin="0,29,7,12"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
-                Foreground="#FFFCFDFF"
-                ScrollViewer.VerticalScrollBarVisibility="Visible">
 
-                <TreeViewItem
+            <ScrollViewer x:Name="Scrollbar_for_the_freinds_list" Grid.Column="2 ">
+
+                <TreeView
+                    x:Name="Freinds_List_view"
+                    Height="auto"
+                    Margin="0,29,7,12"
                     Background="#FF419EEA"
                     BorderBrush="#FF008CFF"
                     Foreground="#FFFCFDFF"
-                    Header="Friends"
-                    IsExpanded="True">
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
 
                     <TreeViewItem
                         Background="#FF419EEA"
+                        BorderBrush="#FF008CFF"
                         Foreground="#FFFCFDFF"
-                        Header="Online Friends"
-                        IsExpanded="True"
-                        ItemsSource="{Binding Friends[OnlineFriends]}" />
+                        Header="Friends"
+                        IsExpanded="True">
+
+                        <TreeViewItem
+                            Background="#FF419EEA"
+                            Foreground="#FFFCFDFF"
+                            Header="Online Friends"
+                            IsExpanded="True"
+                            ItemsSource="{Binding Friends[OnlineFriends]}" />
 
 
-                    <TreeViewItem
-                        Background="#FF419EEA"
-                        Foreground="#FFFCFDFF"
-                        Header="Offline Friends"
-                        IsExpanded="True"
-                        ItemsSource="{Binding Friends[Offlineusers]}" />
+                        <TreeViewItem
+                            Background="#FF419EEA"
+                            Foreground="#FFFCFDFF"
+                            Header="Offline Friends"
+                            IsExpanded="True"
+                            ItemsSource="{Binding Friends[Offlineusers]}" />
 
 
 
 
-                </TreeViewItem>
+                    </TreeViewItem>
 
 
-            </TreeView>
+                </TreeView>
+            </ScrollViewer>
             <Label
                 Width="auto"
                 Height="auto"
@@ -367,21 +371,26 @@
                 HorizontalContentAlignment="Center"
                 Content="List of users"
                 Foreground="White" />
-            <ListBox
-                x:Name="User_List_client"
-                Width="auto"
-                Height="auto"
-                Margin="0,17,8,0"
-                Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
-                Background="#FF419EEA"
-                BorderBrush="Transparent"
-                Foreground="White"
-                ItemsSource="{Binding UsersDictionary.Values}"
-                OpacityMask="Red"
-                ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                ScrollViewer.VerticalScrollBarVisibility="Visible"
-                SelectedIndex="0"
-                SelectionChanged="ListBox_SelectionChanged" />
+
+            <ScrollViewer x:Name="Scrollbar_for_the_list_of_users" Grid.Column="2">
+
+                <ListBox
+                    x:Name="User_List_client"
+                    Width="auto"
+                    Height="auto"
+                    Margin="0,17,8,0"
+                    Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
+                    Background="#FF419EEA"
+                    BorderBrush="Transparent"
+                    Foreground="White"
+                    ItemsSource="{Binding UsersDictionary.Values}"
+                    OpacityMask="Red"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    SelectedIndex="0"
+                    SelectionChanged="ListBox_SelectionChanged" />
+            </ScrollViewer>
+
 
             <!--
 
