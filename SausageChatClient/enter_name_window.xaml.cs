@@ -19,6 +19,9 @@ namespace SausageChatClient
   /// </summary>
   public partial class Window1
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Window1"/> class.
+    /// </summary>
     public Window1()
     {
 
@@ -27,27 +30,31 @@ namespace SausageChatClient
       InitializeComponent();
     }
 
+    /// <summary>
+    /// Defines the user_input_string
+    /// </summary>
+    internal string user_input_string;// will be used to store the name the user has set for himself.  global
 
-    string user_input_string; // will be used to store the name the user has set for himself.  global 
-
-
-
+    /// <summary>
+    /// The Enter_name_input_box_TextChanged
+    /// </summary>
+    /// <param name="sender">The sender<see cref="object"/></param>
+    /// <param name="e">The e<see cref="TextChangedEventArgs"/></param>
     private void Enter_name_input_box_TextChanged(object sender, TextChangedEventArgs e)
     {
-
     }
 
-
-
-
-
+    /// <summary>
+    /// The Set_name_Button_Click
+    /// </summary>
+    /// <param name="sender">The sender<see cref="object"/></param>
+    /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
     private void Set_name_Button_Click(object sender, RoutedEventArgs e)
     {
       user_input_string = Enter_name_input_box.Text;
 
 
       this.Close();
-
     }
   }
 }
