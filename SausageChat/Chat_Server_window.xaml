@@ -13,7 +13,26 @@
     BorderBrush="#FF008CFF"
     NonActiveBorderBrush="#FF008CFF"
     NonActiveWindowTitleBrush="#FF008CFF"
+    ResizeMode="NoResize"
     mc:Ignorable="d">
+
+
+    <Window.Resources>
+
+
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Background" Value="#FF419EEA" />
+            <Setter Property="Foreground" Value="#FFFCFDFF" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+
+
+
+
+        </Style>
+
+    </Window.Resources>
     <Grid Background="#FF008CFF">
 
         <Grid.ColumnDefinitions>
@@ -44,39 +63,42 @@
             VerticalAlignment="Top">
 
 
+            <ScrollViewer
+                Grid.Column="1"
+                Width="{Binding Width, ElementName=Stack_panel_for_chatbox_and_other_buttons_}"
+                Margin="0,0,-15,0">
+                <ItemsControl
+                    x:Name="Messages"
+                    Width="365"
+                    Height="315"
+                    HorizontalAlignment="Stretch"
+                    Background="#FF419EEA"
+                    BorderBrush="#FF008CFF"
+                    Foreground="White"
+                    ItemsSource="{Binding Messages}">
 
-            <ItemsControl
-                x:Name="Messages"
-                Height="315"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
-                Foreground="White"
-                ItemsSource="{Binding Messages}">
+                    <ItemsControl.ItemTemplate>
 
-                <ItemsControl.ItemTemplate>
+                        <DataTemplate>
 
-                    <DataTemplate>
+                            <StackPanel Orientation="Vertical">
 
-                        <StackPanel Orientation="Vertical">
-
-                            <TextBlock Text="{Binding}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
 
 
-            </ItemsControl>
+                </ItemsControl>
 
-
+            </ScrollViewer>
 
             <TextBox
                 x:Name="Server_message_input_box"
+                Width="370"
                 Height="35"
-                Margin="0,16,0,20"
+                Margin="10,16,10,20"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
                 Controls:TextBoxHelper.Watermark="Enter Server Message"
                 Background="#FF419EEA"
                 BorderBrush="#FF008CFF"
@@ -87,6 +109,7 @@
             <Button
                 x:Name="Send_message_Button"
                 Height="33"
+                Margin="10,0"
                 VerticalAlignment="Top"
                 Background="#FF419EEA"
                 BorderBrush="#FF008CFF"
@@ -186,22 +209,25 @@
         <!--  The item source should be bound to the Users list in the VM, and it can bind to the name property  -->
         <StackPanel Grid.Column="2" Margin="0,0,-4,0">
             <Label
-                Width="271"
+                Width="214"
                 Height="25"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
                 Content="User List"
                 Foreground="White" />
-            <ListBox
-                x:Name="User_List"
-                Height="216"
-                Margin="10,0,14,0"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
-                Foreground="#FFFCFDFF"
-                ItemsSource="{Binding ConnectedUsers}"
-                SelectionChanged="ListBox_SelectionChanged" />
+            <ScrollViewer Margin="10,0,0,0">
+                <ListBox
+                    x:Name="User_List"
+                    Width="201"
+                    Height="216"
+                    Background="#FF419EEA"
+                    BorderBrush="#FF008CFF"
+                    Foreground="#FFFCFDFF"
+                    ItemsSource="{Binding ConnectedUsers}"
+                    SelectionChanged="ListBox_SelectionChanged" />
+            </ScrollViewer>
             <TextBox
                 x:Name="DebugBox"
                 Height="175"
