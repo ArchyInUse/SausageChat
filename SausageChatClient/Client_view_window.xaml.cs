@@ -156,8 +156,8 @@ namespace SausageChatClient
     /// <summary>
     /// The Button_Click
     /// </summary>
- 
-    /// change name button
+    /// <param name="sender">The sender<see cref="object"/></param>
+    /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
     private void Button_Click_change_name(object sender, RoutedEventArgs e)
     {
       Window1 win2 = new Window1();
@@ -244,9 +244,13 @@ namespace SausageChatClient
       }
     }
 
+    /// <summary>
+    /// The Disconnect_Button_Client_Click
+    /// </summary>
+    /// <param name="sender">The sender<see cref="object"/></param>
+    /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
     private void Disconnect_Button_Client_Click(object sender, RoutedEventArgs e)
     {
-
     }
   }
 }
