@@ -156,9 +156,9 @@ namespace SausageChatClient
     /// <summary>
     /// The Button_Click
     /// </summary>
-    /// <param name="sender">The sender<see cref="object"/></param>
-    /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
-    private void Button_Click(object sender, RoutedEventArgs e)
+ 
+    /// change name button
+    private void Button_Click_change_name(object sender, RoutedEventArgs e)
     {
       Window1 win2 = new Window1();
       win2.ShowDialog();
@@ -242,6 +242,11 @@ namespace SausageChatClient
         // reset the text box
         User_Message_client_Copy.Text = string.Empty;
       }
+    }
+
+    private void Disconnect_Button_Client_Click(object sender, RoutedEventArgs e)
+    {
+
     }
   }
 }
