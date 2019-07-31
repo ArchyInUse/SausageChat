@@ -24,21 +24,8 @@ namespace SausageChatClient
             }
         }
 
-        private Dictionary<Guid, User> usersDictionary;
-        public Dictionary<Guid, User> UsersDictionary
-        {
-            get
-            {
-                return usersDictionary;
-            }
-            set
-            {
-                usersDictionary = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<User> Users { get; set; }
+        public SausageUserList UsersList { get; set; }
+        
         public User SelectedUser { get; set; } = null;
         public User SelectedFriend { get; set; } = null;
 
@@ -52,8 +39,7 @@ namespace SausageChatClient
 
         public ViewModel()
         {
-            UsersDictionary = new Dictionary<Guid, User>();
-            Users = new ObservableCollection<User>();
+            UsersList = new SausageUserList();
             Friends = new Dictionary<string, ObservableCollection<User>>();
             Friends.Add("OnlineFriends", new ObservableCollection<User>()
             {
@@ -72,6 +58,6 @@ namespace SausageChatClient
             Messages.Add(new ServerMessage("This is a server message"));
         }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }

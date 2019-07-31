@@ -36,26 +36,14 @@ namespace SausageChatClient.Networking
         public static MainWindow Mw { get; set; }
         public static ViewModel Vm { get; set; }
         public static User ClientInfo { get; set; }
-        // This will change soon and shouldn't be binded to.
-        public static ObservableCollection<User> Users
-        {
+        public static SausageUserList UsersList {
             get
             {
-                return Vm.Users;
+                return Vm.UsersList;
             }
             set
             {
-                Vm.Users = value;
-            }
-        }
-        public static Dictionary<Guid, User> UsersDictionary {
-            get
-            {
-                return Vm.UsersDictionary;
-            }
-            set
-            {
-                Vm.UsersDictionary = value;
+                Vm.UsersList = value;
             }
         }
         public static SynchronizationContext UiCtx { get; set; }
@@ -70,7 +58,6 @@ namespace SausageChatClient.Networking
             catch (NullReferenceException) { }
             try
             {
-                Users = new ObservableCollection<User>();
                 ServerIp = IpPool[option];
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.Connect(ServerIp);
@@ -86,9 +73,7 @@ namespace SausageChatClient.Networking
 
         public static void Stop()
         {
-            Users = new ObservableCollection<User>();
-            UsersDictionary = new Dictionary<Guid, User>();
-
+            UsersList = new SausageUserList();
             Disconnect();
         }
 
@@ -133,7 +118,7 @@ namespace SausageChatClient.Networking
             switch (Message.Option)
             {
                 case PacketOption.ClientMessage:
-                    Log(new UserMessage(Message.Content, UsersDictionary[Message.Guid]));
+                    Log(new UserMessage(Message.Content, UsersList[Message.Guid]));
                     break;
                 case PacketOption.IsServer:
                     Log(new ServerMessage(Message.Content));
@@ -141,7 +126,7 @@ namespace SausageChatClient.Networking
                 case PacketOption.NameChange:
                     if (Message.Guid != ClientInfo.Guid)
                     {
-                        User user = UsersDictionary[Message.Guid];
+                        User user = UsersList[Message.Guid];
                         Log(new ServerMessage($"{user.Name} has changed their name to {Message.NewName}"));
                         user.Name = Message.NewName;
                         break;
@@ -156,9 +141,9 @@ namespace SausageChatClient.Networking
                         Log(new ServerMessage(Message.Content));
                         break;
                     }
-                    Log(new ServerMessage($"{UsersDictionary[Message.Guid]} has been banned:"));
+                    Log(new ServerMessage($"{UsersList[Message.Guid]} has been banned:"));
                     Log(new ServerMessage(Message.Content));
-                    UsersDictionary.Remove(Message.Guid);
+                    UsersList.Remove(Message.Guid);
                     break;
                 case PacketOption.UserKicked:
                     if (ClientInfo.Guid == Message.Guid)
@@ -168,38 +153,37 @@ namespace SausageChatClient.Networking
                         Log(new ServerMessage(Message.Content));
                         break;
                     }
-                    Log(new ServerMessage($"{UsersDictionary[Message.Guid]} has been kicked:"));
+                    Log(new ServerMessage($"{UsersList[Message.Guid]} has been kicked:"));
                     Log(new ServerMessage(Message.Content));
-                    UsersDictionary.Remove(Message.Guid);
+                    UsersList.Remove(Message.Guid);
                     break;
                 case PacketOption.UserMuted:
                     if (ClientInfo.Guid == Message.Guid)
                         Log(new ServerMessage("You've been muted:"));
                     else
-                        Log(new ServerMessage($"{UsersDictionary[Message.Guid]} has been muted:"));
+                        Log(new ServerMessage($"{UsersList[Message.Guid]} has been muted:"));
                     Log(new ServerMessage(Message.Content));
-                    UsersDictionary[Message.Guid].IsMuted = true;
+                    UsersList[Message.Guid].IsMuted = true;
                     break;
                 case PacketOption.UserUnmuted:
-                    Log(new ServerMessage($"{UsersDictionary[Message.Guid]} has been unmuted"));
-                    UsersDictionary[Message.Guid].IsMuted = false;
+                    Log(new ServerMessage($"{UsersList[Message.Guid]} has been unmuted"));
+                    UsersList[Message.Guid].IsMuted = false;
                     break;
                 case PacketOption.UserConnected:
                     Log(new ServerMessage($"{Message.Guid} has joined"));
-                    UsersDictionary.Add(Message.Guid, new User(Message.NewName, Message.Guid));
+                    UsersList.Add(new User(Message.NewName, Message.Guid));
                     break;
                 case PacketOption.UserDisconnected:
-                    Log(new ServerMessage($"{UsersDictionary[Message.Guid]} has disconnected"));
-                    UsersDictionary.Remove(Message.Guid);
+                    Log(new ServerMessage($"{UsersList[Message.Guid]} has disconnected"));
+                    UsersList.Remove(Message.Guid);
                     break;
                 case PacketOption.UserList:
-                    //TODO: fix this
-                    Vm.Users = new ObservableCollection<User>(Message.UsersList);
+                    Vm.UsersList = new SausageUserList(Message.UsersList);
                     break;
                 case PacketOption.GetGuid:
                     ClientInfo = new User(Message.Guid.ToString(), Message.Guid);
                     Log(new ServerMessage($"{Message.Guid.ToString()} has joined."));
-                    UsersDictionary.Add(Message.Guid, ClientInfo);
+                    UsersList.Add(ClientInfo);
                     break;
             }
         }

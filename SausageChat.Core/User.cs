@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using SausageChat.Core.Messaging;
 
 namespace SausageChat.Core
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
-        public string Name { get; set; }
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+                NotifyPropChanged();
+            }
+        }
         public Guid Guid { get; set; }
         public bool IsAdmin { get; set; } = false;
         public bool IsMuted { get; set; } = false;
@@ -23,6 +37,10 @@ namespace SausageChat.Core
             else
                 this.Name = Name;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropChanged([CallerMemberName] string PropName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropName));
 
         public override string ToString() => Name;
 

@@ -393,7 +393,7 @@
                  Background="#FF419EEA"
                  BorderBrush="Transparent"
                  Foreground="White"
-                 ItemsSource="{Binding UsersDictionary.Values}"
+                 ItemsSource="{Binding UsersList.Users}"
                  OpacityMask="Red"
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
