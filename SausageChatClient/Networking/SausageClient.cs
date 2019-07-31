@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
@@ -76,7 +75,7 @@ namespace SausageChatClient.Networking
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.Connect(ServerIp);
                 UiCtx = SynchronizationContext.Current;
-                Log("Connected");
+                Log(new ServerMessage("Connected"));
                 Listen();
             }
             catch (SocketException)
@@ -221,7 +220,7 @@ namespace SausageChatClient.Networking
 
             byte[] bytesMessage = Encoding.ASCII.GetBytes(message);
 
-            Log("Started Sending...");
+            Log(new ServerMessage("Started Sending..."));
 
             try
             {
