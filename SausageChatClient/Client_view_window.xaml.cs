@@ -80,16 +80,10 @@ namespace SausageChatClient
     {
       string option = "";
       if (Select_IP_Combo_box.SelectedIndex == 0)
-      {
-        //user has selected Disco IP
         option = "Disco";
-      }
-
-      if (Select_IP_Combo_box.SelectedIndex == 1)
-      {
-        //user has selected  Montes IP
+      else if (Select_IP_Combo_box.SelectedIndex == 1)
         option = "Monte";
-      }
+
       return option;
     }
 

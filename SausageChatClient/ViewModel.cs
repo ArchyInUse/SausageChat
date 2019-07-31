@@ -39,6 +39,8 @@ namespace SausageChatClient
         }
 
         public ObservableCollection<User> Users { get; set; }
+        public User SelectedUser { get; set; } = null;
+        public User SelectedFriend { get; set; } = null;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {

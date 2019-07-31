@@ -25,6 +25,7 @@ namespace SausageChat
                 NotifyPropertyChanged();
             }
         }
+
         public SausageConnection SelectedUser { get; set; } = null;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
