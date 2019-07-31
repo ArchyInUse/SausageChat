@@ -67,10 +67,16 @@
 
 
       <ScrollViewer Grid.Column="1"
+                    VerticalScrollBarVisibility="Visible"
                     Width="{Binding Width, ElementName=Stack_panel_for_chatbox_and_other_buttons_}"
-                    Margin="0,0,-15,0">
+                    Margin="0,0,1,0"
+                    Foreground="{x:Null}"
+                    Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
+        <ScrollViewer.Background>
+          <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}" />
+        </ScrollViewer.Background>
         <ItemsControl x:Name="Messages"
-                      Width="365"
+                      Width="384.129"
                       Height="315"
                       HorizontalAlignment="Stretch"
                       BorderBrush="#FF008CFF"
@@ -95,9 +101,8 @@
       </ScrollViewer>
 
       <TextBox x:Name="Server_message_input_box"
-               Width="370"
                Height="35"
-               Margin="10,16,10,20"
+               Margin="0,16,6.013,20"
                HorizontalAlignment="Stretch"
                Controls:TextBoxHelper.Watermark="Enter Server Message"
                Background="#FF419EEA"
@@ -109,7 +114,7 @@
                CaretBrush="#FF008CFF" />
       <Button x:Name="Send_message_Button"
               Height="33"
-              Margin="10,0"
+              Margin="0,0,6.013,0"
               VerticalAlignment="Top"
               Background="#FF419EEA"
               BorderBrush="#FF008CFF"
