@@ -27,7 +27,7 @@ namespace SausageChat.Core
             {
                 var index = Users.IndexOf(Users.First(x => x.Guid == guid));
 
-                Users[index] = value;
+                UiCtx.Send(x => Users[index] = value);
             }
         }
 
