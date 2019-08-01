@@ -4,6 +4,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using SausageChat.Core;
 
 namespace SausageChat.Core
 {
@@ -13,6 +15,7 @@ namespace SausageChat.Core
     public class SausageUserList : INotifyCollectionChanged
     {
         public ObservableCollection<User> Users { get; set; }
+        public static SynchronizationContext UiCtx { get; set; }
 
         public User this[Guid guid]
         {
@@ -40,20 +43,21 @@ namespace SausageChat.Core
 
         public void Remove(Guid guid)
         {
-            Users.Remove(Users.FirstOrDefault(x => x.Guid == guid));
-            NotifyCollectionChanged(NotifyCollectionChangedAction.Remove);
+            UiCtx.Send(y => Users.Remove(Users.FirstOrDefault(x => x.Guid == guid)));
+            UiCtx.Send(x => NotifyCollectionChanged(NotifyCollectionChangedAction.Remove));
         }
 
         public void Remove(User user)
         {
-            Users.Remove(user);
-            NotifyCollectionChanged(NotifyCollectionChangedAction.Remove);
+            UiCtx.Send(x => Users.Remove(user));
+
+            UiCtx.Send(x => NotifyCollectionChanged(NotifyCollectionChangedAction.Remove));
         }
 
         public void Add(User user)
         {
-            Users.Add(user);
-            NotifyCollectionChanged(NotifyCollectionChangedAction.Add);
+            UiCtx.Send(x => Users.Add(user));
+            UiCtx.Send(x => NotifyCollectionChanged(NotifyCollectionChangedAction.Add));
         }
 
         public void Add(Guid guid)
