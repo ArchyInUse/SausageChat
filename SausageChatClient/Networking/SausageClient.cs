@@ -19,7 +19,7 @@ namespace SausageChatClient.Networking
         public static byte[] Data = new byte[1024];
         public static Dictionary<string, IPEndPoint> IpPool { get; set; } = new Dictionary<string, IPEndPoint>()
         {
-            ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.163.48"), 60000)
+            ["Disco"] = new IPEndPoint(IPAddress.Parse("89.139.194.57"), 60000)
         };
         public static Dictionary<string, ObservableCollection<User>> Friends
         {
