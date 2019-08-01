@@ -40,6 +40,12 @@ namespace SausageChatClient
         public ViewModel()
         {
             UsersList = new SausageUserList();
+
+            UsersList.Add(new User("User1"));
+            UsersList.Add(new User("User2"));
+            UsersList.Add(new User("User2"));
+
+
             Friends = new Dictionary<string, ObservableCollection<User>>();
             Friends.Add("OnlineFriends", new ObservableCollection<User>()
             {

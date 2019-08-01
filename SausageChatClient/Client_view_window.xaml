@@ -11,7 +11,10 @@
                       Width="1074"
                       Height="675.753"
                       ResizeMode="NoResize"
-                      mc:Ignorable="d">
+                      mc:Ignorable="d"
+                      Background="#FF008CFF"
+                      NonActiveBorderBrush="#FF008CFF"
+                      NonActiveWindowTitleBrush="#FF008CFF">
 
 
   <Window.Resources>
@@ -77,6 +80,35 @@
                  Text="{Binding}" />
     </DataTemplate>
 
+    
+    <Style TargetType="{x:Type MenuItem}">
+      <Setter Property="Background"
+              Value="#FF419EEA" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type MenuItem}">
+            <Border Padding="17,0"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}"
+                    SnapsToDevicePixels="True">
+              <ContentPresenter Content="{TemplateBinding Header}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            </Border>
+           
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsHighlighted"
+                       Value="true">
+                <Setter Property="Background"
+                        Value="Red" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
 
   </Window.Resources>
 
@@ -123,15 +155,7 @@
                     VerticalScrollBarVisibility="Visible"
                     Width="{Binding Width, ElementName=stackPanel}"
                     Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
-        <ScrollViewer.Foreground>
-          <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}" />
-        </ScrollViewer.Foreground>
-        <ScrollViewer.Background>
-          <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ScrollBarColorKey}}" />
-        </ScrollViewer.Background>
-        <ScrollViewer.ContextMenu>
-          <ContextMenu />
-        </ScrollViewer.ContextMenu>
+
         <ItemsControl x:Name="MessageListThingWORK"
                       Grid.Column="1"
                       Background="#FF419EEA"
@@ -141,14 +165,11 @@
                       Margin="0"
                       Padding="0" />
       </ScrollViewer>
-
       <Button x:Name="Send_message_Button_client"
-              Width="111"
+              Width="96"
               Height="31"
-              Margin="0,-7,22,-3"
+              Margin="0,-7,37,-3"
               Padding="0"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Bottom"
               HorizontalContentAlignment="Center"
               VerticalContentAlignment="Center"
               Background="#FF419EEA"
@@ -157,7 +178,10 @@
               Content="Send"
               Foreground="#FFFCFDFF"
               RenderTransformOrigin="0.542,1.415"
-              ScrollViewer.CanContentScroll="True">
+              ScrollViewer.CanContentScroll="True"
+              Panel.ZIndex="1"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Bottom">
         <Button.RenderTransform>
           <TransformGroup>
             <ScaleTransform />
@@ -171,10 +195,9 @@
 
       <TextBox x:Name="User_Message_client_Copy"
                Height="31"
-               MinHeight="31"
-               Margin="5,-74,15,53"
+               MinHeight="0"
+               Margin="4,-74,24,53"
                VerticalAlignment="Bottom"
-               Panel.ZIndex="-2"
                Controls:TextBoxHelper.Watermark="Enter Message"
                Background="#FF419EEA"
                BorderBrush="#FF008CFF"
@@ -358,8 +381,22 @@
                           Foreground="#FFFCFDFF"
                           Header="Online Friends"
                           IsExpanded="True"
-                          ItemsSource="{Binding Friends[OnlineFriends]}" />
+                          ItemsSource="{Binding Friends[OnlineFriends]}">
 
+              <TreeViewItem.ContextMenu>
+                <ContextMenu>
+                   
+                  <MenuItem Header="Send Message"
+                            />
+
+                  <MenuItem Header="Remove  Friend"
+                            Background="#FF419EEA"
+                            BorderBrush="#FF008CFF"
+                            Foreground="White" />
+                </ContextMenu>
+                
+              </TreeViewItem.ContextMenu>
+            </TreeViewItem>
 
             <TreeViewItem Background="#FF419EEA"
                           Foreground="#FFFCFDFF"
@@ -391,14 +428,47 @@
                  Margin="0,17,8,0"
                  Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
                  Background="#FF419EEA"
-                 BorderBrush="Transparent"
+                 BorderBrush="#FF008CFF"
                  Foreground="White"
                  ItemsSource="{Binding UsersList.Users}"
-                 OpacityMask="Red"
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                  SelectedIndex="0"
-                 SelectionChanged="ListBox_SelectionChanged" />
+                 SelectionChanged="ListBox_SelectionChanged">
+
+          <ListBox.ContextMenu>
+            <ContextMenu>
+              <MenuItem Header="Add Friend"
+                        Background="#FF419EEA"
+                        BorderBrush="#FF008CFF"
+                        Foreground="White" />
+              
+              <MenuItem Header="Mute User"
+                        Background="#FF419EEA"
+                        BorderBrush="#FF008CFF"
+                        Foreground="White" />
+              
+              <MenuItem Header="Kick User"
+                        Background="#FF419EEA"
+                        BorderBrush="#FF008CFF"
+                        Foreground="White" />
+              
+              <MenuItem Header="Ban User"
+                        Background="#FF419EEA"
+                        BorderBrush="#FF008CFF"
+                        Foreground="White" />
+              
+             
+
+
+              
+              
+            </ContextMenu>
+            
+          </ListBox.ContextMenu>
+          </ListBox>
+
+        
       </ScrollViewer>
 
 
