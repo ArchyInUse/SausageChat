@@ -31,10 +31,10 @@ namespace SausageChatClient
         /// </summary>
         public MainWindow()
         {
+            SausageUserList.UiCtx = SynchronizationContext.Current;
             ViewModel Vm = new ViewModel();
             SausageClient.Mw = this;
             SausageClient.Vm = Vm;
-            SausageUserList.UiCtx = SynchronizationContext.Current;
             this.DataContext = Vm;
         }
 
