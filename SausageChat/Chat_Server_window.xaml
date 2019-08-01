@@ -144,6 +144,7 @@
                 BorderBrush="#FF008CFF"
                 CaretBrush="#FF008CFF"
                 Foreground="White"
+                KeyDown="Server_message_input_box_KeyDown"
                 SpellCheck.IsEnabled="True"
                 TextChanged="Server_message_button_TextChanged"
                 TextWrapping="Wrap" />

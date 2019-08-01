@@ -138,6 +138,22 @@ namespace SausageChat.Networking
                     };
                     SendAsync(packet);
                     break;
+                case PacketOption.UserBanned:
+                    if(UserInfo.IsAdmin)
+                        SausageServer.Ban(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
+                    break;
+                case PacketOption.UserKicked:
+                    if(UserInfo.IsAdmin)
+                        SausageServer.Kick(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
+                    break;
+                case PacketOption.UserMuted:
+                    if (UserInfo.IsAdmin)
+                        SausageServer.Mute(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
+                    break;
+                case PacketOption.UserUnmuted:
+                    if (UserInfo.IsAdmin)
+                        SausageServer.Unmute(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
+                    break;
             }
         }
 
