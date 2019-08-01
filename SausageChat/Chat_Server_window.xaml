@@ -288,11 +288,6 @@
                                 Foreground="White"
                                 Header="Ban User" />
 
-
-
-
-
-
                         </ContextMenu>
 
                     </ListBox.ContextMenu>

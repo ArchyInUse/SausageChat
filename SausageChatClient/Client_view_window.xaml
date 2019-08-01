@@ -373,12 +373,14 @@
                                     <MenuItem
                                         BorderBrush="#FF008CFF"
                                         Foreground="White"
-                                        Header="Send Message" />
-
+                                        Header="Send Message"
+                            Click="Send_message_Context_menu_client"/>
+                                        
                                     <MenuItem
                                         BorderBrush="#FF008CFF"
                                         Foreground="White"
-                                        Header="Remove  Friend" />
+                                        Header="Remove  Friend"
+                            Click="Remove_Friend_Context_menu_client_online_friends" />
                                 </ContextMenu>
 
                             </TreeViewItem.ContextMenu>
@@ -400,7 +402,8 @@
                                     <MenuItem
                                         BorderBrush="#FF008CFF"
                                         Foreground="White"
-                                        Header="Remove  Friend" />
+                                        Header="Remove  Friend"
+                                      Click ="Remove_Friend_Context_menu_client_offline"/>
                                 </ContextMenu>
 
                             </TreeViewItem.ContextMenu>

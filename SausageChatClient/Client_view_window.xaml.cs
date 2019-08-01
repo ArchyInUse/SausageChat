@@ -120,6 +120,14 @@ namespace SausageChatClient
       SausageClient.Send(packet);
     }
 
+
+    //command for the context menu send message to user
+    private void Send_message_Context_menu_client(object sender, RoutedEventArgs e)
+    {
+      //code here will open the send message window. 
+
+    }
+
     /// <summary>
     /// The User_Message_client_TextChanged
     /// </summary>
@@ -246,5 +254,10 @@ namespace SausageChatClient
     private void Disconnect_Button_Client_Click(object sender, RoutedEventArgs e)
     {
     }
-  }
+
+    private void MenuItem_Click(object sender, RoutedEventArgs e)
+    {
+
+        }
+    }
 }
