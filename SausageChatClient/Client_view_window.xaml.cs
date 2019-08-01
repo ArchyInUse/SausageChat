@@ -1,4 +1,5 @@
 using MahApps.Metro.Controls;
+using SausageChat.Core;
 using SausageChat.Core.Networking;
 using SausageChatClient.Networking;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +34,7 @@ namespace SausageChatClient
             ViewModel Vm = new ViewModel();
             SausageClient.Mw = this;
             SausageClient.Vm = Vm;
+            SausageUserList.UiCtx = SynchronizationContext.Current;
             this.DataContext = Vm;
         }
 

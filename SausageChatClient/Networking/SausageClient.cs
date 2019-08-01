@@ -66,7 +66,6 @@ namespace SausageChatClient.Networking
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.Connect(ServerIp);
                 UiCtx = SynchronizationContext.Current;
-                SausageUserList.UiCtx = SynchronizationContext.Current;
                 Log(new ServerMessage("Connected"));
                 Listen();
             }
