@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using SausageChat.Core.Messaging;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
+using System.Linq;
 using Newtonsoft.Json;
 using System.Threading;
 
@@ -47,6 +48,9 @@ namespace SausageChatClient.Networking
             }
         }
         public static SynchronizationContext UiCtx { get; set; }
+
+        public static bool Contains(this Dictionary<string, ObservableCollection<User>> friends, Guid guid) =>
+            (friends["OnlineFriends"].Any(x => x.Guid == guid) || friends["OfflineFriends"].Any(x => x.Guid == guid));
 
         public static void Start(string option)
         {
@@ -191,12 +195,7 @@ namespace SausageChatClient.Networking
         /// <summary>
         /// removes all null characters
         /// </summary>
-        private static void StripData()
-        {
-            int newSize = Array.FindLastIndex(Data, Data.Length - 1, x => x != 0) + 1;
-
-            Array.Resize(ref Data, newSize);
-        }
+        private static void StripData() => Array.Resize(ref Data, Array.FindLastIndex(Data, Data.Length - 1, x => x != 0) + 1);
 
         public static void Send(string message)
         {
@@ -240,7 +239,40 @@ namespace SausageChatClient.Networking
             UiCtx.Send(x => Vm.Messages.Add(message));
         }
 
-        // the server will return the rename message thus no need for logging (in client 
+        public static void Ban(Guid guid, string Reason = null) => BanKickMuteWrapper(guid, PacketOption.UserBanned, Reason);
+
+        public static void Kick(Guid guid, string Reason = null) => BanKickMuteWrapper(guid, PacketOption.UserKicked, Reason);
+
+        public static void Mute(Guid guid, string Reason = null) => BanKickMuteWrapper(guid, PacketOption.UserMuted, Reason);
+
+        public static void Unmute(Guid guid) => BanKickMuteWrapper(guid, PacketOption.UserUnmuted);
+
+        private static void BanKickMuteWrapper(Guid guid, PacketOption option, string Reason = null)
+        {
+            if (!ClientInfo.IsAdmin) return;
+            PacketFormat packet;
+            if (option != PacketOption.UserUnmuted)
+            {
+                if (Reason == null) Reason = "Place Holder Reason";
+                packet = new PacketFormat(option)
+                {
+                    Sender = ClientInfo.Guid,
+                    Guid = guid,
+                    Content = Reason
+                };
+            }
+            else
+            {
+                packet = new PacketFormat(PacketOption.UserUnmuted)
+                {
+                    Sender = ClientInfo.Guid,
+                    Guid = guid
+                };
+            }
+            Send(packet);
+        }
+
+        // the server will return the rename message thus no need for logging (in client)
         public static void Rename(string newName)
         {
             ClientInfo.Name = newName;
