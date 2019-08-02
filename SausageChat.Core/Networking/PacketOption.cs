@@ -23,6 +23,12 @@
         // on user change name (includes GUID & NewName)
         NameChange,
         // when a client joins the server, he needs to get a GUID
-        GetGuid
+        GetGuid,
+        // Friend request sent
+        FriendRequest,
+        // Friend request accepted
+        FriendRequestAccepted,
+        // Friend request denied
+        FriendRequestDenied
     }
 }

@@ -281,20 +281,25 @@
                             <MenuItem
                                 BorderBrush="#FF008CFF"
                                 Foreground="White"
-                                Header="Mute User" />
+                                Header="Mute User"
+                                x:Name="ContextMenuMute"
+                                Click="ContextMenuMute_Click"/>
 
                             <MenuItem
                                 BorderBrush="#FF008CFF"
                                 Foreground="White"
-                                Header="Kick User" />
+                                Header="Kick User"
+                                x:Name="ContextMenuKick"
+                                Click="ContextMenuKick_Click"/>
 
                             <MenuItem
                                 BorderBrush="#FF008CFF"
                                 Foreground="White"
-                                Header="Ban User" />
+                                Header="Ban User"
+                                x:Name="ContextMenuBan"
+                                Click="ContextMenuBan_Click"/>
 
                         </ContextMenu>
-
                     </ListBox.ContextMenu>
 
                 </ListBox>

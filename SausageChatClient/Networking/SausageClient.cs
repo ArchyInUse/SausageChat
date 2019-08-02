@@ -10,6 +10,7 @@ using SausageChat.Core.Networking;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace SausageChatClient.Networking
 {
@@ -188,6 +189,34 @@ namespace SausageChatClient.Networking
                     Log(new ServerMessage($"{Message.Guid.ToString()} has joined."));
                     UsersList.Add(ClientInfo);
                     break;
+                case PacketOption.FriendRequest:
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    string content = $"Friend request recieved from {UsersList[Message.Sender].Name}, Accept?";
+                    string caption = "Sausage Chat friend request";
+                    DialogResult result;
+
+                    result = MessageBox.Show(content, caption, buttons);
+                    if (result == DialogResult.Yes)
+                    {
+                        Log(new ServerMessage("Accepted friend request"));
+                        Friends["OnlineFriends"].Add(UsersList[Message.Sender]);
+                    }
+                    else
+                        break;
+                    PacketFormat packet = new PacketFormat(PacketOption.FriendRequestAccepted)
+                    {
+                        Sender = ClientInfo.Guid,
+                        Guid = Message.Sender
+                    };
+                    Send(packet);
+                    break;
+                case PacketOption.FriendRequestAccepted:
+                    Friends["OnlineFriends"].Add(UsersList[Message.Guid]);
+                    Log(new ServerMessage($"Friend request accepted by {UsersList[Message.Guid].Name}"));
+                    break;
+                case PacketOption.FriendRequestDenied:
+                    Log(new ServerMessage("Friend request denied"));
+                    break;
             }
         }
 
@@ -286,6 +315,14 @@ namespace SausageChatClient.Networking
         // Needs implementation
         public static void AddFriend(Guid guid)
         {
+            PacketFormat packet = new PacketFormat(PacketOption.FriendRequest)
+            {
+                Sender = ClientInfo.Guid,
+                Guid = guid,
+            };
+
+            Send(packet);
+            Log(new ServerMessage("Friend request sent"));
         }
 
         public static void Disconnect(PacketOption? Po = null)

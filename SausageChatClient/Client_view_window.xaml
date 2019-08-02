@@ -40,19 +40,13 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Height" Value="25" />
             <Setter Property="Margin" Value="0" />
-
-
-
         </Style>
-
 
         <Style TargetType="{x:Type TreeViewItem}">
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Background" Value="#FF419EEA" />
             <Setter Property="BorderBrush" Value="#FF008CFF" />
         </Style>
-
-
 
         <DataTemplate DataType="{x:Type messaging:UserMessage}">
             <TextBlock
@@ -67,7 +61,6 @@
                 Foreground="#011627"
                 Text="{Binding}" />
         </DataTemplate>
-
 
         <Style TargetType="{x:Type MenuItem}">
             <Setter Property="Background" Value="#FF419EEA" />

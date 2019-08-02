@@ -154,6 +154,21 @@ namespace SausageChat.Networking
                     if (UserInfo.IsAdmin)
                         SausageServer.Unmute(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
                     break;
+                case PacketOption.FriendRequest:
+                    SausageConnection reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    if(reciever == null)
+                        SendAsync(new PacketFormat(PacketOption.IsServer) { Content = "User not found" });
+                    else
+                        reciever.SendAsync(Message);
+                    break;
+                case PacketOption.FriendRequestAccepted:
+                    SausageConnection r = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    r.SendAsync(Message);
+                    break;
+                case PacketOption.FriendRequestDenied:
+                    SausageConnection rec = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    rec.SendAsync(Message);
+                    break;
             }
         }
 
