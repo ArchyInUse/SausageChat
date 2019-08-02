@@ -269,7 +269,11 @@
                     Foreground="#FFFCFDFF"
                     ItemsSource="{Binding ConnectedUsers}"
                     SelectionChanged="ListBox_SelectionChanged">
-
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=UserInfo.Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
 
                     <ListBox.ContextMenu>
                         <ContextMenu>

@@ -134,7 +134,7 @@ namespace SausageChat.Networking
                 case PacketOption.UserList:
                     PacketFormat packet = new PacketFormat(PacketOption.UserList)
                     {
-                        UsersList = SausageServer.UsersDictionary.Values.ToArray()
+                        UsersList = SausageServer.UsersDictionary.Users.ToArray()
                     };
                     SendAsync(packet);
                     break;

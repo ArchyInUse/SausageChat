@@ -28,6 +28,7 @@ namespace SausageChat.Core
                 var index = Users.IndexOf(Users.First(x => x.Guid == guid));
 
                 UiCtx.Send(x => Users[index] = value);
+                NotifyCollectionChanged(NotifyCollectionChangedAction.Replace);
             }
         }
 

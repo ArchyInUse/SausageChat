@@ -34,7 +34,7 @@ namespace SausageChat.Networking
                 Vm.ConnectedUsers = value;
             }
     }
-        public static Dictionary<Guid, User> UsersDictionary { get; set; } = new Dictionary<Guid, User>();
+        public static SausageUserList UsersDictionary { get; set; } = new SausageUserList();
         public static List<IPAddress> Blacklisted { get; set; } = new List<IPAddress>();
         public static IPEndPoint LocalIp { get; set; } = new IPEndPoint(IPAddress.Any, PORT);
         public static SynchronizationContext UiCtx { get; set; }
@@ -45,7 +45,7 @@ namespace SausageChat.Networking
             {
                 MainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 ConnectedUsers = new ObservableCollection<SausageConnection>();
-                UsersDictionary = new Dictionary<Guid, User>();
+                UsersDictionary = new SausageUserList();
                 MainSocket.Bind(LocalIp);
                 MainSocket.Listen(10);
                 UiCtx = SynchronizationContext.Current;
@@ -197,7 +197,7 @@ namespace SausageChat.Networking
                 UiCtx.Send(x => ConnectedUsers.Add(user));
                 UiCtx.Send(x => Vm.ConnectedUsers = SortUsersList());
                 UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"));
-                UsersDictionary.Add(user.UserInfo.Guid, user.UserInfo);
+                UsersDictionary.Add(user.UserInfo);
                 // global packet for all the users to know the user has joined
                 PacketFormat GlobalPacket = new PacketFormat(PacketOption.UserConnected)
                 {

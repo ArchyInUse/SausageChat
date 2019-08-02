@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
 using System.Windows.Input;
+using System.Threading;
 
 namespace SausageChat
 {
@@ -19,6 +20,7 @@ namespace SausageChat
         /// </summary>
         public MainWindow()
         {
+            SausageUserList.UiCtx = SynchronizationContext.Current;
             InitializeComponent();
             var vm = new ViewModel();
             DataContext = vm;
@@ -33,7 +35,12 @@ namespace SausageChat
         /// <param name="e">The e<see cref="SelectionChangedEventArgs"/></param>
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
         {
-            SausageServer.Vm.SelectedUser = (SausageConnection)e.AddedItems[0];
+            try
+            {
+                SausageServer.Vm.SelectedUser = (SausageConnection)e.AddedItems[0];
+            }
+            catch (Exception ex)
+            { }
         }
 
         /// <summary>

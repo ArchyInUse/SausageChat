@@ -75,11 +75,7 @@ namespace SausageChatClient.Networking
             }
         }
 
-        public static void Stop()
-        {
-            UsersList = new SausageUserList();
-            Disconnect();
-        }
+        public static void Stop() => Disconnect();
 
         public static void Listen()
         {
@@ -163,7 +159,10 @@ namespace SausageChatClient.Networking
                     break;
                 case PacketOption.UserMuted:
                     if (ClientInfo.Guid == Message.Guid)
+                    {
+                        // disable chat box
                         Log(new ServerMessage("You've been muted:"));
+                    }
                     else
                         Log(new ServerMessage($"{UsersList[Message.Guid]} has been muted:"));
                     Log(new ServerMessage(Message.Content));
@@ -296,6 +295,7 @@ namespace SausageChatClient.Networking
                 if (Socket.Connected) return;
 
                 Socket.Close();
+                UsersList = new SausageUserList();
 
                 Log(new ServerMessage("Disconnected"));
             }
