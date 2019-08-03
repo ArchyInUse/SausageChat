@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="Server_Window"
     Title="Server_Window"
+    xmlns:messaging="clr-namespace:SausageChat.Core.Messaging;assembly=SausageChat.Core"
     Width="814"
     Height="552"
     Background="#FF008CFF"
@@ -26,16 +27,23 @@
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
-
-
-
-
-
-
-
-
-
         </Style>
+
+
+
+        <DataTemplate DataType="{x:Type messaging:UserMessage}">
+            <TextBlock
+            HorizontalAlignment="Left"
+            Foreground="White"
+            Text="{Binding}" />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type messaging:ServerMessage}">
+            <TextBlock
+        HorizontalAlignment="Center"
+        Foreground="#011627"
+        Text="{Binding}" />
+        </DataTemplate>
 
 
         <Style TargetType="{x:Type MenuItem}">
@@ -44,17 +52,16 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type MenuItem}">
                         <Border
-                            Padding="17,0"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="True">
+                        Padding="17,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True">
                             <ContentPresenter
-                                Content="{TemplateBinding Header}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            Content="{TemplateBinding Header}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="true">
                                 <Setter Property="Background" Value="#011627" />
@@ -105,9 +112,11 @@
                 Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
                 Foreground="{x:Null}"
                 VerticalScrollBarVisibility="Visible">
+                
                 <ScrollViewer.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" />
                 </ScrollViewer.Background>
+                
                 <ItemsControl
                     x:Name="Messages"
                     Width="384.129"
@@ -117,21 +126,7 @@
                     BorderBrush="#FF008CFF"
                     Foreground="White"
                     ItemsSource="{Binding Messages}">
-
-                    <ItemsControl.ItemTemplate>
-
-                        <DataTemplate>
-
-                            <StackPanel Orientation="Vertical">
-
-                                <TextBlock Text="{Binding}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-
-
                 </ItemsControl>
-
             </ScrollViewer>
 
             <TextBox
