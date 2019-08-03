@@ -30,7 +30,8 @@ namespace SausageChat.Core.Networking
         public bool ShouldSerializeSender() => Option == PacketOption.UserBanned ||
                                               Option == PacketOption.UserKicked ||
                                               Option == PacketOption.UserMuted ||
-                                              Option == PacketOption.UserUnmuted;
+                                              Option == PacketOption.UserUnmuted ||
+                                              Option == PacketOption.FriendRequest;
 
         #endregion
     }

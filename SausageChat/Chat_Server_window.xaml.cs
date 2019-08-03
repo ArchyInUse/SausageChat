@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
 using System.Windows.Input;
+using System.Threading;
 
 namespace SausageChat
 {
@@ -19,6 +20,7 @@ namespace SausageChat
         /// </summary>
         public MainWindow()
         {
+            SausageUserList.UiCtx = SynchronizationContext.Current;
             InitializeComponent();
             var vm = new ViewModel();
             DataContext = vm;
@@ -33,7 +35,12 @@ namespace SausageChat
         /// <param name="e">The e<see cref="SelectionChangedEventArgs"/></param>
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //event for user list box
         {
-            SausageServer.Vm.SelectedUser = (SausageConnection)e.AddedItems[0];
+            try
+            {
+                SausageServer.Vm.SelectedUser = (SausageConnection)e.AddedItems[0];
+            }
+            catch (Exception ex)
+            { }
         }
 
         /// <summary>
@@ -161,22 +168,37 @@ namespace SausageChat
         {
         }
 
-        private void Messages_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Messages_KeyDown(object sender, KeyEventArgs e)
         {
         }
 
-        private void Server_message_input_box_KeyDown(object sender, KeyEventArgs e)
+        private async void Server_message_input_box_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
                 // send the message
-                SausageServer.Log(new PacketFormat(PacketOption.IsServer)
+                await SausageServer.Log(new PacketFormat(PacketOption.IsServer)
                 {
                     Content = Server_message_input_box.Text
                 });
                 // reset the text box
                 Server_message_input_box.Text = "";
             }
+        }
+
+        private async void ContextMenuMute_Click(object sender, RoutedEventArgs e)
+        {
+           await SausageServer.Mute(SausageServer.Vm.SelectedUser);
+        }
+
+        private async void ContextMenuKick_Click(object sender, RoutedEventArgs e)
+        {
+            await SausageServer.Kick(SausageServer.Vm.SelectedUser);
+        }
+
+        private async void ContextMenuBan_Click(object sender, RoutedEventArgs e)
+        {
+            await SausageServer.Ban(SausageServer.Vm.SelectedUser);
         }
     }
 }
