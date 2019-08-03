@@ -74,35 +74,6 @@
     </DataTemplate>
 
 
-    <Style TargetType="{x:Type MenuItem}">
-      <Setter Property="Background"
-              Value="#FF419EEA" />
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type MenuItem}">
-            <Border Padding="17,0"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    SnapsToDevicePixels="True">
-              <ContentPresenter Content="{TemplateBinding Header}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-            </Border>
-
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsHighlighted"
-                       Value="true">
-                <Setter Property="Background"
-                        Value="#011627" />
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
-
-
   </Window.Resources>
 
   <Grid x:Name="Grid_client_view"
@@ -308,8 +279,7 @@
 
       <ScrollViewer x:Name="Scrollbar_for_the_freinds_list"
                     Grid.Row="1"
-                    Background="White"
-                    >
+                    Background="White">
 
         <TreeView x:Name="Freinds_List_view"
                   Height="auto"
@@ -336,15 +306,18 @@
                 <ContextMenu>
 
                   <MenuItem x:Name="SendMessageToFriendMenuItem"
-                            BorderBrush="#FF008CFF"
+                            Header="Send message"
+                          
                             Click="SendMessageToFriendMenuItem_Click"
-                            Foreground="White"
-                            Header="Send Message" />
+                           
+                                              />
+                            
+                  
 
                   <MenuItem x:Name="RemoveFriendMenuitem"
-                            BorderBrush="#FF008CFF"
+                            
                             Click="RemoveFriendMenuitem_Click"
-                            Foreground="White"
+                           
                             Header="Remove  Friend" />
                 </ContextMenu>
 
@@ -361,8 +334,8 @@
               <TreeViewItem.ContextMenu>
                 <ContextMenu>
 
-                  <MenuItem BorderBrush="#FF008CFF"
-                            Foreground="White"
+                  <MenuItem 
+                           
                             Header="Remove  Friend" />
                 </ContextMenu>
 
@@ -404,27 +377,27 @@
           <ListBox.ContextMenu>
             <ContextMenu>
               <MenuItem x:Name="ContextMenuAddFriend"
-                        BorderBrush="#FF008CFF"
+                       
                         Click="ContextMenuAddFriend_Click"
-                        Foreground="White"
+                       
                         Header="Add Friend" />
 
               <MenuItem x:Name="ContextMenuMuteUser"
-                        BorderBrush="#FF008CFF"
+                       
                         Click="ContextMenuMuteUser_Click"
-                        Foreground="White"
+                       
                         Header="Mute User" />
 
               <MenuItem x:Name="ContextMenuKickUser"
-                        BorderBrush="#FF008CFF"
+                       
                         Click="ContextMenuKickUser_Click"
-                        Foreground="White"
+                       
                         Header="Kick User" />
 
               <MenuItem x:Name="ContextMenuBanUser"
-                        BorderBrush="#FF008CFF"
+                       
                         Click="ContextMenuBanUser_Click"
-                        Foreground="White"
+                       
                         Header="Ban User" />
             </ContextMenu>
           </ListBox.ContextMenu>
