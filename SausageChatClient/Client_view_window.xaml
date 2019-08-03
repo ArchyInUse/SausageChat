@@ -9,11 +9,10 @@
                       x:Name="Client"
                       Title="Client_view"
                       Width="1074"
-                      Height="675.753"
+                      Height="675"
                       Background="#FF008CFF"
                       NonActiveBorderBrush="#FF008CFF"
                       NonActiveWindowTitleBrush="#FF008CFF"
-                      ResizeMode="CanResize"
                       mc:Ignorable="d">
 
 
@@ -114,36 +113,15 @@
 
   <Grid x:Name="Grid_client_view"
         Background="#FF008CFF">
+
     <Grid.ColumnDefinitions>
-      <!--  Define the columns for the grid  -->
-
-      <ColumnDefinition Width="250*" />
-      <ColumnDefinition Width="599*" />
-      <!--  The first row.  -->
-      <!--  The Second Column  -->
-      <!--  The third column  -->
-
-
-      <ColumnDefinition Width="219*" />
-      <!--  The Fourth column  -->
-
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="3*" />
+      <ColumnDefinition Width="*" />
 
     </Grid.ColumnDefinitions>
 
-    <Grid.RowDefinitions>
 
-
-      <!--  The First Row  -->
-      <!--  The Second Row  -->
-
-
-
-      <RowDefinition Height="565*" />
-      <RowDefinition Height="82*" />
-
-
-
-    </Grid.RowDefinitions>
     <!--
 
       <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
@@ -152,94 +130,84 @@
 
 
     <Grid Grid.Column="1">
-      <ScrollViewer Margin="0"
-                    VerticalScrollBarVisibility="Visible"
-                    Background="Beige"
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+
+      </Grid.RowDefinitions>
+      <ScrollViewer MinWidth="591"
                     MinHeight="539"
-                    MinWidth="591">
+                    Margin="0"
+                    Background="Beige"
+                    VerticalScrollBarVisibility="Visible">
 
         <ItemsControl x:Name="MessageListThingWORK"
+                      MinWidth="591"
                       MinHeight="539"
-                      Margin="0"
-                      Padding="0"
                       Background="#FF419EEA"
                       BorderBrush="#FF008CFF"
-                      ItemsSource="{Binding Messages}"
-                      MinWidth="591" />
+                      ItemsSource="{Binding Messages}" />
       </ScrollViewer>
-    </Grid>
-    <Grid Grid.Column="1"
-          Grid.Row="1"
-          MinHeight="50"
-          Height="16"
-          VerticalAlignment="Top">
+
+
+
       <Button x:Name="Send_message_Button_client"
-              Width="125"
+              Grid.Row="1"
+              Width="88"
               Height="31"
+              Padding="0"
               HorizontalAlignment="Right"
               VerticalAlignment="Bottom"
-              HorizontalContentAlignment="Center"
-              VerticalContentAlignment="Center"
               Panel.ZIndex="1"
               Background="#FF419EEA"
               BorderBrush="#FF008CFF"
               Click="Send_message_Button_Click"
               Content="Send"
               Foreground="#FFFCFDFF"
-              RenderTransformOrigin="0.542,1.415"
-              ScrollViewer.CanContentScroll="True"
-              Grid.Column="1"
-              Grid.Row="1"
-              Padding="0">
-        <Button.RenderTransform>
-          <TransformGroup>
-            <ScaleTransform />
-            <SkewTransform />
-            <RotateTransform />
-            <TranslateTransform Y="-18" />
-          </TransformGroup>
-        </Button.RenderTransform>
-      </Button>
+              ScrollViewer.CanContentScroll="True" />
 
       <TextBox x:Name="User_Message_client_Copy"
+               Height="31"
                MinHeight="0"
+               Margin="0,0,78,0"
+               VerticalAlignment="Top"
                Controls:TextBoxHelper.Watermark="Enter Message"
                Background="#FF419EEA"
                BorderBrush="#FF008CFF"
                CaretBrush="#FF003BB0"
                Foreground="#FFFCFDFF"
                KeyDown="User_Message_client_Copy_KeyDown"
-               RenderTransformOrigin="0.541,2.29"
                SpellCheck.IsEnabled="True"
                TextChanged="User_Message_client_TextChanged"
                TextWrapping="Wrap"
-               MinWidth="591"
-               Margin="0"
-               Height="31"
-               VerticalAlignment="Top" />
+               Grid.Row="1"
+               MinWidth="495" />
+
 
 
     </Grid>
 
 
-
-    <StackPanel Height="auto"
-                Margin="0,0,0,0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Grid.RowSpan="2">
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="20" />
+        <RowDefinition Height="100" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="6" />
+      </Grid.RowDefinitions>
 
       <Label Width="120"
              Height="26"
-             Margin="0,0,-60,0"
+             Margin="76,0,17,0"
              HorizontalAlignment="Center"
              VerticalAlignment="Top"
              Content="Select IP"
-             Foreground="#FFFCFDFF" />
+             Foreground="#FFFCFDFF"
+             Grid.Row="0" />
 
       <ComboBox x:Name="Select_IP_Combo_box"
                 Height="26"
-                Margin="0,0,0,40"
                 VerticalAlignment="Top"
                 Background="#FF419EEA"
                 BorderBrush="#FF008CFF"
@@ -248,7 +216,8 @@
                 IsReadOnly="True"
                 OpacityMask="#FF003BB0"
                 SelectedIndex="0"
-                SelectionChanged="Select_IP_Combo_box_SelectionChanged">
+                SelectionChanged="Select_IP_Combo_box_SelectionChanged"
+                Grid.Row="1">
 
         <ComboBoxItem Margin="0,0,-2,0"
                       Background="#FF419EEA"
@@ -264,59 +233,62 @@
         <!--  This is index 1  -->
       </ComboBox>
 
-      <Button x:Name="Connect_Button_Client"
-              Width="Auto"
-              Height="45"
-              Margin="0,0,10,10"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
-              Click="Connect_Button_Client_Click"
-              Content="Connect"
-              Foreground="#FFFCFDFF" />
-      <Button x:Name="Disconnect"
-              Width="Auto"
-              Height="45"
-              Margin="0,0,10,12"
-              Padding="1,1,1,0"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
-              Click="Disconnect_Button_Client_Click"
-              Content="Disconnect"
-              Foreground="#FFFCFDFF" />
+      <StackPanel Grid.Row="2">
+        <Button x:Name="Connect_Button_Client"
+                Width="Auto"
+                Height="45"
+                Margin="0,0,0,10"
+                Background="#FF419EEA"
+                BorderBrush="#FF008CFF"
+                Click="Connect_Button_Client_Click"
+                Content="Connect"
+                Foreground="#FFFCFDFF" />
+        <Button x:Name="Disconnect"
+                Width="Auto"
+                Height="45"
+                Margin="0,0,0,10"
+                Background="#FF419EEA"
+                BorderBrush="#FF008CFF"
+                Click="Disconnect_Button_Client_Click"
+                Content="Disconnect"
+                Foreground="#FFFCFDFF" />
 
-      <Button x:Name="Friends_button_client"
-              Width="Auto"
-              Height="45"
-              Margin="0,0,10,0"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
-              Click="Freinds_button_client_Click"
-              Content="Friends "
-              Foreground="#FFFCFDFF" />
-      <Button x:Name="Info_button_client"
-              Width="Auto"
-              Margin="0,10,10,0"
-              Click="Info_button_client_Click"
-              Content="Info" />
-      <Button x:Name="Change_name_button"
-              Width="Auto"
-              Margin="0,10,10,0"
-              Click="Button_Click_change_name"
-              Content="Change Name" />
-      <Label x:Name="Add_friend_button_client_Copy"
-             Width="Auto"
-             Height="45"
-             Margin="0,10,10,0"
-             HorizontalContentAlignment="Center"
-             VerticalContentAlignment="Center"
-             Background="#FF419EEA"
-             BorderBrush="#FF008CFF"
-             Content="You are admin"
-             Foreground="#FFFCFDFF" />
-    </StackPanel>
+        <Button x:Name="Friends_button_client"
+                Width="Auto"
+                Height="45"
+                Margin="0,0,0,10"
+                Background="#FF419EEA"
+                BorderBrush="#FF008CFF"
+                Click="Freinds_button_client_Click"
+                Content="Friends "
+                Foreground="#FFFCFDFF" />
+        <Button x:Name="Info_button_client"
+                Width="Auto"
+                Margin="0,0,0,10"
+                Click="Info_button_client_Click"
+                Content="Info" />
+        <Button x:Name="Change_name_button"
+                Width="Auto"
+                Margin="0,0,0,10"
+                Click="Button_Click_change_name"
+                Content="Change Name" />
+        <Label x:Name="Add_friend_button_client_Copy"
+               Width="Auto"
+               Height="45"
+               Margin="0,5,0,12"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Background="#FF419EEA"
+               BorderBrush="#FF008CFF"
+               Content="You are admin"
+               Foreground="#FFFCFDFF" />
+      </StackPanel>
+
+    </Grid>
 
     <!--  If user is admin, have the button appear. If user is not admin. Then have button disappear.  -->
     <TextBox x:Name="Debug_Textbox_for_Disco"
+             Grid.RowSpan="2"
              Grid.Column="2"
              Margin="0,483,0,23"
              d:IsHidden="True"
@@ -326,8 +298,7 @@
              Foreground="White"
              Text="TextBox"
              TextWrapping="Wrap"
-             Visibility="Hidden"
-             Grid.RowSpan="2" />
+             Visibility="Hidden" />
 
 
 
@@ -378,17 +349,17 @@
               <TreeViewItem.ContextMenu>
                 <ContextMenu>
 
-                  <MenuItem BorderBrush="#FF008CFF"
+                  <MenuItem x:Name="SendMessageToFriendMenuItem"
+                            BorderBrush="#FF008CFF"
+                            Click="SendMessageToFriendMenuItem_Click"
                             Foreground="White"
-                            Header="Send Message"
-                            x:Name="SendMessageToFriendMenuItem"
-                            Click="SendMessageToFriendMenuItem_Click" />
+                            Header="Send Message" />
 
-                  <MenuItem BorderBrush="#FF008CFF"
+                  <MenuItem x:Name="RemoveFriendMenuitem"
+                            BorderBrush="#FF008CFF"
+                            Click="RemoveFriendMenuitem_Click"
                             Foreground="White"
-                            Header="Remove  Friend"
-                            x:Name="RemoveFriendMenuitem"
-                            Click="RemoveFriendMenuitem_Click" />
+                            Header="Remove  Friend" />
                 </ContextMenu>
 
               </TreeViewItem.ContextMenu>
@@ -449,29 +420,29 @@
 
           <ListBox.ContextMenu>
             <ContextMenu>
-              <MenuItem BorderBrush="#FF008CFF"
+              <MenuItem x:Name="ContextMenuAddFriend"
+                        BorderBrush="#FF008CFF"
+                        Click="ContextMenuAddFriend_Click"
                         Foreground="White"
-                        Header="Add Friend"
-                        x:Name="ContextMenuAddFriend"
-                        Click="ContextMenuAddFriend_Click" />
+                        Header="Add Friend" />
 
-              <MenuItem BorderBrush="#FF008CFF"
+              <MenuItem x:Name="ContextMenuMuteUser"
+                        BorderBrush="#FF008CFF"
+                        Click="ContextMenuMuteUser_Click"
                         Foreground="White"
-                        Header="Mute User"
-                        x:Name="ContextMenuMuteUser"
-                        Click="ContextMenuMuteUser_Click" />
+                        Header="Mute User" />
 
-              <MenuItem BorderBrush="#FF008CFF"
+              <MenuItem x:Name="ContextMenuKickUser"
+                        BorderBrush="#FF008CFF"
+                        Click="ContextMenuKickUser_Click"
                         Foreground="White"
-                        Header="Kick User"
-                        x:Name="ContextMenuKickUser"
-                        Click="ContextMenuKickUser_Click" />
+                        Header="Kick User" />
 
-              <MenuItem BorderBrush="#FF008CFF"
+              <MenuItem x:Name="ContextMenuBanUser"
+                        BorderBrush="#FF008CFF"
+                        Click="ContextMenuBanUser_Click"
                         Foreground="White"
-                        Header="Ban User"
-                        x:Name="ContextMenuBanUser"
-                        Click="ContextMenuBanUser_Click" />
+                        Header="Ban User" />
             </ContextMenu>
           </ListBox.ContextMenu>
         </ListBox>
