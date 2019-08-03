@@ -51,10 +51,11 @@ namespace SausageChat.Networking
                 UiCtx = SynchronizationContext.Current;
                 MainSocket.BeginAccept(OnUserConnect, null);
                 IsOpen = true;
+                UiCtx.Send(x => Vm.Messages.Add(new ServerMessage("Opened server")));
             }
             else
             {
-                MessageBox.Show("Server is already open", "Sausage Server");
+                UiCtx.Send(x => Vm.Messages.Add(new ServerMessage("Server already open")));
             }
         }
 
@@ -67,7 +68,8 @@ namespace SausageChat.Networking
                 {
                     u.Disconnect();
                 }
-                Vm.Messages.Add(new ServerMessage("Closed all sockets"));
+                UiCtx.Send(x => Vm.Messages.Add(new ServerMessage("Closed all sockets")));
+                IsOpen = false;
             }
             else
             {
@@ -191,7 +193,20 @@ namespace SausageChat.Networking
         // TODO: Add user list
         public static void OnUserConnect(IAsyncResult ar)
         {
-            var user = new SausageConnection(MainSocket.EndAccept(ar));
+            SausageConnection user;
+            try
+            {
+                user = new SausageConnection(MainSocket.EndAccept(ar));
+            }
+            catch(SocketException ex)
+            {
+                Close();
+                return;
+            }
+            catch(ObjectDisposedException ex)
+            {
+                return;
+            }
             if (!Blacklisted.Any(x => x == user.Ip.Address))
             {
                 UiCtx.Send(x => ConnectedUsers.Add(user));
