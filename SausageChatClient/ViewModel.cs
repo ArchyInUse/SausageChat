@@ -44,9 +44,10 @@ namespace SausageChatClient
             UsersList.Add(new User("User1"));
             UsersList.Add(new User("User2"));
             UsersList.Add(new User("User2"));
+      UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2"));
 
 
-            Friends = new Dictionary<string, ObservableCollection<User>>();
+      Friends = new Dictionary<string, ObservableCollection<User>>();
             Friends.Add("OnlineFriends", new ObservableCollection<User>()
             {
                 new User("Sally"),
@@ -57,7 +58,31 @@ namespace SausageChatClient
             {
                 new User("jay"),
                 new User("john"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
+                new User("sasha"),
                 new User("sasha")
+
+
             });
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("This is a user message!"));

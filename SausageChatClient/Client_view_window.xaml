@@ -37,8 +37,6 @@
     </Style>
 
 
-
-
     <Style TargetType="ListBoxItem">
       <Setter Property="Background"
               Value="#FF419EEA" />
@@ -50,9 +48,6 @@
               Value="25" />
       <Setter Property="Margin"
               Value="0" />
-
-
-
     </Style>
 
 
@@ -64,7 +59,6 @@
       <Setter Property="BorderBrush"
               Value="#FF008CFF" />
     </Style>
-
 
 
     <DataTemplate DataType="{x:Type messaging:UserMessage}">
@@ -122,13 +116,6 @@
     </Grid.ColumnDefinitions>
 
 
-    <!--
-
-      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-        -->
-
-
     <Grid Grid.Column="1">
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
@@ -139,7 +126,7 @@
                     MinHeight="539"
                     Margin="0"
                     Background="Beige"
-                    VerticalScrollBarVisibility="Visible">
+                    VerticalScrollBarVisibility="Auto">
 
         <ItemsControl x:Name="MessageListThingWORK"
                       MinWidth="591"
@@ -148,7 +135,6 @@
                       BorderBrush="#FF008CFF"
                       ItemsSource="{Binding Messages}" />
       </ScrollViewer>
-
 
 
       <Button x:Name="Send_message_Button_client"
@@ -167,7 +153,9 @@
               ScrollViewer.CanContentScroll="True" />
 
       <TextBox x:Name="User_Message_client_Copy"
+               Grid.Row="1"
                Height="31"
+               MinWidth="495"
                MinHeight="0"
                Margin="0,0,78,0"
                VerticalAlignment="Top"
@@ -179,11 +167,7 @@
                KeyDown="User_Message_client_Copy_KeyDown"
                SpellCheck.IsEnabled="True"
                TextChanged="User_Message_client_TextChanged"
-               TextWrapping="Wrap"
-               Grid.Row="1"
-               MinWidth="495" />
-
-
+               TextWrapping="Wrap" />
 
     </Grid>
 
@@ -197,16 +181,17 @@
         <RowDefinition Height="6" />
       </Grid.RowDefinitions>
 
-      <Label Width="120"
+      <Label Grid.Row="0"
+             Width="120"
              Height="26"
              Margin="76,0,17,0"
              HorizontalAlignment="Center"
              VerticalAlignment="Top"
              Content="Select IP"
-             Foreground="#FFFCFDFF"
-             Grid.Row="0" />
+             Foreground="#FFFCFDFF" />
 
       <ComboBox x:Name="Select_IP_Combo_box"
+                Grid.Row="1"
                 Height="26"
                 VerticalAlignment="Top"
                 Background="#FF419EEA"
@@ -216,8 +201,7 @@
                 IsReadOnly="True"
                 OpacityMask="#FF003BB0"
                 SelectedIndex="0"
-                SelectionChanged="Select_IP_Combo_box_SelectionChanged"
-                Grid.Row="1">
+                SelectionChanged="Select_IP_Combo_box_SelectionChanged">
 
         <ComboBoxItem Margin="0,0,-2,0"
                       Background="#FF419EEA"
@@ -301,38 +285,40 @@
              Visibility="Hidden" />
 
 
+    <Grid Grid.Column="2"
+          Width="auto"
+          Height="auto">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="40" /> <!-- label -->
+        <RowDefinition Height="*" />  <!-- freinds list -->
+        <RowDefinition Height="20" /> <!-- empty -->
+        <RowDefinition Height="35" /> <!-- label   -->
+        <RowDefinition Height="*" /> <!-- list of users-->
+        <RowDefinition Height="35" />
 
-    <StackPanel Grid.Column="2"
-                Width="auto"
-                Height="auto"
-                Margin="0,0,-5,22"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
-      <!--
-
-      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-            -->
-
+      </Grid.RowDefinitions>
 
       <Label Width="auto"
-             Height="auto"
-             Margin="0,0,5,0"
-             VerticalAlignment="Top"
              HorizontalContentAlignment="Center"
              Content="Friends List"
-             Foreground="White" />
+             Foreground="White"
+             Height="26"
+             VerticalAlignment="Top"
+             Grid.Row="0"/>
 
       <ScrollViewer x:Name="Scrollbar_for_the_freinds_list"
-                    Grid.Column="2 ">
+                    Grid.Row="1"
+                    Background="White"
+                    >
 
         <TreeView x:Name="Freinds_List_view"
                   Height="auto"
-                  Margin="0,29,7,12"
                   Background="#FF419EEA"
                   BorderBrush="#FF008CFF"
                   Foreground="#FFFCFDFF"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible">
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  MinWidth="200"
+                  MinHeight="346">
 
           <TreeViewItem Background="#FF419EEA"
                         BorderBrush="#FF008CFF"
@@ -372,10 +358,8 @@
                           ItemsSource="{Binding Friends[Offlineusers]}">
 
 
-
               <TreeViewItem.ContextMenu>
                 <ContextMenu>
-
 
                   <MenuItem BorderBrush="#FF008CFF"
                             Foreground="White"
@@ -386,9 +370,6 @@
 
             </TreeViewItem>
 
-
-
-
           </TreeViewItem>
 
 
@@ -396,19 +377,21 @@
       </ScrollViewer>
       <Label Width="auto"
              Height="auto"
-             Margin="0,15,11,0"
+             Margin="0,0,0,0"
              HorizontalContentAlignment="Center"
              Content="List of users"
-             Foreground="White" />
+             Foreground="White"
+             Grid.Row="3" />
 
       <ScrollViewer x:Name="Scrollbar_for_the_list_of_users"
-                    Grid.Column="2">
+                    VerticalScrollBarVisibility="Visible"
+                    Grid.Row="4"
+                    Background="White">
 
         <ListBox x:Name="User_List_client"
                  Width="auto"
-                 Height="auto"
-                 Margin="0,17,8,0"
-                 Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
+                 MinHeight="200"
+                 MinWidth="200"
                  Background="#FF419EEA"
                  BorderBrush="#FF008CFF"
                  Foreground="White"
@@ -447,21 +430,9 @@
           </ListBox.ContextMenu>
         </ListBox>
 
-
       </ScrollViewer>
 
-
-      <!--
-
-      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-            -->
-      <!--
-
-      <ListBoxItem Content="User1" Selected="ListBoxItem_Selected" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-      <ListBoxItem Content="User2" Background="#FF419EEA" Foreground="#FFFCFDFF"/>
-            -->
-    </StackPanel>
+    </Grid>
 
   </Grid>
 </Controls:MetroWindow>
