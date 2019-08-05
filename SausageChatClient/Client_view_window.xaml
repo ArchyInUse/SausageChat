@@ -115,7 +115,7 @@
               Padding="0"
               HorizontalAlignment="Right"
               VerticalAlignment="Bottom"
-              Panel.ZIndex="1"
+             
               Background="#FF419EEA"
               BorderBrush="#FF008CFF"
               Click="Send_message_Button_Click"
