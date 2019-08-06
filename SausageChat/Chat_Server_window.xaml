@@ -13,7 +13,10 @@
                       BorderBrush="#FF008CFF"
                       NonActiveBorderBrush="#FF008CFF"
                       NonActiveWindowTitleBrush="#FF008CFF"
-                      mc:Ignorable="d">
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      mc:Ignorable="d"
+
+                      >
 
 
   <Window.Resources>
@@ -93,7 +96,7 @@
       <ScrollViewer Grid.Row="0"
                     MinWidth="400"
                     MinHeight="300"
-                    Background="White"
+                    Background="#202225"
                     Foreground="{x:Null}"
                     VerticalScrollBarVisibility="Visible">
 
@@ -104,7 +107,7 @@
                       MinHeight="315"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
-                      Background="#FF419EEA"
+                      Background="#FF36393F"
                       BorderBrush="#FF008CFF"
                       Foreground="White"
                       ItemsSource="{Binding Messages}"
@@ -115,24 +118,25 @@
       <TextBox Grid.Row="1"
                x:Name="Server_message_input_box"
                Controls:TextBoxHelper.Watermark="Enter Server Message"
-               Background="#FF419EEA"
-               BorderBrush="#FF008CFF"
-               CaretBrush="#FF008CFF"
+               Background="#FF484C52"
+               BorderBrush="#FF484C52"
+               CaretBrush="#FF484C52"
                Foreground="White"
                KeyDown="Server_message_input_box_KeyDown"
                SpellCheck.IsEnabled="True"
                TextChanged="Server_message_button_TextChanged"
                TextWrapping="Wrap"
                Height="31"
-               Margin="0,1,81,1" />
+               Margin="0,1,81,1"
+               SelectionBrush="{x:Null}" />
       <Button Grid.Row="1"
               x:Name="Send_message_Button"
               Height="33"
               Width="81"
               HorizontalAlignment="Right"
               VerticalAlignment="Bottom"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
+              Background="#FF484C52"
+              BorderBrush="#FF484C52"
               Click="Send_message_Button_Click"
               Content="Send"
               Foreground="#FFFCFDFF"
@@ -148,7 +152,6 @@
 
       <Grid.RowDefinitions>
 
-        <RowDefinition Height="100" />
         <RowDefinition Height="100" />
         <RowDefinition Height="100" />
         <RowDefinition Height="100" />
@@ -169,21 +172,8 @@
               Click="Info_Button_Click"
               Content="Info"
               Foreground="#FFFCFDFF" />
-      
-      <Button x:Name="Info2_Button"
-              Grid.Row="1"
-              MinHeight="44"
-              MinWidth="270"
-              HorizontalAlignment="Left"
-              VerticalAlignment="Top"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
-              Click="Button_Click"
-              Content="info?"
-              Foreground="#FFFCFDFF"
-              Margin="5,0,5,10" />
       <Button x:Name="Stop_Server"
-              Grid.Row="2"
+              Grid.Row="1"
               MinHeight="44"
               MinWidth="270"
               HorizontalAlignment="Left"
@@ -197,7 +187,7 @@
               Margin="5,0,5,10" />
 
       <Button x:Name="Start_server"
-              Grid.Row="3"
+              Grid.Row="2"
               MinHeight="44"
               MinWidth="270"
               HorizontalAlignment="Left"
@@ -285,15 +275,6 @@
 
         </ListBox>
       </ScrollViewer>
-      <TextBox x:Name="DebugBox"
-               Grid.Row="2"
-               MinHeight="175"
-               MinWidth="201"
-               Background="#FF419EEA"
-               BorderBrush="#FF008CFF"
-               Foreground="White"
-               TextWrapping="Wrap"
-               Margin="10,10,10,10" />
     </Grid>
 
 

@@ -100,7 +100,7 @@ namespace SausageChat
         /// <param name="text">The text<see cref="string"/></param>
         public void AddTextToDebugBox(string text)
         {
-            DebugBox.Text += text;
+            //DebugBox.Text += text;
         }
 
         /// <summary>
