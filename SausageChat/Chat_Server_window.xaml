@@ -9,7 +9,7 @@
                       xmlns:messaging="clr-namespace:SausageChat.Core.Messaging;assembly=SausageChat.Core"
                       Width="1074"
                       Height="675"
-                      Background="#FF008CFF"
+                      Background="{x:Null}"
                       BorderBrush="#FF008CFF"
                       NonActiveBorderBrush="#FF008CFF"
                       NonActiveWindowTitleBrush="#FF008CFF"
@@ -24,7 +24,7 @@
 
     <Style TargetType="ListBoxItem">
       <Setter Property="Background"
-              Value="#FF419EEA" />
+              Value="#FF202225" />
       <Setter Property="Foreground"
               Value="#FFFCFDFF" />
       <Setter Property="BorderBrush"
@@ -45,7 +45,7 @@
 
     <DataTemplate DataType="{x:Type messaging:ServerMessage}">
       <TextBlock HorizontalAlignment="Center"
-                 Foreground="#011627"
+                 Foreground="Red"
                  Text="{Binding}" />
     </DataTemplate>
 
@@ -57,7 +57,7 @@
 
 
   
-  <Grid Background="#FF008CFF">
+  <Grid>
 
     <Grid.ColumnDefinitions>
       <!--  Define the columns for the grid  -->
@@ -98,7 +98,8 @@
                     MinHeight="300"
                     Background="#202225"
                     Foreground="{x:Null}"
-                    VerticalScrollBarVisibility="Visible">
+                    VerticalScrollBarVisibility="Visible"
+                    BorderBrush="#FF36393F">
 
 
 
@@ -108,7 +109,7 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       Background="#FF36393F"
-                      BorderBrush="#FF008CFF"
+                      BorderBrush="#FF36393F"
                       Foreground="White"
                       ItemsSource="{Binding Messages}"
                       Margin="0,0,5,0">
@@ -148,7 +149,8 @@
     <Grid x:Name="Stack_panel_for_buttons"
           Grid.Column="0"
           Width="auto"
-          Height="auto">
+          Height="auto"
+          Background="#FF2F3136">
 
       <Grid.RowDefinitions>
 
@@ -167,8 +169,8 @@
               Margin="5,10,5,10"
               VerticalAlignment="Top"
               HorizontalAlignment="Left"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
+              Background="#FF202225"
+              BorderBrush="#FF484C52"
               Click="Info_Button_Click"
               Content="Info"
               Foreground="#FFFCFDFF" />
@@ -178,9 +180,8 @@
               MinWidth="270"
               HorizontalAlignment="Left"
               VerticalAlignment="Top"
-              
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
+              Background="#FF202225"
+              BorderBrush="#FF484C52"
               Click="Stop_Server_Click"
               Content="Stop Server"
               Foreground="#FFFCFDFF"
@@ -192,8 +193,8 @@
               MinWidth="270"
               HorizontalAlignment="Left"
               VerticalAlignment="Top"
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
+              Background="#FF202225"
+              BorderBrush="#FF484C52"
               Click="Start_server_Click"
               Content="Start Server"
               Foreground="#FFFCFDFF"
@@ -202,7 +203,7 @@
     <!--  The item source should be bound to the Users list in the VM, and it can bind to the name property  -->
 
     <Grid Grid.Column="2"
-          >
+          Background="#FF2F3136">
       <Grid.RowDefinitions>
 
         <RowDefinition Height="*" />
@@ -225,13 +226,14 @@
              Foreground="White"
              />
       <ScrollViewer  Grid.Row="1"
-                     Background="White"
-                     Margin="10,0,0,0" >
+                     Background="#FF202225"
+                     Margin="10,0,0,0"
+                     Foreground="White">
         <ListBox x:Name="User_List"
                  MinWidth="201"
                  MinHeight="216"
-                 Background="#FF419EEA"
-                 BorderBrush="#FF008CFF"
+                 Background="#FF2F3136"
+                 BorderBrush="#FF484C52"
                  Foreground="#FFFCFDFF"
                  ItemsSource="{Binding ConnectedUsers}"
                  SelectionChanged="ListBox_SelectionChanged"
