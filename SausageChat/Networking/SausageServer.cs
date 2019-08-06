@@ -15,7 +15,6 @@ using System.Threading;
 
 namespace SausageChat.Networking
 {
-    // TD -> when renaming, make sure there isn't another user called the same name (would mess up Mute/Kick/Ban)
     static class SausageServer
     {
         public static bool IsOpen { get; set; } = false;

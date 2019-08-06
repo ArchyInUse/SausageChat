@@ -200,7 +200,6 @@
               Foreground="#FFFCFDFF"
               Margin="5,0" />
     </Grid>
-    <!--  The item source should be bound to the Users list in the VM, and it can bind to the name property  -->
 
     <Grid Grid.Column="2"
           Background="#FF2F3136">
@@ -268,8 +267,8 @@
               
                         
               <MenuItem Header="Info"
-                        x:Name="Context_menu_info_user"
-                   
+                        x:Name="ContextMenuInfo"
+                        Click="ContextMenuInfo_Click"
                 />
 
             </ContextMenu>

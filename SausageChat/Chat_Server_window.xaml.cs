@@ -200,5 +200,10 @@ namespace SausageChat
         {
             await SausageServer.Ban(SausageServer.Vm.SelectedUser);
         }
+
+        private void ContextMenuInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
