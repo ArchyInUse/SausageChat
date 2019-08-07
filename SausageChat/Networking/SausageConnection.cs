@@ -156,10 +156,13 @@ namespace SausageChat.Networking
                     break;
                 case PacketOption.FriendRequest:
                     SausageConnection reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
-                    if(reciever == null)
+                    if (reciever == null)
                         SendAsync(new PacketFormat(PacketOption.IsServer) { Content = "User not found" });
                     else
+                    {
                         reciever.SendAsync(Message);
+                        UiCtx.Send(x => Vm.Messages.Add(new ServerMessage($"{UserInfo} requested {reciever} for a friend request.")));
+                    }
                     break;
                 case PacketOption.FriendRequestAccepted:
                     SausageConnection r = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
