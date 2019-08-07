@@ -131,13 +131,6 @@ namespace SausageChat.Networking
                     Disconnect();
                     SausageServer.UsersDictionary.Remove(Message.Guid);
                     break;
-                case PacketOption.UserList:
-                    PacketFormat packet = new PacketFormat(PacketOption.UserList)
-                    {
-                        UsersList = SausageServer.UsersDictionary.Users.ToArray()
-                    };
-                    SendAsync(packet);
-                    break;
                 case PacketOption.UserBanned:
                     if(UserInfo.IsAdmin)
                         SausageServer.Ban(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
