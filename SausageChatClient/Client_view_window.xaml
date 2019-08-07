@@ -10,7 +10,7 @@
                       Title="Client_view"
                       Width="1074"
                       Height="675"
-                      Background="#FF008CFF"
+                      Background="#FF484C52"
                       NonActiveBorderBrush="#FF008CFF"
                       NonActiveWindowTitleBrush="#FF008CFF"
                       mc:Ignorable="d">
@@ -55,9 +55,9 @@
       <Setter Property="Foreground"
               Value="White" />
       <Setter Property="Background"
-              Value="#FF419EEA" />
+              Value="Gainsboro" />
       <Setter Property="BorderBrush"
-              Value="#FF008CFF" />
+              Value="Gold" />
     </Style>
 
 
@@ -96,28 +96,30 @@
       <ScrollViewer MinWidth="591"
                     MinHeight="539"
                     Margin="0"
-                    Background="Beige"
-                    VerticalScrollBarVisibility="Auto">
+                    Background="#FF36393F"
+                    VerticalScrollBarVisibility="Auto"
+                    BorderBrush="#FF36393F"
+                    Foreground="{x:Null}">
 
         <ItemsControl x:Name="MessageListThingWORK"
                       MinWidth="591"
                       MinHeight="539"
-                      Background="#FF419EEA"
-                      BorderBrush="#FF008CFF"
-                      ItemsSource="{Binding Messages}" />
+                      Background="#FF36393F"
+                      BorderBrush="#FF36393F"
+                      ItemsSource="{Binding Messages}"
+                      Foreground="White" />
       </ScrollViewer>
 
 
       <Button x:Name="Send_message_Button_client"
               Grid.Row="1"
-              Width="88"
+              Width="78"
               Height="31"
               Padding="0"
               HorizontalAlignment="Right"
               VerticalAlignment="Bottom"
-             
-              Background="#FF419EEA"
-              BorderBrush="#FF008CFF"
+              Background="#FF484C52"
+              BorderBrush="#FF484C52"
               Click="Send_message_Button_Click"
               Content="Send"
               Foreground="#FFFCFDFF"
@@ -131,20 +133,22 @@
                Margin="0,0,78,0"
                VerticalAlignment="Top"
                Controls:TextBoxHelper.Watermark="Enter Message"
-               Background="#FF419EEA"
-               BorderBrush="#FF008CFF"
-               CaretBrush="#FF003BB0"
+               Background="#FF484C52"
+               BorderBrush="#FF484C52"
+               CaretBrush="#FF484C52"
                Foreground="#FFFCFDFF"
                KeyDown="User_Message_client_Copy_KeyDown"
                SpellCheck.IsEnabled="True"
                TextChanged="User_Message_client_TextChanged"
-               TextWrapping="Wrap" />
+               TextWrapping="Wrap"
+               SelectionBrush="{x:Null}" />
 
     </Grid>
 
 
     <Grid HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
+          VerticalAlignment="Stretch"
+          Background="#FF2F3136">
       <Grid.RowDefinitions>
         <RowDefinition Height="20" />
         <RowDefinition Height="100" />
@@ -165,36 +169,37 @@
                 Grid.Row="1"
                 Height="26"
                 VerticalAlignment="Top"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
+                Background="#FF36393F"
+                BorderBrush="#FF36393F"
                 Foreground="White"
                 IsDropDownOpen="True"
                 IsReadOnly="True"
-                OpacityMask="#FF003BB0"
                 SelectedIndex="0"
                 SelectionChanged="Select_IP_Combo_box_SelectionChanged">
 
         <ComboBoxItem Margin="0,0,-2,0"
-                      Background="#FF419EEA"
-                      BorderBrush="#FF008CFF"
+                      Background="#FF36393F"
+                      Foreground="White"
+                      BorderBrush="#FF36393F"
                       Content="Disco's IP" />
         <!--  This is index 0  -->
         <ComboBoxItem Margin="0,0,-2,0"
-                      Background="#FF419EEA"
-                      BorderBrush="#FF008CFF"
-                      Content="Monte's IP"
+                      Background="#FF36393F"
+                      BorderBrush="#FF36393F"
                       Foreground="White"
-                      OpacityMask="#FF003BB0" />
+                      Content="Monte's IP"
+                      />
         <!--  This is index 1  -->
       </ComboBox>
 
-      <StackPanel Grid.Row="2">
+      <StackPanel Grid.Row="2"
+                  Background="#FF2F3136">
         <Button x:Name="Connect_Button_Client"
                 Width="Auto"
                 Height="45"
                 Margin="0,0,0,10"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
+                Background="#FF202225"
+                BorderBrush="#FF484C52"
                 Click="Connect_Button_Client_Click"
                 Content="Connect"
                 Foreground="#FFFCFDFF" />
@@ -202,8 +207,8 @@
                 Width="Auto"
                 Height="45"
                 Margin="0,0,0,10"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
+                Background="#FF202225"
+                BorderBrush="#FF484C52"
                 Click="Disconnect_Button_Client_Click"
                 Content="Disconnect"
                 Foreground="#FFFCFDFF" />
@@ -212,8 +217,8 @@
                 Width="Auto"
                 Height="45"
                 Margin="0,0,0,10"
-                Background="#FF419EEA"
-                BorderBrush="#FF008CFF"
+                Background="#FF202225"
+                BorderBrush="#FF484C52"
                 Click="Freinds_button_client_Click"
                 Content="Friends "
                 Foreground="#FFFCFDFF" />
@@ -221,20 +226,24 @@
                 Width="Auto"
                 Margin="0,0,0,10"
                 Click="Info_button_client_Click"
-                Content="Info" />
+                Content="Info"
+                Background="#FF202225"
+                BorderBrush="#FF484C52" />
         <Button x:Name="Change_name_button"
                 Width="Auto"
                 Margin="0,0,0,10"
                 Click="Button_Click_change_name"
-                Content="Change Name" />
+                Content="Change Name"
+                Background="#FF202225"
+                BorderBrush="#FF484C52" />
         <Label x:Name="Add_friend_button_client_Copy"
                Width="Auto"
                Height="45"
                Margin="0,5,0,12"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"
-               Background="#FF419EEA"
-               BorderBrush="#FF008CFF"
+               Background="#FF202225"
+               BorderBrush="#FF484C52"
                Content="You are admin"
                Foreground="#FFFCFDFF" />
       </StackPanel>
@@ -258,85 +267,87 @@
 
     <Grid Grid.Column="2"
           Width="auto"
-          Height="auto">
+          Height="auto"
+          Background="#FF36393F">
       <Grid.RowDefinitions>
-        <RowDefinition Height="40" /> <!-- label -->
-        <RowDefinition Height="*" />  <!-- freinds list -->
-        <RowDefinition Height="20" /> <!-- empty -->
-        <RowDefinition Height="35" /> <!-- label   -->
-        <RowDefinition Height="*" /> <!-- list of users-->
+        <RowDefinition Height="40" />
+        <!--  label  -->
+        <RowDefinition Height="*" />
+        <!--  freinds list  -->
+        <RowDefinition Height="20" />
+        <!--  empty  -->
+        <RowDefinition Height="35" />
+        <!--  label  -->
+        <RowDefinition Height="*" />
+        <!--  list of users  -->
         <RowDefinition Height="35" />
 
       </Grid.RowDefinitions>
 
-      <Label Width="auto"
-             HorizontalContentAlignment="Center"
-             Content="Friends List"
-             Foreground="White"
+      <Label Grid.Row="0"
+             Width="auto"
              Height="26"
              VerticalAlignment="Top"
-             Grid.Row="0"/>
+             HorizontalContentAlignment="Center"
+             Content="Friends List"
+             Foreground="White" />
 
       <ScrollViewer x:Name="Scrollbar_for_the_freinds_list"
                     Grid.Row="1"
-                    Background="White">
+                    Background="#FF202225"
+                    Margin="10,0,0,0">
 
         <TreeView x:Name="Freinds_List_view"
                   Height="auto"
-                  Background="#FF419EEA"
-                  BorderBrush="#FF008CFF"
-                  Foreground="#FFFCFDFF"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                   MinWidth="200"
-                  MinHeight="346">
+                  MinHeight="346"
+                  Background="#FF36393F"
+                  BorderBrush="#FF202225"
+                  Foreground="#FFFCFDFF"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible">
 
-          <TreeViewItem Background="#FF419EEA"
-                        BorderBrush="#FF008CFF"
-                        Foreground="#FFFCFDFF"
+          <TreeViewItem Background="#FF36393F"
+                        Foreground="White"
+                        BorderBrush="#FF36393F"
                         Header="Friends"
                         IsExpanded="True">
 
-            <TreeViewItem Background="#FF419EEA"
-                          Foreground="#FFFCFDFF"
+            <TreeViewItem Background="Wheat"
+                          Foreground="White"
                           Header="Online Friends"
                           IsExpanded="True"
-                          ItemsSource="{Binding Friends[OnlineFriends]}">
+                          ItemsSource="{Binding Friends[OnlineFriends]}"
+                          >
 
               <TreeViewItem.ContextMenu>
                 <ContextMenu>
 
                   <MenuItem x:Name="SendMessageToFriendMenuItem"
-                            Header="Send message"
-                          
                             Click="SendMessageToFriendMenuItem_Click"
-                           
-                                              />
-                            
-                  
+                            Header="Send message" />
+
+
 
                   <MenuItem x:Name="RemoveFriendMenuitem"
-                            
                             Click="RemoveFriendMenuitem_Click"
-                           
                             Header="Remove  Friend" />
                 </ContextMenu>
 
               </TreeViewItem.ContextMenu>
             </TreeViewItem>
 
-            <TreeViewItem Background="#FF419EEA"
+            <TreeViewItem Background="#FF36393F"
                           Foreground="#FFFCFDFF"
                           Header="Offline Friends"
                           IsExpanded="True"
-                          ItemsSource="{Binding Friends[Offlineusers]}">
+                          ItemsSource="{Binding Friends[Offlineusers]}"
+                          BorderBrush="#FF36393F">
 
 
               <TreeViewItem.ContextMenu>
                 <ContextMenu>
 
-                  <MenuItem 
-                           
-                            Header="Remove  Friend" />
+                  <MenuItem Header="Remove  Friend" />
                 </ContextMenu>
 
               </TreeViewItem.ContextMenu>
@@ -348,25 +359,26 @@
 
         </TreeView>
       </ScrollViewer>
-      <Label Width="auto"
+      <Label Grid.Row="3"
+             Width="auto"
              Height="auto"
              Margin="0,0,0,0"
              HorizontalContentAlignment="Center"
              Content="List of users"
-             Foreground="White"
-             Grid.Row="3" />
+             Foreground="White" />
 
       <ScrollViewer x:Name="Scrollbar_for_the_list_of_users"
-                    VerticalScrollBarVisibility="Visible"
                     Grid.Row="4"
-                    Background="White">
+                    Background="#FF202225"
+                    
+                    Margin="10,0,0,0">
 
         <ListBox x:Name="User_List_client"
                  Width="auto"
-                 MinHeight="200"
                  MinWidth="200"
-                 Background="#FF419EEA"
-                 BorderBrush="#FF008CFF"
+                 MinHeight="200"
+                 Background="#FF36393F"
+                 BorderBrush="#FF202225"
                  Foreground="White"
                  ItemsSource="{Binding UsersList.Users}"
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
@@ -377,27 +389,19 @@
           <ListBox.ContextMenu>
             <ContextMenu>
               <MenuItem x:Name="ContextMenuAddFriend"
-                       
                         Click="ContextMenuAddFriend_Click"
-                       
                         Header="Add Friend" />
 
               <MenuItem x:Name="ContextMenuMuteUser"
-                       
                         Click="ContextMenuMuteUser_Click"
-                       
                         Header="Mute User" />
 
               <MenuItem x:Name="ContextMenuKickUser"
-                       
                         Click="ContextMenuKickUser_Click"
-                       
                         Header="Kick User" />
 
               <MenuItem x:Name="ContextMenuBanUser"
-                       
                         Click="ContextMenuBanUser_Click"
-                       
                         Header="Ban User" />
             </ContextMenu>
           </ListBox.ContextMenu>

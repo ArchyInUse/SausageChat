@@ -57,7 +57,7 @@
 
 
   
-  <Grid>
+  <Grid Background="#FF36393F">
 
     <Grid.ColumnDefinitions>
       <!--  Define the columns for the grid  -->
@@ -84,7 +84,8 @@
           Height="auto"
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch"
-          Grid.Column="1">
+          Grid.Column="1"
+          Background="#FF36393F">
 
       <Grid.RowDefinitions>
 
