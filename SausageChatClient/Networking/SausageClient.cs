@@ -184,7 +184,8 @@ namespace SausageChatClient.Networking
                 case PacketOption.GetGuid:
                     ClientInfo = new User(Message.Guid.ToString(), Message.Guid);
                     Log(new ServerMessage($"{Message.Guid.ToString()} has joined."));
-                    UsersList.Add(Message.UsersList);
+                    if(Message.UsersList != null)
+                        UsersList.Add(Message.UsersList);
                     UsersList.Add(ClientInfo);
                     break;
                 case PacketOption.FriendRequest:
