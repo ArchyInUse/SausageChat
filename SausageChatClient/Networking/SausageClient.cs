@@ -230,13 +230,11 @@ namespace SausageChatClient.Networking
             {
                 Socket.BeginSend(bytesMessage, 0, bytesMessage.Length, SocketFlags.None, OnSendComplete, null);
             }
-            catch(SocketException)
+            catch (SocketException)
             {
                 return;
             }
         }
-
-        public static void Send(IMessage message) => Send(message.ToString());
 
         public static void Send(PacketFormat packet) => Send(JsonConvert.SerializeObject(packet));
 
