@@ -11,8 +11,9 @@
                       Width="1074"
                       Height="675"
                       Background="#FF484C52"
-                      NonActiveBorderBrush="#FF008CFF"
-                      NonActiveWindowTitleBrush="#FF008CFF"
+                      NonActiveBorderBrush="#FF484C52"
+                      NonActiveWindowTitleBrush="#FF484C52"
+                     
                       mc:Ignorable="d">
 
 
@@ -74,7 +75,7 @@
   </Window.Resources>
 
   <Grid x:Name="Grid_client_view"
-        Background="#FF008CFF">
+        Background="#FF484C52">
 
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
@@ -380,7 +381,6 @@
                  Foreground="White"
                  ItemsSource="{Binding UsersList.Users}"
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"
                  SelectedIndex="0"
                  SelectionChanged="ListBox_SelectionChanged">
 
