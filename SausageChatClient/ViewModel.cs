@@ -25,7 +25,7 @@ namespace SausageChatClient
         }
 
         public SausageUserList UsersList { get; set; }
-        
+
         public User SelectedUser { get; set; } = null;
         public User SelectedFriend { get; set; } = null;
 
@@ -44,10 +44,10 @@ namespace SausageChatClient
             UsersList.Add(new User("User1"));
             UsersList.Add(new User("User2"));
             UsersList.Add(new User("User2"));
-      UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2"));
+            UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2")); UsersList.Add(new User("User2"));
 
 
-      Friends = new Dictionary<string, ObservableCollection<User>>();
+            Friends = new Dictionary<string, ObservableCollection<User>>();
             Friends.Add("OnlineFriends", new ObservableCollection<User>()
             {
                 new User("Sally"),
@@ -58,39 +58,15 @@ namespace SausageChatClient
             {
                 new User("jay"),
                 new User("john"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
-                new User("sasha"),
                 new User("sasha")
-
-
             });
             Messages = new ObservableCollection<IMessage>();
             Messages.Add(new UserMessage("This is a user message!"));
             Messages.Add(new ServerMessage("This is a server message"));
 
-      Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message"));
-      Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message"));
-    }
+            Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message"));
+            Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message")); Messages.Add(new ServerMessage("This is a server message"));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
