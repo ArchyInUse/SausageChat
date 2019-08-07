@@ -105,7 +105,7 @@ namespace SausageChatClient.Networking
                 return;
             }
 
-            StripData();
+            SausageHelper.StripData(ref Data);
             Parse(Encoding.ASCII.GetString(Data));
 
             Data = new byte[1024];
@@ -127,9 +127,8 @@ namespace SausageChatClient.Networking
                 case PacketOption.NameChange:
                     if (Message.Guid != ClientInfo.Guid)
                     {
-                        User user = UsersList[Message.Guid];
-                        Log(new ServerMessage($"{user.Name} has changed their name to {Message.NewName}"));
-                        user.Name = Message.NewName;
+                        Log(new ServerMessage($"{UsersList[Message.Guid].Name} has changed their name to {Message.NewName}"));
+                        UsersList[Message.Guid].Name = Message.NewName;
                         break;
                     }
                     Log(new ServerMessage($"You changed your name to {ClientInfo.Name}"));
@@ -219,11 +218,6 @@ namespace SausageChatClient.Networking
             }
         }
 
-        /// <summary>
-        /// removes all null characters
-        /// </summary>
-        private static void StripData() => Array.Resize(ref Data, Array.FindLastIndex(Data, Data.Length - 1, x => x != 0) + 1);
-
         public static void Send(string message)
         {
             if (!Socket.Connected) return;
@@ -302,7 +296,7 @@ namespace SausageChatClient.Networking
         // the server will return the rename message thus no need for logging (in client)
         public static void Rename(string newName)
         {
-            ClientInfo.Name = newName;
+            UsersList[ClientInfo.Guid].Name = newName;
             PacketFormat packet = new PacketFormat(PacketOption.NameChange)
             {
                 Guid = ClientInfo.Guid,

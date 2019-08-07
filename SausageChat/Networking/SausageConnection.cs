@@ -113,6 +113,9 @@ namespace SausageChat.Networking
 
         private void Parse(string msg)
         {
+            byte[] m = Encoding.ASCII.GetBytes(msg);
+            SausageHelper.StripData(ref m);
+            msg = Encoding.ASCII.GetString(m);
             PacketFormat Message = JsonConvert.DeserializeObject<PacketFormat>(msg);
 
             switch (Message.Option)
