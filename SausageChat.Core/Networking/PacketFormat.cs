@@ -18,13 +18,11 @@ namespace SausageChat.Core.Networking
         // for Json.NET
         #region JsonMethods
 
-        public bool ShouldSerializeGuid() => Option != PacketOption.IsServer ||
-                                             Option != PacketOption.UserList;
+        public bool ShouldSerializeGuid() => Option != PacketOption.IsServer;
         public bool ShouldSerializeNewName() => Option == PacketOption.NameChange ||
                                                 Option == PacketOption.UserConnected;
-        public bool ShouldSerializeUsersList() => Option == PacketOption.UserList;
+        public bool ShouldSerializeUsersList() => Option == PacketOption.GetGuid;
         public bool ShouldSerializeContent() => Option != PacketOption.NameChange ||
-                                              Option != PacketOption.UserList ||
                                               Option != PacketOption.UserConnected ||
                                               Option != PacketOption.UserDisconnected;
         public bool ShouldSerializeSender() => Option == PacketOption.UserBanned ||

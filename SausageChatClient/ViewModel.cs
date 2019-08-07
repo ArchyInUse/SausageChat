@@ -41,24 +41,10 @@ namespace SausageChatClient
         {
             UsersList = new SausageUserList();
 
-            UsersList.Add(new User("User1"));
-            UsersList.Add(new User("User2"));
-
 
             Friends = new Dictionary<string, ObservableCollection<User>>();
-            Friends.Add("OnlineFriends", new ObservableCollection<User>()
-            {
-                new User("Sally"),
-                new User("Bob"),
-                new User("Francis")
-            });
-            Friends.Add("Offlineusers", new ObservableCollection<User>()
-            {
-                new User("jay"),
-                new User("john"),
-                new User("sasha")
-            });
             Messages = new ObservableCollection<IMessage>();
+
             Messages.Add(new UserMessage("This is a user message!"));
             Messages.Add(new ServerMessage("This is a server message"));
 

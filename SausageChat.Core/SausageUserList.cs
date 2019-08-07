@@ -41,6 +41,8 @@ namespace SausageChat.Core
             CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(CCA, nameof(Users)));
         }
 
+        public User[] ToArray() => Users.ToArray();
+
         public void Remove(Guid guid)
         {
             UiCtx.Send(y => Users.Remove(Users.FirstOrDefault(x => x.Guid == guid)));
@@ -52,6 +54,14 @@ namespace SausageChat.Core
             UiCtx.Send(x => Users.Remove(user));
 
             UiCtx.Send(x => NotifyCollectionChanged(NotifyCollectionChangedAction.Remove));
+        }
+
+        public void Add(User[] UsersArray)
+        {
+            foreach(var u in UsersArray)
+            {
+                Add(u);
+            }
         }
 
         public void Add(User user)

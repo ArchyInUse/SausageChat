@@ -181,12 +181,10 @@ namespace SausageChatClient.Networking
                     Log(new ServerMessage($"{UsersList[Message.Guid]} has disconnected"));
                     UsersList.Remove(Message.Guid);
                     break;
-                case PacketOption.UserList:
-                    Vm.UsersList = new SausageUserList(Message.UsersList);
-                    break;
                 case PacketOption.GetGuid:
                     ClientInfo = new User(Message.Guid.ToString(), Message.Guid);
                     Log(new ServerMessage($"{Message.Guid.ToString()} has joined."));
+                    UsersList.Add(Message.UsersList);
                     UsersList.Add(ClientInfo);
                     break;
                 case PacketOption.FriendRequest:

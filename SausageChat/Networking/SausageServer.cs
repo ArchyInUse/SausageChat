@@ -211,18 +211,19 @@ namespace SausageChat.Networking
                 UiCtx.Send(x => ConnectedUsers.Add(user));
                 UiCtx.Send(x => Vm.ConnectedUsers = SortUsersList());
                 UiCtx.Send(x => Mw.AddTextToDebugBox($"User connected on {user.Ip}\n"));
-                UsersDictionary.Add(user.UserInfo);
                 // global packet for all the users to know the user has joined
                 PacketFormat GlobalPacket = new PacketFormat(PacketOption.UserConnected)
                 {
                     Guid = user.UserInfo.Guid,
-                    NewName = user.UserInfo.Name
+                    NewName = user.UserInfo.Name,
+                    UsersList = UsersDictionary.ToArray()
                 };
                 // local packet for the user (who joined) to get his GUID
                 PacketFormat LocalPacket = new PacketFormat(PacketOption.GetGuid)
                 {
                     Guid = user.UserInfo.Guid
                 };
+                UsersDictionary.Add(user.UserInfo);
                 user.SendAsync(LocalPacket);
                 Log(GlobalPacket, user);
             }
