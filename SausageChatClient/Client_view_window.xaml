@@ -38,12 +38,7 @@
 
 
     <Style TargetType="ListBoxItem">
-      <Setter Property="Background"
-              Value="#FF419EEA" />
-      <Setter Property="Foreground"
-              Value="#FFFCFDFF" />
-      <Setter Property="BorderBrush"
-              Value="Transparent" />
+      
       <Setter Property="Height"
               Value="25" />
       <Setter Property="Margin"
@@ -54,8 +49,7 @@
     <Style TargetType="{x:Type TreeViewItem}">
       <Setter Property="Foreground"
               Value="White" />
-      <Setter Property="Background"
-              Value="Gainsboro" />
+     
       <Setter Property="BorderBrush"
               Value="Gold" />
     </Style>
@@ -64,13 +58,16 @@
     <DataTemplate DataType="{x:Type messaging:UserMessage}">
       <TextBlock HorizontalAlignment="Left"
                  Foreground="White"
-                 Text="{Binding}" />
+                 Text="{Binding}"
+                 FontSize="15"/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type messaging:ServerMessage}">
       <TextBlock HorizontalAlignment="Center"
-                 Foreground="#011627"
-                 Text="{Binding}" />
+                 Foreground="#FFB33C40"
+                 Text="{Binding}"
+                 FontSize="20"
+                 FontWeight="Bold" />
     </DataTemplate>
 
 
@@ -107,7 +104,8 @@
                       Background="#FF36393F"
                       BorderBrush="#FF36393F"
                       ItemsSource="{Binding Messages}"
-                      Foreground="White" />
+                      Foreground="White"
+                      />
       </ScrollViewer>
 
 
@@ -169,7 +167,7 @@
                 Grid.Row="1"
                 Height="26"
                 VerticalAlignment="Top"
-                Background="#FF36393F"
+                Background="#FF434751"
                 BorderBrush="#FF36393F"
                 Foreground="White"
                 IsDropDownOpen="True"
@@ -312,12 +310,12 @@
                         Header="Friends"
                         IsExpanded="True">
 
-            <TreeViewItem Background="Wheat"
-                          Foreground="White"
+            <TreeViewItem Background="#FF36393F"
+                          
                           Header="Online Friends"
                           IsExpanded="True"
                           ItemsSource="{Binding Friends[OnlineFriends]}"
-                          >
+                          BorderBrush="#FF36393F">
 
               <TreeViewItem.ContextMenu>
                 <ContextMenu>
