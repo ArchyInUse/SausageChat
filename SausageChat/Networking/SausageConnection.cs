@@ -161,7 +161,7 @@ namespace SausageChat.Networking
                     else
                     {
                         reciever.SendAsync(Message);
-                        UiCtx.Send(x => Vm.Messages.Add(new ServerMessage($"{UserInfo} requested {reciever} for a friend request.")));
+                        SausageServer.UiCtx.Send(x => SausageServer.Vm.Messages.Add(new ServerMessage($"{UserInfo} requested {reciever} for a friend request.")));
                     }
                     break;
                 case PacketOption.FriendRequestAccepted:
