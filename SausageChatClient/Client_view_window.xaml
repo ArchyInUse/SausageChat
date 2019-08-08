@@ -383,6 +383,11 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
                  SelectedIndex="0"
                  SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
 
           <ListBox.ContextMenu>
             <ContextMenu>
