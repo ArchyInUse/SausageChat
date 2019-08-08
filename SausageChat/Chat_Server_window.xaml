@@ -40,13 +40,16 @@
     <DataTemplate DataType="{x:Type messaging:UserMessage}">
       <TextBlock HorizontalAlignment="Left"
                  Foreground="White"
-                 Text="{Binding}" />
+                 Text="{Binding}"
+                 FontSize="15" />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type messaging:ServerMessage}">
       <TextBlock HorizontalAlignment="Center"
-                 Foreground="Red"
-                 Text="{Binding}" />
+                 Foreground="#FFB33C40"
+                 Text="{Binding}"
+                 FontSize="20"
+                 FontWeight="Bold" />
     </DataTemplate>
 
 
@@ -100,6 +103,7 @@
                     Background="#202225"
                     Foreground="{x:Null}"
                     VerticalScrollBarVisibility="Visible"
+                    HorizontalScrollBarVisibility="Auto"
                     BorderBrush="#FF36393F">
 
 
