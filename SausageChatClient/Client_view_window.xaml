@@ -96,6 +96,7 @@
                     Margin="0"
                     Background="#FF36393F"
                     VerticalScrollBarVisibility="Auto"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
                     BorderBrush="#FF36393F"
                     Foreground="{x:Null}">
 
@@ -267,7 +268,7 @@
     <Grid Grid.Column="2"
           Width="auto"
           Height="auto"
-          Background="#FF36393F">
+          Background="#FF2F3136">
       <Grid.RowDefinitions>
         <RowDefinition Height="40" />
         <!--  label  -->
@@ -300,7 +301,7 @@
                   Height="auto"
                   MinWidth="200"
                   MinHeight="346"
-                  Background="#FF36393F"
+                  Background="#FF2F3136"
                   BorderBrush="#FF202225"
                   Foreground="#FFFCFDFF"
                   ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -376,7 +377,7 @@
                  Width="auto"
                  MinWidth="200"
                  MinHeight="200"
-                 Background="#FF36393F"
+                 Background="#FF2F3136"
                  BorderBrush="#FF202225"
                  Foreground="White"
                  ItemsSource="{Binding UsersList.Users}"
