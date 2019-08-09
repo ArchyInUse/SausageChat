@@ -197,7 +197,10 @@ namespace SausageChatClient
 
   
     private void SendMessageToFriendMenuItem_Click(object sender, RoutedEventArgs e)
+
     {
+      Window2 DMwindow = new Window2();
+      DMwindow.ShowDialog();
     }
 
    

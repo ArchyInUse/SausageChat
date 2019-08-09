@@ -19,9 +19,28 @@ namespace SausageChatClient
   /// </summary>
   public partial class Window2
   {
+  
     public Window2()
     {
       InitializeComponent();
+    }
+
+
+    private void SendMessageDMButtonWindow(object sender, RoutedEventArgs e)
+
+    {
+     
+    }
+
+
+    private void UserMessageInputBoxForDMWindowKeyDown(object sender, RoutedEventArgs e)
+    {
+
+
+    }
+
+    private void UserMessageInputBoxDMwindowTextChanged(object sender, RoutedEventArgs e)
+    {
     }
   }
 }
