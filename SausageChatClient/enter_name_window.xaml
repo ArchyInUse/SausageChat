@@ -46,6 +46,7 @@
                      BorderBrush="#FF484C52"
                      Foreground="#FFFCFDFF"
                 TextChanged="Enter_name_input_box_TextChanged"
+                KeyDown="Enter_name_input_box_KeyDown"
                 TextWrapping="Wrap" />
 
 

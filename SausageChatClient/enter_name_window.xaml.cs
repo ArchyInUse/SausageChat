@@ -51,10 +51,20 @@ namespace SausageChatClient
         /// <param name="e">The e<see cref="RoutedEventArgs"/></param>
         private void Set_name_Button_Click(object sender, RoutedEventArgs e)
         {
-            UserInput = Enter_name_input_box.Text;
-            
+            if (!string.IsNullOrEmpty(Enter_name_input_box.Text))
+            {
+                UserInput = Enter_name_input_box.Text;
+                Close();
+            }
+        }
 
-            this.Close();
+        private void Enter_name_input_box_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter && !string.IsNullOrEmpty(Enter_name_input_box.Text))
+            {
+                UserInput = Enter_name_input_box.Text;
+                Close();
+            }
         }
     }
 }
