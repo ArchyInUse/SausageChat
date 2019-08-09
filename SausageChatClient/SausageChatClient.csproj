@@ -74,6 +74,9 @@
     <Compile Include="enter_name_window.xaml.cs">
       <DependentUpon>enter_name_window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DMWindow.xaml.cs">
+      <DependentUpon>DMWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Client_view_window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -87,6 +90,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="enter_name_window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DMWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
