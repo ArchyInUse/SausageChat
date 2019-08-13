@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Networking\Channel.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="enter_name_window.xaml.cs">
       <DependentUpon>enter_name_window.xaml</DependentUpon>

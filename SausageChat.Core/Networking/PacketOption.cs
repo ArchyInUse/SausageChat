@@ -27,6 +27,14 @@
         // Friend request accepted
         FriendRequestAccepted,
         // Friend request denied
-        FriendRequestDenied
+        FriendRequestDenied,
+        // DmMessage
+        DmMessage,
+        // Dm start request (from user1 to user2)
+        DmStartRequest,
+        // Dm Accept (from user2 back to user1)
+        DmAccepted,
+        // Dm Denied (from user2 back to user1)
+        DmDenied
     }
 }

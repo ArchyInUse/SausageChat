@@ -49,9 +49,10 @@ namespace SausageChatClient.Networking
             }
         }
         public static SynchronizationContext UiCtx { get; set; }
+        public static List<Channel> Channels { get; set; }
 
         public static bool Contains(this Dictionary<string, ObservableCollection<User>> friends, Guid guid) =>
-            (friends["OnlineFriends"].Any(x => x.Guid == guid) || friends["OfflineFriends"].Any(x => x.Guid == guid));
+            friends["OnlineFriends"].Any(x => x.Guid == guid) || friends["OfflineFriends"].Any(x => x.Guid == guid);
 
         public static void Start(string option)
         {
@@ -67,6 +68,7 @@ namespace SausageChatClient.Networking
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 Socket.Connect(ServerIp);
                 UiCtx = SynchronizationContext.Current;
+                DmWindow.UiCtx = SynchronizationContext.Current;
                 Log(new ServerMessage("Connected"));
                 Listen();
             }
@@ -214,6 +216,15 @@ namespace SausageChatClient.Networking
                     break;
                 case PacketOption.FriendRequestDenied:
                     Log(new ServerMessage("Friend request denied"));
+                    break;
+                case PacketOption.DmStartRequest:
+                    if (MessageBox.Show($"Dm request recieved from {UsersList[Message.Sender].Name}, do you accept?",
+                        "Sausage Chat Direct Message request",
+                        MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        Channel channel = new Channel();
+                    }
+                case PacketOption.DmMessage:
                     break;
             }
         }

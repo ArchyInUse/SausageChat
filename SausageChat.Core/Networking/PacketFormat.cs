@@ -17,7 +17,7 @@ namespace SausageChat.Core.Networking
 
         // for Json.NET
         #region JsonMethods
-
+        
         public bool ShouldSerializeGuid() => Option != PacketOption.IsServer;
         public bool ShouldSerializeNewName() => Option == PacketOption.NameChange ||
                                                 Option == PacketOption.UserConnected;
@@ -29,7 +29,8 @@ namespace SausageChat.Core.Networking
                                               Option == PacketOption.UserKicked ||
                                               Option == PacketOption.UserMuted ||
                                               Option == PacketOption.UserUnmuted ||
-                                              Option == PacketOption.FriendRequest;
+                                              Option == PacketOption.FriendRequest ||
+                                              Option == PacketOption.DmMessage;
 
         #endregion
     }

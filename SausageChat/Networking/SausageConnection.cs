@@ -117,6 +117,7 @@ namespace SausageChat.Networking
             SausageHelper.StripData(ref m);
             msg = Encoding.ASCII.GetString(m);
             PacketFormat Message = JsonConvert.DeserializeObject<PacketFormat>(msg);
+            SausageConnection Reciever;
 
             switch (Message.Option)
             {
@@ -151,22 +152,38 @@ namespace SausageChat.Networking
                         SausageServer.Unmute(SausageServer.ConnectedUsers.First(x => x.UserInfo.Guid == Message.Guid));
                     break;
                 case PacketOption.FriendRequest:
-                    SausageConnection reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
-                    if (reciever == null)
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    if (Reciever == null)
                         SendAsync(new PacketFormat(PacketOption.IsServer) { Content = "User not found" });
                     else
                     {
-                        reciever.SendAsync(Message);
+                        Reciever.SendAsync(Message);
                         SausageServer.UiCtx.Send(x => SausageServer.Vm.Messages.Add(new ServerMessage($"{UserInfo} requested {reciever} for a friend request.")));
                     }
                     break;
                 case PacketOption.FriendRequestAccepted:
-                    SausageConnection r = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
-                    r.SendAsync(Message);
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    Reciever.SendAsync(Message);
                     break;
                 case PacketOption.FriendRequestDenied:
-                    SausageConnection rec = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
-                    rec.SendAsync(Message);
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    Reciever.SendAsync(Message);
+                    break;
+                case PacketOption.DmMessage:
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    Reciever.SendAsync(Message);
+                    break;
+                case PacketOption.DmAccepted:
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    Reciever.SendAsync(Message);
+                    break;
+                case PacketOption.DmDenied:
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    Reciever.SendAsync(Message);
+                    break;
+                case PacketOption.DmStartRequest:
+                    Reciever = SausageServer.ConnectedUsers.FirstOrDefault(x => x.UserInfo.Guid == Message.Guid);
+                    Reciever.SendAsync(Message);
                     break;
             }
         }
