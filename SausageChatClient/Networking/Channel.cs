@@ -5,7 +5,6 @@ using System.Linq;
 using SausageChat.Core;
 using SausageChat.Core.Networking;
 using SausageChat.Core.Messaging;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
