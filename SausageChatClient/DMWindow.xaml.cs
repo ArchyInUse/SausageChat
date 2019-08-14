@@ -68,6 +68,13 @@ namespace SausageChatClient
         {
         }
 
+
+        private void UserMessageInputBoxForDMWindowKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Channel.Send(UserMessageInputBoxForDMWindow.Text);
+        }
+
         private void UserMessageInputBoxForDMWindow_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
