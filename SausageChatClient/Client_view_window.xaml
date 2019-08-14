@@ -394,6 +394,7 @@
                     BorderBrush="#FF202225"
                     Foreground="White"
                     ItemsSource="{Binding UsersList.Users}"
+                    DisplayMemberPath="{Binding Path=Name}"
                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
                     SelectedIndex="0"
                     SelectionChanged="ListBox_SelectionChanged">
