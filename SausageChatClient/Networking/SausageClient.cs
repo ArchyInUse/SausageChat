@@ -49,7 +49,7 @@ namespace SausageChatClient.Networking
             }
         }
         public static SynchronizationContext UiCtx { get; set; }
-        public static List<Channel> Channels { get; set; }
+        public static Dictionary<Guid, Channel> Channels { get; set; }
 
         public static bool Contains(this Dictionary<string, ObservableCollection<User>> friends, Guid guid) =>
             friends["OnlineFriends"].Any(x => x.Guid == guid) || friends["OfflineFriends"].Any(x => x.Guid == guid);
@@ -222,9 +222,15 @@ namespace SausageChatClient.Networking
                         "Sausage Chat Direct Message request",
                         MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        Channel channel = new Channel();
+                        Channel channel = new Channel(ClientInfo, UsersList[Message.Sender]);
+                        Channels.Add(Message.Sender, channel);
+                        channel.Init();
                     }
+                    break;
                 case PacketOption.DmMessage:
+                    Channels[Message.Guid].SendToUiContext(new UserMessage(Message.Content, UsersList[Message.Guid]));
+                    break;
+                case PacketOption.DmAccepted:
                     break;
             }
         }

@@ -43,13 +43,15 @@ namespace SausageChatClient.Networking
         public User User { get; set; }
         public DmWindow Window { get; set; }
 
-        public Channel(ref User first, ref User second)
+        public Channel(User first, User second)
         {
             Client = first;
             User = second;
             Messages = new ObservableCollection<IMessage>();
             Window = new DmWindow(this);
         }
+
+        public void Init() => Task.Run(() => Window.Init());
 
         public void SendToUiContext(IMessage message) => UiCtx.Send(x => Window.Messages.Add(message));
         public void Send(string message)
