@@ -25,5 +25,5 @@ They interact with one another to make calls, where the server is the validator 
 ### Scraped features:
 We've decided to ditch 2 features for a lack of infastrucutre and the amount of maintenance that would need to be done for those 2 features, we plan on eventually coming back to this project and largly improving it's code quality, as well as implement more complex yet more maintainable systems and maybe implement these features once we're done.
 
-Fully operational friends system (online/offline friends)
+Fully operational friends system (online/offline friends) &
 Fully operational DM System for friends
