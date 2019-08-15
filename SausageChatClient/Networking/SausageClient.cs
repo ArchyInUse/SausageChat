@@ -82,7 +82,6 @@ namespace SausageChatClient.Networking
         public static void Listen()
         {
             if (!Socket.Connected) return;
-            Log(new ServerMessage("Started listening..."));
 
             try
             {
@@ -96,7 +95,6 @@ namespace SausageChatClient.Networking
 
         public static void OnMessageRecieved(IAsyncResult ar)
         {
-            Log(new ServerMessage("Recieved Message"));
             try
             {
                 Socket.EndReceive(ar); 
@@ -242,8 +240,7 @@ namespace SausageChatClient.Networking
             if (!Socket.Connected) return;
 
             byte[] bytesMessage = Encoding.ASCII.GetBytes(message);
-
-            Log(new ServerMessage("Started Sending..."));
+            
 
             try
             {
@@ -259,7 +256,6 @@ namespace SausageChatClient.Networking
 
         private static void OnSendComplete(IAsyncResult ar)
         {
-            Log("Sent Data");
             try
             {
                 Socket.EndSend(ar);

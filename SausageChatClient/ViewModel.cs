@@ -45,9 +45,6 @@ namespace SausageChatClient
             Friends = new Dictionary<string, ObservableCollection<User>>();
             Messages = new ObservableCollection<IMessage>();
 
-            Messages.Add(new UserMessage("This is a user message!"));
-            Messages.Add(new ServerMessage("This is a server message"));
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

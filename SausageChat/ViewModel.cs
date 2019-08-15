@@ -40,10 +40,7 @@ namespace SausageChat
             dictionary.Source = new Uri("pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Dialogs.xaml");
 
             Messages = new ObservableCollection<IMessage>();
-            Messages.Add(new ServerMessage("Hello!"));
             ConnectedUsers = new ObservableCollection<SausageConnection>();
-            ConnectedUsers.Add(new SausageConnection("Sally"));
-            ConnectedUsers.Add(new SausageConnection("Bob"));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
