@@ -215,6 +215,24 @@ namespace SausageChatClient.Networking
                 case PacketOption.FriendRequestDenied:
                     Log(new ServerMessage("Friend request denied"));
                     break;
+                case PacketOption.AdminPermsRecieved:
+                    if (Message.Guid == ClientInfo.Guid)
+                    {
+                        ClientInfo.IsAdmin = true;
+                        Log(new ServerMessage($"You are now admin"));
+                    }
+                    else
+                        Log(new ServerMessage($"{UsersList[Message.Guid]} is now admin"));
+                    break;
+                case PacketOption.AdminPermsRemoved:
+                    if (Message.Guid == ClientInfo.Guid)
+                    {
+                        ClientInfo.IsAdmin = false;
+                        Log(new ServerMessage($"You are no longer admin"));
+                    }
+                    else
+                        Log(new ServerMessage($"{UsersList[Message.Guid]} is no longer admin"));
+                    break;
             }
         }
 

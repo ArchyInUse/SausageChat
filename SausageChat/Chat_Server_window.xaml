@@ -246,8 +246,10 @@
                                 Click="ContextMenuBan_Click"
                                 Header="Ban User" />
 
-
-
+                            <MenuItem 
+                                x:Name="ContextMenuAdmin"
+                                Click="ContextMenuAdmin_Click"
+                                Header="Give Admin" />
 
 
                         </ContextMenu>

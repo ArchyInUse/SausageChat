@@ -35,6 +35,10 @@
         // Dm Accept (from user2 back to user1)
         DmAccepted,
         // Dm Denied (from user2 back to user1)
-        DmDenied
+        DmDenied,
+        // Give admin perms
+        AdminPermsRecieved,
+        // Remove admin perms
+        AdminPermsRemoved
     }
 }
