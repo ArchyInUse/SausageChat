@@ -297,7 +297,7 @@
                     SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Name}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
