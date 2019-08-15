@@ -11,7 +11,7 @@ namespace SausageChat.Core.Networking
         public Guid Sender { get; set; }
         public string NewName { get; set; }
         public User[] UsersList { get; set; }
-        public string Content { get; set; } = "";
+        public string Content { get; set; }
 
         public PacketFormat(PacketOption packetOption) => Option = packetOption;
 

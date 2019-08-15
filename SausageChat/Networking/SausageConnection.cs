@@ -83,6 +83,7 @@ namespace SausageChat.Networking
             {
                 var BytesRec = Socket.EndReceive(ar);
                 Parse(Encoding.ASCII.GetString(Data));
+                Data = new byte[1024];
                 ListenAsync();
             }
             catch(SocketException)
