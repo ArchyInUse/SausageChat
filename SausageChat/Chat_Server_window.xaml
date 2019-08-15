@@ -220,11 +220,11 @@
                     Background="#FF2F3136"
                     BorderBrush="#FF484C52"
                     Foreground="#FFFCFDFF"
-                    ItemsSource="{Binding UsersList.Users}"
+                    ItemsSource="{Binding ConnectedUsers}"
                     SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}" />
+                            <TextBlock Text="{Binding Path=UserInfo.Name}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 

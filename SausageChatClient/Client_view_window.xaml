@@ -290,12 +290,17 @@
                     MinHeight="200"
                     Background="#FF2F3136"
                     BorderBrush="#FF202225"
-                    DisplayMemberPath="{Binding Path=Name}"
                     Foreground="White"
                     ItemsSource="{Binding UsersList.Users}"
                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
                     SelectedIndex="0"
-                    SelectionChanged="ListBox_SelectionChanged" />
+                    SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </ScrollViewer>
 
