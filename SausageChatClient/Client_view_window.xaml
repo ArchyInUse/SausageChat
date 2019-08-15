@@ -274,104 +274,16 @@
             Height="auto"
             Background="#FF2F3136">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />   <!--  label  -->
+                <RowDefinition Height="*" />  <!--  label  -->
               
-                <RowDefinition Height="*" />  <!--  freinds list  -->
+                <RowDefinition Height="10*" /> <!--  list of users  -->
                
-                <RowDefinition Height="20" />   <!--  empty  -->
-             
-                <RowDefinition Height="35" />  <!--  label  -->
-              
-                <RowDefinition Height="*" /> <!--  list of users  -->
-               
-                <RowDefinition Height="35" /> <!-- empty -->
+                <RowDefinition Height="*" /> <!-- empty -->
 
             </Grid.RowDefinitions>
 
             <Label
                 Grid.Row="0"
-                Width="auto"
-                Height="26"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center"
-                Content="Friends List"
-                Foreground="White" />
-
-            <ScrollViewer
-                x:Name="Scrollbar_for_the_freinds_list"
-                Grid.Row="1"
-                Margin="10,0,0,0"
-                Background="#FF202225">
-
-                <TreeView
-                    x:Name="Freinds_List_view"
-                    Height="auto"
-                    MinWidth="200"
-                    MinHeight="346"
-                    Background="#FF2F3136"
-                    BorderBrush="#FF202225"
-                    Foreground="#FFFCFDFF"
-                    ScrollViewer.VerticalScrollBarVisibility="Visible">
-
-                    <TreeViewItem
-                        Background="#FF36393F"
-                        BorderBrush="#FF36393F"
-                        Foreground="White"
-                        Header="Friends"
-                        IsExpanded="True">
-
-                        <TreeViewItem
-                            Background="#FF36393F"
-                            BorderBrush="#FF36393F"
-                            Header="Online Friends"
-                            IsExpanded="True"
-                            ItemsSource="{Binding Friends[OnlineFriends]}">
-
-                            <TreeViewItem.ContextMenu>
-                                <ContextMenu>
-
-                                    <MenuItem
-                                        x:Name="SendMessageToFriendMenuItem"
-                                        Click="SendMessageToFriendMenuItem_Click"
-                                        Header="Send message" />
-
-
-
-                                    <MenuItem
-                                        x:Name="RemoveFriendMenuitem"
-                                        Click="RemoveFriendMenuitem_Click"
-                                        Header="Remove  Friend" />
-                                </ContextMenu>
-
-                            </TreeViewItem.ContextMenu>
-                        </TreeViewItem>
-
-                        <TreeViewItem
-                            Background="#FF36393F"
-                            BorderBrush="#FF36393F"
-                            Foreground="#FFFCFDFF"
-                            Header="Offline Friends"
-                            IsExpanded="True"
-                            ItemsSource="{Binding Friends[Offlineusers]}">
-
-
-                            <TreeViewItem.ContextMenu>
-                                <ContextMenu>
-
-                                    <MenuItem Header="Remove  Friend" />
-                                </ContextMenu>
-
-                            </TreeViewItem.ContextMenu>
-
-                        </TreeViewItem>
-
-                    </TreeViewItem>
-
-
-                </TreeView>
-            </ScrollViewer>
-            <Label
-                Grid.Row="3"
                 Width="auto"
                 Height="auto"
                 Margin="0,0,0,0"
@@ -381,7 +293,7 @@
 
             <ScrollViewer
                 x:Name="Scrollbar_for_the_list_of_users"
-                Grid.Row="4"
+                Grid.Row="1"
                 Margin="10,0,0,0"
                 Background="#FF202225">
 
@@ -398,29 +310,7 @@
                     SelectedIndex="0"
                     SelectionChanged="ListBox_SelectionChanged">
 
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem
-                                x:Name="ContextMenuAddFriend"
-                                Click="ContextMenuAddFriend_Click"
-                                Header="Add Friend" />
-
-                            <MenuItem
-                                x:Name="ContextMenuMuteUser"
-                                Click="ContextMenuMuteUser_Click"
-                                Header="Mute User" />
-
-                            <MenuItem
-                                x:Name="ContextMenuKickUser"
-                                Click="ContextMenuKickUser_Click"
-                                Header="Kick User" />
-
-                            <MenuItem
-                                x:Name="ContextMenuBanUser"
-                                Click="ContextMenuBanUser_Click"
-                                Header="Ban User" />
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
+                   
                 </ListBox>
 
             </ScrollViewer>

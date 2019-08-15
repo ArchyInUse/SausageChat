@@ -160,7 +160,7 @@
 
             <Grid.RowDefinitions>
 
-                <RowDefinition Height="100" />
+                
                 <RowDefinition Height="100" />
                 <RowDefinition Height="100" />
 
@@ -168,25 +168,13 @@
 
 
             </Grid.RowDefinitions>
+            
             <Button
-                x:Name="Info_Button"
+                x:Name="Stop_Server"
                 Grid.Row="0"
                 MinWidth="270"
                 MinHeight="44"
                 Margin="5,10,5,10"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Background="#FF202225"
-                BorderBrush="#FF484C52"
-                Click="Info_Button_Click"
-                Content="Info"
-                Foreground="#FFFCFDFF" />
-            <Button
-                x:Name="Stop_Server"
-                Grid.Row="1"
-                MinWidth="270"
-                MinHeight="44"
-                Margin="5,0,5,10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="#FF202225"
