@@ -67,6 +67,7 @@ namespace SausageChat.Networking
                 {
                     u.Disconnect();
                 }
+                UiCtx.Send(x => Vm.Messages = new ObservableCollection<IMessage>());
                 UiCtx.Send(x => Vm.Messages.Add(new ServerMessage("Closed all sockets")));
                 IsOpen = false;
             }
