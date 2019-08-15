@@ -49,9 +49,6 @@
         </DataTemplate>
 
 
-
-
-
     </Window.Resources>
 
 
@@ -62,20 +59,11 @@
             <!--  Define the columns for the grid  -->
 
             <ColumnDefinition Width="auto" />
-            <!--  The first row.  -->
-            <!--  The Second Column  -->
             <ColumnDefinition Width="1*" />
-            <!--  The third column  -->
-
-
             <ColumnDefinition Width="auto" />
-
-            <!--  The Fourth column  -->
 
 
         </Grid.ColumnDefinitions>
-
-
 
 
 
@@ -160,7 +148,7 @@
 
             <Grid.RowDefinitions>
 
-                
+
                 <RowDefinition Height="100" />
                 <RowDefinition Height="100" />
 
@@ -168,7 +156,7 @@
 
 
             </Grid.RowDefinitions>
-            
+
             <Button
                 x:Name="Stop_Server"
                 Grid.Row="0"
@@ -260,10 +248,7 @@
 
 
 
-                            <MenuItem
-                                x:Name="ContextMenuInfo"
-                                Click="ContextMenuInfo_Click"
-                                Header="Info" />
+
 
                         </ContextMenu>
                     </ListBox.ContextMenu>

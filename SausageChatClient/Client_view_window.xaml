@@ -11,8 +11,8 @@
     Title="Client_view"
     Width="1074"
     Height="675"
-                      Background="{x:Null}"
-                      NonActiveBorderBrush="#FF484C52"
+    Background="{x:Null}"
+    NonActiveBorderBrush="#FF484C52"
     NonActiveWindowTitleBrush="#FF484C52"
     mc:Ignorable="d">
 
@@ -81,6 +81,7 @@
                 <RowDefinition Height="auto" />
 
             </Grid.RowDefinitions>
+
             <ScrollViewer
                 MinWidth="591"
                 MinHeight="539"
@@ -179,14 +180,14 @@
                     BorderBrush="#FF36393F"
                     Content="Disco's IP"
                     Foreground="White" />
-                <!--  This is index 0  -->
+
                 <ComboBoxItem
                     Margin="0,0,-2,0"
                     Background="#FF36393F"
                     BorderBrush="#FF36393F"
                     Content="Monte's IP"
                     Foreground="White" />
-                <!--  This is index 1  -->
+
             </ComboBox>
 
             <StackPanel Grid.Row="2" Background="#FF2F3136">
@@ -211,24 +212,8 @@
                     Content="Disconnect"
                     Foreground="#FFFCFDFF" />
 
-                <Button
-                    x:Name="Friends_button_client"
-                    Width="Auto"
-                    Height="45"
-                    Margin="0,0,0,10"
-                    Background="#FF202225"
-                    BorderBrush="#FF484C52"
-                    Click="Freinds_button_client_Click"
-                    Content="Friends "
-                    Foreground="#FFFCFDFF" />
-                <Button
-                    x:Name="Info_button_client"
-                    Width="Auto"
-                    Margin="0,0,0,10"
-                    Background="#FF202225"
-                    BorderBrush="#FF484C52"
-                    Click="Info_button_client_Click"
-                    Content="Info" />
+
+
                 <Button
                     x:Name="Change_name_button"
                     Width="Auto"
@@ -238,7 +223,7 @@
                     Click="Button_Click_change_name"
                     Content="Change Name" />
                 <Label
-                    x:Name="Add_friend_button_client_Copy"
+                    x:Name="YouAreAdminLabel"
                     Width="Auto"
                     Height="45"
                     Margin="0,5,0,12"
@@ -252,7 +237,6 @@
 
         </Grid>
 
-        <!--  If user is admin, have the button appear. If user is not admin. Then have button disappear.  -->
         <TextBox
             x:Name="Debug_Textbox_for_Disco"
             Grid.RowSpan="2"
@@ -274,11 +258,13 @@
             Height="auto"
             Background="#FF2F3136">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />  <!--  label  -->
-              
-                <RowDefinition Height="10*" /> <!--  list of users  -->
-               
-                <RowDefinition Height="*" /> <!-- empty -->
+                <RowDefinition Height="*" />
+
+                <RowDefinition Height="10*" />
+
+
+                <RowDefinition Height="*" />
+
 
             </Grid.RowDefinitions>
 
@@ -304,15 +290,12 @@
                     MinHeight="200"
                     Background="#FF2F3136"
                     BorderBrush="#FF202225"
+                    DisplayMemberPath="{Binding Path=Name}"
                     Foreground="White"
                     ItemsSource="{Binding UsersList.Users}"
-                    DisplayMemberPath="{Binding Path=Name}"
                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
                     SelectedIndex="0"
-                    SelectionChanged="ListBox_SelectionChanged">
-
-                   
-                </ListBox>
+                    SelectionChanged="ListBox_SelectionChanged" />
 
             </ScrollViewer>
 
