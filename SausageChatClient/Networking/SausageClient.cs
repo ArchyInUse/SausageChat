@@ -11,6 +11,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace SausageChatClient.Networking
 {
@@ -53,7 +54,7 @@ namespace SausageChatClient.Networking
         public static bool Contains(this Dictionary<string, ObservableCollection<User>> friends, Guid guid) =>
             friends["OnlineFriends"].Any(x => x.Guid == guid) || friends["OfflineFriends"].Any(x => x.Guid == guid);
 
-        public static void Start(string option)
+        public static async Task Start(string option)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace SausageChatClient.Networking
             {
                 ServerIp = IpPool[option];
                 Socket = new Socket(ServerIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                Socket.Connect(ServerIp);
+                await Socket.ConnectAsync(ServerIp);
                 UiCtx = SynchronizationContext.Current;
                 Log(new ServerMessage("Connected"));
                 Listen();
