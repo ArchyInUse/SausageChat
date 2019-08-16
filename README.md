@@ -17,8 +17,7 @@ SausageServer is where the main socket is located, it contains all information a
 Sausage Connection is a handler for a user, it contains the connected socket as well as handles all requests to and from the user, for example accepting and sending messages.
 
 ### Instructions
-Requirements
-Two separate computers. Windows 7 and up.
+Requirements: Two separate computers. Windows 7 and up.
 
 First, go to SausageClient.cs and go to line 24 and change the Ip address to the desired ip address for the sever view. Compile it.  Build it in release mode. 
 
