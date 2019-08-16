@@ -16,6 +16,18 @@ SausageServer is where the main socket is located, it contains all information a
 
 Sausage Connection is a handler for a user, it contains the connected socket as well as handles all requests to and from the user, for example accepting and sending messages.
 
+### Instructions
+Requirements
+Two separate computers. Windows 7 and up.
+
+First, go to SausageClient.cs and go to line 24 and change the Ip address to the desired ip address for the sever view. Compile it.  Build it in release mode. 
+
+Zip the release folder of SausageChatServer and zip it. Extract the release folder on the  computer that has the Ip address you gave in  sausageclient.cs and run the exe. Click on start server. 
+
+Look in the release folder for sausage chat client and run the exe. Click on connect, and you should be able to send messages. 
+ 
+
+
 #### Client:
 SausageClient is a simple static class which has all the information (apart from the IP or other secret information) as well as all the methods used for interacting with the server.
 
